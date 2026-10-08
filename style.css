@@ -4245,3 +4245,891 @@ body.dark .loading-overlay p {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+/* ============================================ */
+/* MOBIL MOSLASHUV — App ko'rinishi */
+/* ============================================ */
+
+/* Umumiy */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 80px;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Header */
+    .header {
+        padding: 12px 16px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .header-right {
+        gap: 8px;
+    }
+
+    .btn-theme {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .date {
+        display: none; /* Mobilda yashirish */
+    }
+
+    .profile-menu {
+        padding: 6px 10px;
+    }
+
+    .profile-menu span {
+        display: none; /* Faqat avatar */
+    }
+
+    .avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* Container */
+    .container {
+        padding: 0 16px;
+    }
+
+    /* Stats — 3 ta ustun */
+    .stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        padding: 14px 8px;
+        border-radius: 12px;
+    }
+
+    .stat-number {
+        font-size: 24px;
+    }
+
+    .stat-label {
+        font-size: 11px;
+    }
+
+    /* Motivatsiya */
+    .motivation-banner {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    /* Add habit */
+    .add-habit {
+        padding: 18px 16px;
+        border-radius: 12px;
+    }
+
+    .add-habit h2 {
+        font-size: 16px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+    }
+
+    .form-group input,
+    .form-group input[type="time"] {
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+
+    /* Radio cards — vertikal */
+    .period-options {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .radio-card {
+        width: 100%;
+        padding: 12px;
+    }
+
+    /* Day chips */
+    .days-options {
+        gap: 6px;
+    }
+
+    .day-chip {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    /* Habit item */
+    .habit-item {
+        padding: 14px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .habit-name {
+        font-size: 15px;
+    }
+
+    .habit-meta {
+        font-size: 11px;
+        gap: 6px;
+    }
+
+    .habit-meta span {
+        padding: 2px 6px;
+    }
+
+    .habit-actions {
+        gap: 6px;
+    }
+
+    .btn-check,
+    .btn-delete,
+    .btn-notes {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    /* Tasks */
+    .tasks-quick-btn {
+        padding: 14px 16px;
+    }
+
+    .tasks-quick-icon {
+        font-size: 26px;
+    }
+
+    .tasks-quick-text strong {
+        font-size: 15px;
+    }
+
+    /* Challenge */
+    .challenge-card {
+        padding: 16px;
+    }
+
+    .challenge-title h3 {
+        font-size: 12px;
+    }
+
+    .challenge-name {
+        font-size: 15px;
+    }
+
+    .challenge-icon {
+        font-size: 30px;
+    }
+
+    .challenge-xp {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    /* Badges */
+    .badges-preview {
+        padding: 16px;
+    }
+
+    .badges-preview h3 {
+        font-size: 15px;
+    }
+
+    .badge-mini {
+        min-width: 76px;
+        padding: 10px 6px;
+    }
+
+    .badge-icon {
+        font-size: 26px;
+    }
+
+    .badge-name {
+        font-size: 10px;
+    }
+
+    /* Modallar */
+    .modal-content,
+    .page-content {
+        padding: 20px 16px;
+        border-radius: 16px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-content h2,
+    .page-content h2 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    /* Profile */
+    .profile-info {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px;
+    }
+
+    .profile-avatar-large {
+        width: 70px;
+        height: 70px;
+        font-size: 30px;
+    }
+
+    .profile-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    /* Leaderboard */
+    .lb-header-card {
+        flex-direction: column;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .lb-header-info {
+        width: 100%;
+    }
+
+    /* Tasks form */
+    .task-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* Charts */
+    .chart-container {
+        height: 220px;
+        padding: 12px;
+    }
+
+    /* Notes modal */
+    .note-input-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .note-mood-select {
+        width: 100%;
+    }
+
+    /* Bottom navigation — ixtiyoriy */
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid #e0e0e0;
+        padding: 8px 0;
+        z-index: 200;
+        box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+    }
+
+    body.dark .mobile-bottom-nav {
+        background: #1e1e2e;
+        border-top-color: #3a3a4e;
+    }
+
+    .mobile-nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        padding: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #888;
+        font-size: 10px;
+        transition: color 0.2s;
+    }
+
+    .mobile-nav-item.active {
+        color: var(--primary);
+    }
+
+    .mobile-nav-icon {
+        font-size: 22px;
+    }
+}
+
+/* Kichik ekranlar */
+@media (max-width: 480px) {
+    .stats {
+        gap: 6px;
+    }
+
+    .stat-card {
+        padding: 12px 6px;
+    }
+
+    .stat-number {
+        font-size: 20px;
+    }
+
+    .stat-label {
+        font-size: 10px;
+    }
+
+    .habit-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
+
+/* iOS PWA uchun */
+@media (display-mode: standalone) {
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .header {
+        padding-top: calc(12px + env(safe-area-inset-top));
+    }
+}
+/* ============================================ */
+/* MOBIL MOSLASHUV — To'liq qayta yozilgan */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    /* Asosiy */
+    body {
+        padding-bottom: 90px;
+        -webkit-tap-highlight-color: transparent;
+        font-size: 14px;
+    }
+
+    /* Container */
+    .container {
+        padding: 0 14px;
+        max-width: 100%;
+    }
+
+    /* ====== HEADER ====== */
+    .header {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 12px 14px !important;
+        gap: 8px !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 100 !important;
+    }
+
+    .logo {
+        font-size: 16px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .header-right {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+
+    .date {
+        display: none !important;
+    }
+
+    .btn-theme {
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 15px !important;
+        padding: 0 !important;
+    }
+
+    .profile-menu {
+        padding: 5px 8px !important;
+        gap: 5px !important;
+    }
+
+    .profile-menu > span {
+        display: none !important;
+    }
+
+    .avatar {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 13px !important;
+    }
+
+    /* ====== STATISTIKA — 3 ta yonma-yon ====== */
+    .stats {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .stat-card {
+        padding: 12px 6px !important;
+        border-radius: 12px !important;
+        min-width: 0 !important;
+    }
+
+    .stat-number {
+        font-size: 22px !important;
+        line-height: 1.1 !important;
+    }
+
+    .stat-label {
+        font-size: 10px !important;
+        line-height: 1.2 !important;
+    }
+
+    /* ====== MOTIVATSIYA ====== */
+    .motivation-banner {
+        padding: 10px 14px !important;
+        font-size: 13px !important;
+        margin-bottom: 14px !important;
+    }
+
+    /* ====== REJALAR TEZ KIRISH ====== */
+    .tasks-quick-access {
+        margin-bottom: 14px !important;
+    }
+
+    .tasks-quick-btn {
+        padding: 12px 14px !important;
+        gap: 10px !important;
+    }
+
+    .tasks-quick-icon {
+        font-size: 24px !important;
+    }
+
+    .tasks-quick-text strong {
+        font-size: 14px !important;
+    }
+
+    .tasks-quick-text span {
+        font-size: 11px !important;
+    }
+
+    /* ====== CHALLENGE ====== */
+    .challenge-card {
+        padding: 14px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .challenge-header {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .challenge-title {
+        gap: 8px !important;
+    }
+
+    .challenge-icon {
+        font-size: 26px !important;
+    }
+
+    .challenge-title h3 {
+        font-size: 11px !important;
+    }
+
+    .challenge-name {
+        font-size: 14px !important;
+    }
+
+    .challenge-xp {
+        font-size: 11px !important;
+        padding: 4px 10px !important;
+    }
+
+    .challenge-desc {
+        font-size: 12px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .challenge-progress {
+        margin-bottom: 10px !important;
+    }
+
+    /* ====== YUTUQLAR ====== */
+    .badges-preview {
+        padding: 14px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .badges-preview h3 {
+        font-size: 14px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .badges-row {
+        gap: 8px !important;
+    }
+
+    .badge-mini {
+        min-width: 70px !important;
+        padding: 10px 6px !important;
+    }
+
+    .badge-icon {
+        font-size: 24px !important;
+    }
+
+    .badge-name {
+        font-size: 9px !important;
+    }
+
+    /* ====== PREMIUM BANNER ====== */
+    .premium-banner {
+        padding: 12px !important;
+        font-size: 12px !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* ====== ODAT QO'SHISH FORMASI ====== */
+    .add-habit {
+        padding: 16px !important;
+        border-radius: 14px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .add-habit h2 {
+        font-size: 15px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .form-group {
+        margin-bottom: 14px !important;
+    }
+
+    .form-group label {
+        font-size: 12px !important;
+        margin-bottom: 6px !important;
+    }
+
+    .form-group input,
+    .form-group input[type="time"] {
+        padding: 11px 12px !important;
+        font-size: 14px !important;
+        border-radius: 10px !important;
+    }
+
+    /* Davomiylik — vertikal */
+    .period-options {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+    }
+
+    .radio-card {
+        width: 100% !important;
+        padding: 10px 12px !important;
+        font-size: 13px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Kunlar */
+    .days-options {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 6px !important;
+    }
+
+    .day-chip {
+        padding: 8px 4px !important;
+        font-size: 11px !important;
+        text-align: center !important;
+    }
+
+    /* Tugma */
+    .btn-add {
+        padding: 14px !important;
+        font-size: 14px !important;
+        border-radius: 12px !important;
+    }
+
+    /* ====== FAOL ODATLAR ====== */
+    .habits-section {
+        padding: 16px !important;
+        border-radius: 14px !important;
+    }
+
+    .habits-section h2 {
+        font-size: 15px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .habit-item {
+        padding: 12px !important;
+        gap: 10px !important;
+        border-radius: 12px !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .habit-info {
+        min-width: 0 !important;
+        flex: 1 !important;
+    }
+
+    .habit-name {
+        font-size: 14px !important;
+        margin-bottom: 6px !important;
+    }
+
+    .habit-meta {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        font-size: 10px !important;
+    }
+
+    .habit-meta span {
+        padding: 2px 6px !important;
+        border-radius: 5px !important;
+    }
+
+    .habit-actions {
+        display: flex !important;
+        gap: 6px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .btn-check,
+    .btn-delete,
+    .btn-notes {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 15px !important;
+    }
+
+    /* ====== MODALLAR ====== */
+    .modal-content,
+    .page-content {
+        padding: 20px 16px !important;
+        border-radius: 16px !important;
+        max-height: 92vh !important;
+        width: calc(100% - 20px) !important;
+        max-width: 100% !important;
+    }
+
+    .modal-content h2,
+    .page-content h2 {
+        font-size: 18px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .close-btn {
+        font-size: 26px !important;
+        top: 10px !important;
+        right: 14px !important;
+    }
+
+    /* ====== PROFIL SAHIFASI ====== */
+    .profile-info {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 16px !important;
+        gap: 14px !important;
+    }
+
+    .profile-avatar-large {
+        width: 68px !important;
+        height: 68px !important;
+        font-size: 28px !important;
+    }
+
+    .profile-details p {
+        font-size: 13px !important;
+    }
+
+    .profile-stats {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    /* ====== LEADERBOARD ====== */
+    .lb-header-card {
+        flex-direction: column !important;
+        padding: 16px !important;
+        gap: 12px !important;
+    }
+
+    .lb-header-info {
+        width: 100% !important;
+        justify-content: space-around !important;
+    }
+
+    .leaderboard-filters {
+        gap: 6px !important;
+    }
+
+    .leaderboard-filter-btn {
+        padding: 7px 12px !important;
+        font-size: 12px !important;
+    }
+
+    /* ====== CHART'LAR ====== */
+    .chart-container {
+        height: 220px !important;
+        padding: 12px !important;
+    }
+
+    .stats-page-content h3 {
+        font-size: 15px !important;
+        margin: 20px 0 10px !important;
+    }
+
+    /* ====== HEATMAP ====== */
+    .heatmap-section {
+        padding: 14px !important;
+    }
+
+    .heatmap-cell {
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    .heatmap-week,
+    .heatmap-days {
+        grid-template-rows: repeat(7, 10px) !important;
+    }
+
+    /* ====== NOTES MODAL ====== */
+    .notes-modal-content {
+        max-width: 100% !important;
+    }
+
+    .note-input-footer {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    .note-mood-select {
+        width: 100% !important;
+    }
+
+    /* ====== DROPDOWN ====== */
+    .dropdown {
+        min-width: 160px !important;
+        right: 0 !important;
+    }
+
+    .dropdown a {
+        padding: 9px 12px !important;
+        font-size: 13px !important;
+    }
+
+    /* ====== FOOTER ====== */
+    .footer {
+        padding: 14px !important;
+        font-size: 12px !important;
+        margin-top: 20px !important;
+    }
+
+    /* ====== LANDING PAGE ====== */
+    .landing-nav {
+        padding: 12px 14px !important;
+        flex-wrap: nowrap !important;
+        gap: 8px !important;
+    }
+
+    .landing-nav .logo {
+        font-size: 16px !important;
+    }
+
+    .nav-buttons {
+        gap: 6px !important;
+    }
+
+    .nav-buttons button {
+        padding: 8px 12px !important;
+        font-size: 12px !important;
+    }
+
+    .hero {
+        padding: 40px 16px !important;
+    }
+
+    .hero h1 {
+        font-size: 24px !important;
+        line-height: 1.25 !important;
+    }
+
+    .hero-sub {
+        font-size: 14px !important;
+    }
+
+    .btn-hero {
+        padding: 14px 28px !important;
+        font-size: 15px !important;
+    }
+
+    .features,
+    .pricing {
+        padding: 40px 16px !important;
+    }
+
+    .features h2,
+    .pricing h2 {
+        font-size: 22px !important;
+    }
+
+    .price-card.featured {
+        transform: none !important;
+    }
+}
+
+/* ============================================ */
+/* KICHIK EKRANLAR */
+/* ============================================ */
+@media (max-width: 480px) {
+    .stat-number {
+        font-size: 20px !important;
+    }
+
+    .stat-label {
+        font-size: 9px !important;
+    }
+
+    .habit-meta {
+        font-size: 9px !important;
+    }
+
+    .btn-check,
+    .btn-delete,
+    .btn-notes {
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* ============================================ */
+/* iOS PWA — To'liq ekran */
+/* ============================================ */
+@media (display-mode: standalone) {
+    body {
+        padding-top: env(safe-area-inset-top) !important;
+        padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+
+    .header {
+        padding-top: calc(12px + env(safe-area-inset-top)) !important;
+    }
+}

@@ -519,3 +519,34 @@ function updateTasksQuickInfo() {
         info.style.fontWeight = '';
     }
 }
+// ============================================
+// MOBIL NAVIGATION
+// ============================================
+function mobileNav(page) {
+    // Active holat
+    document.querySelectorAll('.mobile-nav-item').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.currentTarget.classList.add('active');
+
+    // Sahifaga o'tish
+    if (page === 'home') {
+        if (typeof closePage === 'function') closePage();
+        if (typeof closeTasks === 'function') closeTasks();
+        if (typeof closeLeaderboard === 'function') closeLeaderboard();
+        if (typeof closeStatistics === 'function') closeStatistics();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (page === 'tasks') {
+        if (typeof showTasks === 'function') showTasks();
+    } else if (page === 'stats') {
+        if (typeof showStatistics === 'function') showStatistics();
+    } else if (page === 'profile') {
+        if (typeof showProfile === 'function') showProfile();
+    }
+}
+
+// Faqat mobilda ko'rsatish
+if (window.innerWidth > 768) {
+    const nav = document.getElementById('mobileBottomNav');
+    if (nav) nav.style.display = 'none';
+}

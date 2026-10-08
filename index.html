@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0d2818">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>HabitGo — Odatlaringizni boshqaring</title>
@@ -492,6 +497,26 @@
     </div>
 
     <canvas id="confettiCanvas"></canvas>
+
+    <!-- MOBIL BOTTOM NAVIGATION -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav">
+    <button class="mobile-nav-item active" onclick="mobileNav('home')">
+        <span class="mobile-nav-icon">🏠</span>
+        <span>Asosiy</span>
+    </button>
+    <button class="mobile-nav-item" onclick="mobileNav('tasks')">
+        <span class="mobile-nav-icon">📝</span>
+        <span>Rejalar</span>
+    </button>
+    <button class="mobile-nav-item" onclick="mobileNav('stats')">
+        <span class="mobile-nav-icon">📊</span>
+        <span>Statistika</span>
+    </button>
+    <button class="mobile-nav-item" onclick="mobileNav('profile')">
+        <span class="mobile-nav-icon">👤</span>
+        <span>Profil</span>
+    </button>
+</nav>
 
     <!-- SCRIPT'LAR -->
     <script src="supabase.js"></script>
