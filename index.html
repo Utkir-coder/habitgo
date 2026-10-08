@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0d2818">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>HabitGo — Odatlaringizni boshqaring</title>
-    <meta name="description" content="HabitGo — odatlar tracker. Kunlik, haftalik, oylik odatlar.">
+    <meta name="description" content="HabitGo — odatlar tracker.">
     <meta name="theme-color" content="#0d2818">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,26 +43,10 @@
         <section class="features">
             <h2>Nega HabitGo?</h2>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Statistika</h3>
-                    <p>Natijalaringizni kuzatib boring</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔔</div>
-                    <h3>Eslatmalar</h3>
-                    <p>Odat vaqtida bildirishnoma</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Yutuqlar</h3>
-                    <p>Streak yig'ing, badge oling</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Telefonda ham</h3>
-                    <p>PWA — o'rnatib oling</p>
-                </div>
+                <div class="feature-card"><div class="feature-icon">📊</div><h3>Statistika</h3><p>Natijalaringizni kuzatib boring</p></div>
+                <div class="feature-card"><div class="feature-icon">🔔</div><h3>Eslatmalar</h3><p>Odat vaqtida bildirishnoma</p></div>
+                <div class="feature-card"><div class="feature-icon">🏆</div><h3>Yutuqlar</h3><p>Streak yig'ing, badge oling</p></div>
+                <div class="feature-card"><div class="feature-icon">📱</div><h3>Telefonda ham</h3><p>PWA — o'rnatib oling</p></div>
             </div>
         </section>
 
@@ -77,32 +56,21 @@
                 <div class="price-card">
                     <h3>Bepul</h3>
                     <div class="price"><span>0</span> so'm</div>
-                    <ul>
-                        <li>✅ 3 tagacha odat</li>
-                        <li>✅ Asosiy statistika</li>
-                    </ul>
+                    <ul><li>✅ 3 tagacha odat</li><li>✅ Asosiy statistika</li></ul>
                     <button onclick="showRegister()" class="btn-outline">Boshlash</button>
                 </div>
                 <div class="price-card featured">
                     <div class="badge-popular">🔥 Mashhur</div>
                     <h3>Premium</h3>
                     <div class="price"><span>9,900</span> so'm/oy</div>
-                    <ul>
-                        <li>✅ Cheksiz odatlar</li>
-                        <li>✅ Rejalar bo'limi</li>
-                        <li>✅ Leaderboard</li>
-                        <li>✅ AI motivatsiya</li>
-                    </ul>
+                    <ul><li>✅ Cheksiz odatlar</li><li>✅ Rejalar bo'limi</li><li>✅ Leaderboard</li><li>✅ AI motivatsiya</li></ul>
                     <button onclick="showRegister()" class="btn-primary">Premium olish</button>
                 </div>
                 <div class="price-card">
                     <div class="badge-save">💰 2 oy bepul</div>
                     <h3>Yillik</h3>
                     <div class="price"><span>99,000</span> so'm/yil</div>
-                    <ul>
-                        <li>✅ Premium'ning hammasi</li>
-                        <li>✅ 17% chegirma</li>
-                    </ul>
+                    <ul><li>✅ Premium'ning hammasi</li><li>✅ 17% chegirma</li></ul>
                     <button onclick="showRegister()" class="btn-outline">Yillik olish</button>
                 </div>
             </div>
@@ -141,9 +109,9 @@
         <header class="header">
             <div class="logo">🚀 HabitGo</div>
             <div class="header-right">
+                <button class="btn-add-habit" onclick="openHabitModal()" title="Yangi odat">➕</button>
                 <button class="btn-theme" onclick="showColorPicker()" title="Rang">🎨</button>
                 <button class="btn-theme" onclick="toggleTheme()" id="themeBtn" title="Tungi rejim">🌙</button>
-                <div class="date" id="currentDate"></div>
                 <div class="profile-menu" onclick="toggleProfileMenu()">
                     <div class="avatar" id="userAvatar">👤</div>
                     <span id="userName">Foydalanuvchi</span>
@@ -186,6 +154,7 @@
         </section>
 
         <main class="container">
+            <!-- STATISTIKA -->
             <section class="stats">
                 <div class="stat-card">
                     <div class="stat-number" id="totalHabits">0</div>
@@ -201,6 +170,7 @@
                 </div>
             </section>
 
+            <!-- REJALAR TUGMASI -->
             <section class="tasks-quick-access">
                 <button class="tasks-quick-btn" onclick="showTasks()">
                     <span class="tasks-quick-icon">📝</span>
@@ -212,69 +182,22 @@
                 </button>
             </section>
 
+            <!-- CHALLENGE -->
             <section class="challenge-card" id="challengeCard"></section>
 
-            <section class="badges-preview" id="badgesPreview">
-                <h3>🏆 Yutuqlaringiz</h3>
-                <div class="badges-row" id="badgesRow"></div>
-            </section>
-
+            <!-- PREMIUM LIMIT -->
             <div id="premiumLimit" class="premium-banner" style="display:none;">
                 <span>⚠️ Bepul tarifda faqat 3 ta odat. </span>
                 <a href="#" onclick="showSubscription()">💎 Premium olish</a>
             </div>
 
-            <section class="add-habit">
-                <h2>➕ Yangi odat qo'shish</h2>
-                <div class="form-group">
-                    <label>1️⃣ Odat nomi</label>
-                    <input type="text" id="habitName" placeholder="Masalan: Kitob o'qish">
-                </div>
-                <div class="form-group">
-                    <label>2️⃣ Davomiylik</label>
-                    <div class="period-options">
-                        <label class="radio-card">
-                            <input type="radio" name="period" value="weekly" checked>
-                            <span>📅 Haftalik</span>
-                        </label>
-                        <label class="radio-card">
-                            <input type="radio" name="period" value="monthly">
-                            <span>🗓 Oylik</span>
-                        </label>
-                        <label class="radio-card">
-                            <input type="radio" name="period" value="yearly">
-                            <span>📆 Yillik</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>3️⃣ Kunlar</label>
-                    <div class="days-options">
-                        <label class="day-chip"><input type="checkbox" id="allDays" checked><span>Har kuni</span></label>
-                        <label class="day-chip"><input type="checkbox" class="day" value="1"><span>Dush</span></label>
-                        <label class="day-chip"><input type="checkbox" class="day" value="2"><span>Sesh</span></label>
-                        <label class="day-chip"><input type="checkbox" class="day" value="3"><span>Chor</span></label>
-                        <label class="day-chip"><input type="checkbox" class="day" value="4"><span>Pay</span></label>
-                        <label class="day-chip"><input type="checkbox" class="day" value="5"><span>Jum</span></label>
-                        <label class="day-chip"><input type="checkbox" class="day" value="6"><span>Shan</span></label>
-                        <label class="day-chip"><input type="checkbox" class="day" value="0"><span>Yak</span></label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>4️⃣ Vaqt</label>
-                    <input type="time" id="habitTime" value="06:00">
-                </div>
-                <div class="form-group">
-                    <label>5️⃣ Joy</label>
-                    <input type="text" id="habitPlace" placeholder="Masalan: Bog'da">
-                </div>
-                <button class="btn-add" onclick="addHabit()">✅ Odatni qo'shish</button>
-            </section>
-
+            <!-- FAOL ODATLAR -->
             <section class="habits-section">
                 <h2>📋 Faol odatlar</h2>
                 <div id="habitsList" class="habits-list"></div>
-                <p id="emptyMessage" class="empty-message">Hali odat qo'shmadingiz 🌱</p>
+                <p id="emptyMessage" class="empty-message">
+                    Hali odat qo'shmadingiz. Tepadagi <strong>➕</strong> tugmasini bosing! 🌱
+                </p>
             </section>
 
             <section class="completed-section" id="completedSection" style="display: none;">
@@ -286,6 +209,63 @@
         <footer class="footer">
             <p>HabitGo — Sen har kuni yaxshilanasan! 💪</p>
         </footer>
+    </div>
+
+    <!-- YANGI ODAT MODALI -->
+    <div id="habitModal" class="modal" style="display:none;">
+        <div class="modal-content habit-modal-content">
+            <span class="close-btn" onclick="closeHabitModal()">×</span>
+            <h2>➕ Yangi odat qo'shish</h2>
+
+            <div class="form-group">
+                <label>1️⃣ Odat nomi</label>
+                <input type="text" id="habitName" placeholder="Masalan: Kitob o'qish">
+            </div>
+
+            <div class="form-group">
+                <label>2️⃣ Davomiylik</label>
+                <div class="period-options">
+                    <label class="radio-card">
+                        <input type="radio" name="period" value="weekly" checked>
+                        <span>📅 Haftalik</span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="period" value="monthly">
+                        <span>🗓 Oylik</span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="period" value="yearly">
+                        <span>📆 Yillik</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>3️⃣ Kunlar</label>
+                <div class="days-options">
+                    <label class="day-chip"><input type="checkbox" id="allDays" checked><span>Har kuni</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="1"><span>Dush</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="2"><span>Sesh</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="3"><span>Chor</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="4"><span>Pay</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="5"><span>Jum</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="6"><span>Shan</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="0"><span>Yak</span></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>4️⃣ Vaqt</label>
+                <input type="time" id="habitTime" value="06:00">
+            </div>
+
+            <div class="form-group">
+                <label>5️⃣ Joy</label>
+                <input type="text" id="habitPlace" placeholder="Masalan: Bog'da">
+            </div>
+
+            <button class="btn-add" onclick="addHabit()">✅ Odatni qo'shish</button>
+        </div>
     </div>
 
     <!-- PROFIL -->
@@ -497,26 +477,6 @@
     </div>
 
     <canvas id="confettiCanvas"></canvas>
-
-    <!-- MOBIL BOTTOM NAVIGATION -->
-<nav class="mobile-bottom-nav" id="mobileBottomNav">
-    <button class="mobile-nav-item active" onclick="mobileNav('home')">
-        <span class="mobile-nav-icon">🏠</span>
-        <span>Asosiy</span>
-    </button>
-    <button class="mobile-nav-item" onclick="mobileNav('tasks')">
-        <span class="mobile-nav-icon">📝</span>
-        <span>Rejalar</span>
-    </button>
-    <button class="mobile-nav-item" onclick="mobileNav('stats')">
-        <span class="mobile-nav-icon">📊</span>
-        <span>Statistika</span>
-    </button>
-    <button class="mobile-nav-item" onclick="mobileNav('profile')">
-        <span class="mobile-nav-icon">👤</span>
-        <span>Profil</span>
-    </button>
-</nav>
 
     <!-- SCRIPT'LAR -->
     <script src="supabase.js"></script>

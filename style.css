@@ -5133,3 +5133,67 @@ body.dark .loading-overlay p {
         padding-top: calc(12px + env(safe-area-inset-top)) !important;
     }
 }
+/* ============================================ */
+/* YANGI ODAT TUGMASI (Header) */
+/* ============================================ */
+.btn-add-habit {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    padding: 0;
+    line-height: 1;
+}
+
+.btn-add-habit:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+
+.btn-add-habit:active {
+    transform: scale(0.95);
+}
+
+/* Yangi odat modal */
+.habit-modal-content {
+    max-width: 500px;
+}
+
+.habit-modal-content h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+body.dark .habit-modal-content h2 {
+    color: #e0e0e0;
+}
+
+/* Mobil uchun */
+@media (max-width: 768px) {
+    .btn-add-habit {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+    }
+
+    .habit-modal-content {
+        padding: 20px 16px !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+
+    .habit-modal-content h2 {
+        font-size: 18px !important;
+    }
+}

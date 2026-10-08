@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Asosiy mantiq (Supabase)
+// HABITGO — Asosiy mantiq
 // ============================================
 
 let habits = [];
@@ -29,7 +29,7 @@ const allMotivations = [
 // INIT
 // ============================================
 async function initApp() {
-    console.log('[App] initApp boshlandi');
+    console.log('[App] initApp');
     showLoadingState(true);
 
     try {
@@ -44,7 +44,6 @@ async function initApp() {
         updateStats();
         checkPremiumLimit();
 
-        if (typeof renderBadgesPreview === 'function') renderBadgesPreview();
         if (typeof renderChallenge === 'function') renderChallenge();
         if (typeof loadTasks === 'function') await loadTasks();
         if (typeof updateTasksQuickInfo === 'function') updateTasksQuickInfo();
@@ -131,7 +130,6 @@ async function loadHabits() {
             lastCheck: h.last_check, createdAt: h.created_at
         }));
         habitsLoaded = true;
-        console.log('[App] Odatlar:', habits.length);
     } catch (err) { habits = []; }
 }
 
@@ -154,7 +152,6 @@ function showMotivation() {
     const el = document.getElementById('motivationText');
     if (el) el.textContent = random;
 
-    // AI motivatsiya (1.5 sekunddan keyin)
     if (typeof updateMotivationWithAI === 'function' && currentUser) {
         setTimeout(() => updateMotivationWithAI(), 1500);
     }
@@ -206,6 +203,35 @@ function checkPremiumLimit() {
 }
 
 // ============================================
+// MODAL — YANGI ODAT
+// ============================================
+function openHabitModal() {
+    document.getElementById('habitModal').style.display = 'flex';
+    document.getElementById('habitName').focus();
+}
+
+function closeHabitModal() {
+    document.getElementById('habitModal').style.display = 'none';
+    resetForm();
+}
+
+// Modal tashqarisiga bosilganda yopish
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('habitModal');
+    if (modal && modal.style.display === 'flex' && e.target === modal) {
+        closeHabitModal();
+    }
+});
+
+// ESC tugmasi
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('habitModal');
+        if (modal && modal.style.display === 'flex') closeHabitModal();
+    }
+});
+
+// ============================================
 // ADD HABIT
 // ============================================
 async function addHabit() {
@@ -232,7 +258,7 @@ async function addHabit() {
 
     const today = getTodayStr();
     const range = getPeriodRange(period, today);
-    const btn = document.querySelector('.btn-add');
+    const btn = document.querySelector('#habitModal .btn-add');
     const originalText = btn ? btn.textContent : '';
     if (btn) { btn.textContent = '⏳...'; btn.disabled = true; }
 
@@ -252,7 +278,9 @@ async function addHabit() {
             lastCheck: result.last_check, createdAt: result.created_at
         });
 
-        renderHabits(); updateStats(); checkPremiumLimit(); resetForm();
+        renderHabits(); updateStats(); checkPremiumLimit();
+        closeHabitModal();
+
         if (typeof renderChallenge === 'function') renderChallenge();
         if (typeof checkForNewBadges === 'function') setTimeout(checkForNewBadges, 500);
         showToast(`✅ "${name}" qo'shildi!`);
@@ -264,11 +292,16 @@ async function addHabit() {
 }
 
 function resetForm() {
-    document.getElementById('habitName').value = '';
-    document.getElementById('habitPlace').value = '';
-    document.getElementById('habitTime').value = '06:00';
-    document.querySelector('input[name="period"][value="weekly"]').checked = true;
-    document.getElementById('allDays').checked = true;
+    const nameEl = document.getElementById('habitName');
+    const placeEl = document.getElementById('habitPlace');
+    const timeEl = document.getElementById('habitTime');
+    if (nameEl) nameEl.value = '';
+    if (placeEl) placeEl.value = '';
+    if (timeEl) timeEl.value = '06:00';
+    const weekly = document.querySelector('input[name="period"][value="weekly"]');
+    if (weekly) weekly.checked = true;
+    const allDays = document.getElementById('allDays');
+    if (allDays) allDays.checked = true;
     document.querySelectorAll('.day').forEach(cb => { cb.checked = false; cb.disabled = true; });
 }
 
@@ -335,7 +368,6 @@ async function checkHabit(id) {
             if (newStreak === 7) setTimeout(() => alert(`🔥 7 kun ketma-ket!`), 100);
             else if (newStreak === 30) setTimeout(() => alert(`🏆 30 kun ketma-ket!`), 100);
             if (typeof checkForNewBadges === 'function') setTimeout(checkForNewBadges, 500);
-            if (typeof renderBadgesPreview === 'function') renderBadgesPreview();
             if (typeof renderChallenge === 'function') renderChallenge();
         }
     } catch (err) {
@@ -377,7 +409,6 @@ function renderHabits() {
             const dayNames = ['Yak', 'Dush', 'Sesh', 'Chor', 'Pay', 'Jum', 'Shan'];
             const daysStr = habit.days.length === 7 ? 'Har kuni' : habit.days.map(d => dayNames[d]).join(', ');
             const warning = (isToday && !isDone) ? '<span class="habit-warning">⚠️ Bajarilmadi</span>' : '';
-            const notesCount = typeof getNotesCount === 'function' ? 0 : 0;
 
             return `
                 <div class="habit-item ${isDone ? 'completed' : ''}">
@@ -518,35 +549,4 @@ function updateTasksQuickInfo() {
         info.style.color = '';
         info.style.fontWeight = '';
     }
-}
-// ============================================
-// MOBIL NAVIGATION
-// ============================================
-function mobileNav(page) {
-    // Active holat
-    document.querySelectorAll('.mobile-nav-item').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.currentTarget.classList.add('active');
-
-    // Sahifaga o'tish
-    if (page === 'home') {
-        if (typeof closePage === 'function') closePage();
-        if (typeof closeTasks === 'function') closeTasks();
-        if (typeof closeLeaderboard === 'function') closeLeaderboard();
-        if (typeof closeStatistics === 'function') closeStatistics();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (page === 'tasks') {
-        if (typeof showTasks === 'function') showTasks();
-    } else if (page === 'stats') {
-        if (typeof showStatistics === 'function') showStatistics();
-    } else if (page === 'profile') {
-        if (typeof showProfile === 'function') showProfile();
-    }
-}
-
-// Faqat mobilda ko'rsatish
-if (window.innerWidth > 768) {
-    const nav = document.getElementById('mobileBottomNav');
-    if (nav) nav.style.display = 'none';
 }
