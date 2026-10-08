@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>HabitGo — Odatlaringizni boshqaring</title>
+    <meta name="description" content="HabitGo — odatlar tracker. Kunlik, haftalik, oylik odatlar.">
+    <meta name="theme-color" content="#0d2818">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HabitGo">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <div id="loadingOverlay" class="loading-overlay" style="display:none;">
+        <div class="loading-spinner"></div>
+        <p>Yuklanmoqda...</p>
+    </div>
+
+    <!-- LANDING PAGE -->
+    <div id="landingPage" class="landing-page">
+        <nav class="landing-nav">
+            <div class="logo">🚀 HabitGo</div>
+            <div class="nav-buttons">
+                <button onclick="showLogin()" class="btn-outline">Kirish</button>
+                <button onclick="showRegister()" class="btn-primary">Ro'yxatdan o'tish</button>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>Odatlaringizni <span>o'zgartiring</span>,<br>hayotingizni o'zgartiring</h1>
+            <p class="hero-sub">Har qanday maqsad sari yo'l. Rejalashtir, kuzat, muvaffaqiyatga erish!</p>
+            <button onclick="showRegister()" class="btn-hero">🚀 Bepul boshlash</button>
+        </section>
+
+        <section class="features">
+            <h2>Nega HabitGo?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Statistika</h3>
+                    <p>Natijalaringizni kuzatib boring</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Eslatmalar</h3>
+                    <p>Odat vaqtida bildirishnoma</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Yutuqlar</h3>
+                    <p>Streak yig'ing, badge oling</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Telefonda ham</h3>
+                    <p>PWA — o'rnatib oling</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing">
+            <h2>Narxlar</h2>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Bepul</h3>
+                    <div class="price"><span>0</span> so'm</div>
+                    <ul>
+                        <li>✅ 3 tagacha odat</li>
+                        <li>✅ Asosiy statistika</li>
+                    </ul>
+                    <button onclick="showRegister()" class="btn-outline">Boshlash</button>
+                </div>
+                <div class="price-card featured">
+                    <div class="badge-popular">🔥 Mashhur</div>
+                    <h3>Premium</h3>
+                    <div class="price"><span>9,900</span> so'm/oy</div>
+                    <ul>
+                        <li>✅ Cheksiz odatlar</li>
+                        <li>✅ Rejalar bo'limi</li>
+                        <li>✅ Leaderboard</li>
+                        <li>✅ AI motivatsiya</li>
+                    </ul>
+                    <button onclick="showRegister()" class="btn-primary">Premium olish</button>
+                </div>
+                <div class="price-card">
+                    <div class="badge-save">💰 2 oy bepul</div>
+                    <h3>Yillik</h3>
+                    <div class="price"><span>99,000</span> so'm/yil</div>
+                    <ul>
+                        <li>✅ Premium'ning hammasi</li>
+                        <li>✅ 17% chegirma</li>
+                    </ul>
+                    <button onclick="showRegister()" class="btn-outline">Yillik olish</button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="landing-footer">
+            <p>© 2026 HabitGo. Barcha huquqlar himoyalangan.</p>
+            <p>Aloqa: support@habitgo.uz</p>
+        </footer>
+    </div>
+
+    <!-- KIRISH MODAL -->
+    <div id="authModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <div id="loginForm">
+                <h2>Kirish</h2>
+                <input type="email" id="loginEmail" placeholder="Email">
+                <input type="password" id="loginPassword" placeholder="Parol">
+                <button onclick="login()" class="btn-primary full">Kirish</button>
+                <p class="switch-text">Akkauntingiz yo'qmi? <a href="#" onclick="showRegister()">Ro'yxatdan o'tish</a></p>
+            </div>
+            <div id="registerForm" style="display:none;">
+                <h2>Ro'yxatdan o'tish</h2>
+                <input type="text" id="regName" placeholder="Ismingiz">
+                <input type="email" id="regEmail" placeholder="Email">
+                <input type="password" id="regPassword" placeholder="Parol (kamida 6 belgi)">
+                <button onclick="register()" class="btn-primary full">Ro'yxatdan o'tish</button>
+                <p class="switch-text">Akkauntingiz bormi? <a href="#" onclick="showLogin()">Kirish</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ASOSIY APP -->
+    <div id="appPage" style="display:none;">
+        <header class="header">
+            <div class="logo">🚀 HabitGo</div>
+            <div class="header-right">
+                <button class="btn-theme" onclick="showColorPicker()" title="Rang">🎨</button>
+                <button class="btn-theme" onclick="toggleTheme()" id="themeBtn" title="Tungi rejim">🌙</button>
+                <div class="date" id="currentDate"></div>
+                <div class="profile-menu" onclick="toggleProfileMenu()">
+                    <div class="avatar" id="userAvatar">👤</div>
+                    <span id="userName">Foydalanuvchi</span>
+                    <div class="dropdown" id="profileDropdown">
+                        <a href="#" onclick="showProfile()">👤 Profil</a>
+                        <a href="#" onclick="showTasks()">📝 Rejalar</a>
+                        <a href="#" onclick="showLeaderboard()">🏅 Leaderboard</a>
+                        <a href="#" onclick="showStatistics()">📊 Statistika</a>
+                        <a href="#" onclick="showAchievements()">🏆 Yutuqlar</a>
+                        <a href="#" onclick="showBackup()">💾 Backup</a>
+                        <a href="#" onclick="showSubscription()">💎 Obuna</a>
+                        <a href="#" onclick="logout()">🚪 Chiqish</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="installBanner" class="install-banner" style="display:none;">
+            <div class="install-content">
+                <div class="install-icon">📱</div>
+                <div class="install-text">
+                    <strong>HabitGo'ni o'rnating</strong>
+                    <span>Telefoningizga qo'shing</span>
+                </div>
+                <button class="install-btn" onclick="installPWA()">O'rnatish</button>
+                <button class="install-close" onclick="hideInstallButton()">×</button>
+            </div>
+        </div>
+
+        <section class="motivation-banner">
+            <p id="motivationText">Bugun ajoyib kun bo'ladi! ✨</p>
+        </section>
+
+        <section class="daily-report" id="dailyReport" style="display: none;">
+            <div class="report-content">
+                <h3 id="reportTitle">Kunlik hisobot</h3>
+                <p id="reportText"></p>
+                <button onclick="closeReport()">Yopish</button>
+            </div>
+        </section>
+
+        <main class="container">
+            <section class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalHabits">0</div>
+                    <div class="stat-label">Faol odatlar</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="todayDone">0</div>
+                    <div class="stat-label">Bugun bajarildi</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="bestStreak">0</div>
+                    <div class="stat-label">Eng yaxshi streak</div>
+                </div>
+            </section>
+
+            <section class="tasks-quick-access">
+                <button class="tasks-quick-btn" onclick="showTasks()">
+                    <span class="tasks-quick-icon">📝</span>
+                    <div class="tasks-quick-text">
+                        <strong>Rejalar</strong>
+                        <span id="tasksQuickInfo">Vazifalarni boshqarish</span>
+                    </div>
+                    <span class="tasks-quick-arrow">→</span>
+                </button>
+            </section>
+
+            <section class="challenge-card" id="challengeCard"></section>
+
+            <section class="badges-preview" id="badgesPreview">
+                <h3>🏆 Yutuqlaringiz</h3>
+                <div class="badges-row" id="badgesRow"></div>
+            </section>
+
+            <div id="premiumLimit" class="premium-banner" style="display:none;">
+                <span>⚠️ Bepul tarifda faqat 3 ta odat. </span>
+                <a href="#" onclick="showSubscription()">💎 Premium olish</a>
+            </div>
+
+            <section class="add-habit">
+                <h2>➕ Yangi odat qo'shish</h2>
+                <div class="form-group">
+                    <label>1️⃣ Odat nomi</label>
+                    <input type="text" id="habitName" placeholder="Masalan: Kitob o'qish">
+                </div>
+                <div class="form-group">
+                    <label>2️⃣ Davomiylik</label>
+                    <div class="period-options">
+                        <label class="radio-card">
+                            <input type="radio" name="period" value="weekly" checked>
+                            <span>📅 Haftalik</span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="period" value="monthly">
+                            <span>🗓 Oylik</span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="period" value="yearly">
+                            <span>📆 Yillik</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>3️⃣ Kunlar</label>
+                    <div class="days-options">
+                        <label class="day-chip"><input type="checkbox" id="allDays" checked><span>Har kuni</span></label>
+                        <label class="day-chip"><input type="checkbox" class="day" value="1"><span>Dush</span></label>
+                        <label class="day-chip"><input type="checkbox" class="day" value="2"><span>Sesh</span></label>
+                        <label class="day-chip"><input type="checkbox" class="day" value="3"><span>Chor</span></label>
+                        <label class="day-chip"><input type="checkbox" class="day" value="4"><span>Pay</span></label>
+                        <label class="day-chip"><input type="checkbox" class="day" value="5"><span>Jum</span></label>
+                        <label class="day-chip"><input type="checkbox" class="day" value="6"><span>Shan</span></label>
+                        <label class="day-chip"><input type="checkbox" class="day" value="0"><span>Yak</span></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>4️⃣ Vaqt</label>
+                    <input type="time" id="habitTime" value="06:00">
+                </div>
+                <div class="form-group">
+                    <label>5️⃣ Joy</label>
+                    <input type="text" id="habitPlace" placeholder="Masalan: Bog'da">
+                </div>
+                <button class="btn-add" onclick="addHabit()">✅ Odatni qo'shish</button>
+            </section>
+
+            <section class="habits-section">
+                <h2>📋 Faol odatlar</h2>
+                <div id="habitsList" class="habits-list"></div>
+                <p id="emptyMessage" class="empty-message">Hali odat qo'shmadingiz 🌱</p>
+            </section>
+
+            <section class="completed-section" id="completedSection" style="display: none;">
+                <h2>🏆 Tugallangan odatlar</h2>
+                <div id="completedList" class="habits-list"></div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>HabitGo — Sen har kuni yaxshilanasan! 💪</p>
+        </footer>
+    </div>
+
+    <!-- PROFIL -->
+    <div id="profilePage" class="page-modal" style="display:none;">
+        <div class="page-content">
+            <span class="close-btn" onclick="closePage()">×</span>
+            <h2>👤 Profil</h2>
+            <div class="profile-info">
+                <div class="profile-avatar-large" id="profileAvatar">👤</div>
+                <div class="profile-details">
+                    <p><strong>Ism:</strong> <span id="profileName">-</span></p>
+                    <p><strong>Email:</strong> <span id="profileEmail">-</span></p>
+                    <p><strong>Tarif:</strong> <span id="profilePlan" class="plan-badge">Bepul</span></p>
+                    <p><strong>Ro'yxatdan o'tgan:</strong> <span id="profileJoined">-</span></p>
+                </div>
+            </div>
+            <h3>📊 Statistika</h3>
+            <div class="profile-stats">
+                <div><strong id="pTotalHabits">0</strong><span>Jami odatlar</span></div>
+                <div><strong id="pTotalDone">0</strong><span>Bajarilgan</span></div>
+                <div><strong id="pBestStreak">0</strong><span>Eng yaxshi streak</span></div>
+            </div>
+            <button onclick="logout()" class="btn-danger full">🚪 Chiqish</button>
+        </div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div id="leaderboardPage" class="page-modal" style="display:none;">
+        <div class="page-content leaderboard-page-content">
+            <span class="close-btn" onclick="closeLeaderboard()">×</span>
+            <h2>🏅 Leaderboard</h2>
+            <p class="leaderboard-intro">Eng faol foydalanuvchilar reytingi.</p>
+            <div id="leaderboardHeader"></div>
+            <div class="leaderboard-filters">
+                <button class="leaderboard-filter-btn active" data-filter="streak" onclick="setLeaderboardFilter('streak')">🔥 Streak</button>
+                <button class="leaderboard-filter-btn" data-filter="completed" onclick="setLeaderboardFilter('completed')">✅ Bajarilgan</button>
+                <button class="leaderboard-filter-btn" data-filter="level" onclick="setLeaderboardFilter('level')">⭐ Level</button>
+                <button class="leaderboard-filter-btn" data-filter="xp" onclick="setLeaderboardFilter('xp')">⚡ XP</button>
+            </div>
+            <div id="leaderboardPodium"></div>
+            <div id="leaderboardList" class="leaderboard-list"></div>
+            <div id="leaderboardSelf" class="leaderboard-self"></div>
+        </div>
+    </div>
+
+    <!-- REJALAR -->
+    <div id="tasksPage" class="page-modal" style="display:none;">
+        <div class="page-content tasks-page-content">
+            <span class="close-btn" onclick="closeTasks()">×</span>
+            <h2>📝 Rejalar</h2>
+            <div id="tasksHeader" class="tasks-header"></div>
+            <div class="task-add-form">
+                <h3>➕ Yangi vazifa</h3>
+                <div class="form-group"><input type="text" id="taskName" placeholder="Vazifa nomi" maxlength="100"></div>
+                <div class="form-group"><textarea id="taskDesc" placeholder="Tavsif" maxlength="300" rows="2"></textarea></div>
+                <div class="task-form-row">
+                    <div class="form-group"><label>📅 Sana</label><input type="date" id="taskDate"></div>
+                    <div class="form-group"><label>⏰ Vaqt</label><input type="time" id="taskTime"></div>
+                </div>
+                <div class="form-group">
+                    <label>Kategoriya</label>
+                    <select id="taskCategory">
+                        <option value="study">📚 O'qish</option>
+                        <option value="work">💼 Ish</option>
+                        <option value="sport">💪 Sport</option>
+                        <option value="personal">🏠 Shaxsiy</option>
+                        <option value="other">📌 Boshqa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Prioritet</label>
+                    <div class="priority-options">
+                        <label class="priority-chip"><input type="radio" name="taskPriority" value="low"><span>🟢 Past</span></label>
+                        <label class="priority-chip"><input type="radio" name="taskPriority" value="medium" checked><span>🟡 O'rta</span></label>
+                        <label class="priority-chip"><input type="radio" name="taskPriority" value="high"><span>🔴 Yuqori</span></label>
+                    </div>
+                </div>
+                <button class="btn-add" onclick="addTask()">✅ Vazifani qo'shish</button>
+            </div>
+            <div class="task-filters">
+                <button class="task-filter-btn active" data-filter="active" onclick="setTaskFilter('active')">Faol</button>
+                <button class="task-filter-btn" data-filter="today" onclick="setTaskFilter('today')">Bugun</button>
+                <button class="task-filter-btn" data-filter="week" onclick="setTaskFilter('week')">Hafta</button>
+                <button class="task-filter-btn" data-filter="done" onclick="setTaskFilter('done')">Bajarilgan</button>
+                <button class="task-filter-btn" data-filter="all" onclick="setTaskFilter('all')">Hammasi</button>
+            </div>
+            <div id="tasksList" class="tasks-list"></div>
+        </div>
+    </div>
+
+    <!-- STATISTIKA -->
+    <div id="statisticsPage" class="page-modal" style="display:none;">
+        <div class="page-content stats-page-content">
+            <span class="close-btn" onclick="closeStatistics()">×</span>
+            <h2>📊 Statistika</h2>
+            <div id="statsSummary"></div>
+            <h3>📊 Haftalik faollik</h3>
+            <div class="chart-container"><canvas id="weeklyChart"></canvas></div>
+            <h3>📈 Oylik tendentsiya</h3>
+            <div class="chart-container"><canvas id="monthlyChart"></canvas></div>
+            <h3>📅 Yillik faollik</h3>
+            <div class="heatmap-section">
+                <div id="heatmapContainer"></div>
+                <div id="heatmapLegend" class="heatmap-legend"></div>
+            </div>
+            <h3>📋 Odatlar bo'yicha</h3>
+            <div id="habitBreakdown"></div>
+        </div>
+    </div>
+
+    <!-- BACKUP -->
+    <div id="backupPage" class="page-modal" style="display:none;">
+        <div class="page-content backup-page-content">
+            <span class="close-btn" onclick="closePage()">×</span>
+            <h2>💾 Backup</h2>
+            <p class="backup-intro">Ma'lumotlaringizni JSON faylga saqlang.</p>
+            <div class="backup-info-card">
+                <h3>📊 Hozirgi ma'lumotlar</h3>
+                <div id="backupInfo" class="backup-info-grid"></div>
+            </div>
+            <div class="backup-action">
+                <div class="backup-action-icon">📤</div>
+                <div class="backup-action-text"><strong>Export</strong><span>JSON faylga yuklab olish</span></div>
+                <button class="backup-btn export" onclick="exportData()">📤 Yuklash</button>
+            </div>
+            <div class="backup-action">
+                <div class="backup-action-icon">📥</div>
+                <div class="backup-action-text"><strong>Import</strong><span>JSON fayldan tiklash</span></div>
+                <button class="backup-btn import" onclick="importData()">📥 Yuklash</button>
+            </div>
+            <div class="backup-warning">⚠️ <strong>Diqqat!</strong> Import qilganda hozirgi ma'lumotlar o'chiriladi.</div>
+        </div>
+    </div>
+
+    <!-- OBUNA -->
+    <div id="subscriptionPage" class="page-modal" style="display:none;">
+        <div class="page-content">
+            <span class="close-btn" onclick="closePage()">×</span>
+            <h2>💎 Obuna</h2>
+            <p class="subscription-info">Hozirgi tarif: <strong id="currentPlan">Bepul</strong></p>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>Bepul</h3>
+                    <div class="price"><span>0</span> so'm</div>
+                    <ul><li>✅ 3 tagacha odat</li><li>✅ Asosiy statistika</li></ul>
+                    <button class="btn-outline" disabled>Sizning tarifingiz</button>
+                </div>
+                <div class="price-card featured">
+                    <div class="badge-popular">🔥 Mashhur</div>
+                    <h3>Premium</h3>
+                    <div class="price"><span>9,900</span> so'm/oy</div>
+                    <ul><li>✅ Cheksiz odatlar</li><li>✅ Rejalar</li><li>✅ Leaderboard</li><li>✅ AI motivatsiya</li></ul>
+                    <button class="btn-primary" onclick="buyPremium('monthly')">Premium olish</button>
+                </div>
+                <div class="price-card">
+                    <div class="badge-save">💰 2 oy bepul</div>
+                    <h3>Yillik</h3>
+                    <div class="price"><span>99,000</span> so'm/yil</div>
+                    <ul><li>✅ Premium'ning hammasi</li><li>✅ 17% chegirma</li></ul>
+                    <button class="btn-outline" onclick="buyPremium('yearly')">Yillik olish</button>
+                </div>
+            </div>
+            <p class="payment-note">💳 To'lov: Payme, Click yoki Uzcard orqali<br>(Demo versiyada to'lov simulyatsiya qilinadi)</p>
+        </div>
+    </div>
+
+    <!-- YUTUQLAR -->
+    <div id="achievementsPage" class="page-modal" style="display:none;">
+        <div class="page-content">
+            <span class="close-btn" onclick="closePage()">×</span>
+            <h2>🏆 Yutuqlar</h2>
+            <p style="color:#666; margin-bottom:20px;">Odatlaringizni bajarib badge'lar yig'ing!</p>
+            <div class="achievements-grid" id="achievementsGrid"></div>
+        </div>
+    </div>
+
+    <!-- ESLATMA MODAL -->
+    <div id="notesModal" class="modal" style="display:none;">
+        <div class="modal-content notes-modal-content">
+            <span class="close-btn" onclick="closeNotesModal()">×</span>
+            <h2>📝 Eslatmalar</h2>
+            <p class="notes-habit-title">"<span id="notesHabitName">-</span>" uchun</p>
+            <div class="note-input-group">
+                <textarea id="noteInput" placeholder="Bugun qanday o'tdi?" maxlength="500"></textarea>
+                <div class="note-input-footer">
+                    <select id="noteMood" class="note-mood-select">
+                        <option value="great">😄 Ajoyib</option>
+                        <option value="good">😊 Yaxshi</option>
+                        <option value="neutral" selected>😐 O'rtacha</option>
+                        <option value="bad">😔 Yomon</option>
+                        <option value="terrible">😢 Juda yomon</option>
+                    </select>
+                    <button onclick="addNote()" class="btn-primary">Qo'shish</button>
+                </div>
+            </div>
+            <div id="notesList" class="notes-list"></div>
+            <p class="notes-hint">💡 Ctrl+Enter — tez qo'shish</p>
+        </div>
+    </div>
+
+    <!-- RANG TANLASH -->
+    <div id="colorPickerModal" class="modal" style="display:none;">
+        <div class="modal-content color-picker-content">
+            <span class="close-btn" onclick="closeColorPicker()">×</span>
+            <h2>🎨 Rang mavzusi</h2>
+            <p style="color:#666; margin-bottom:20px; font-size:14px;">O'zingizga yoqqan rangni tanlang</p>
+            <div id="colorOptions" class="color-options"></div>
+        </div>
+    </div>
+
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- SCRIPT'LAR -->
+    <script src="supabase.js"></script>
+    <script src="theme.js"></script>
+    <script src="colors.js"></script>
+    <script src="confetti.js"></script>
+    <script src="notifications.js"></script>
+    <script src="badges.js"></script>
+    <script src="auth.js"></script>
+    <script src="profile.js"></script>
+    <script src="payment.js"></script>
+    <script src="app.js"></script>
+    <script src="ai.js"></script>
+    <script src="heatmap.js"></script>
+    <script src="charts.js"></script>
+    <script src="challenge.js"></script>
+    <script src="notes.js"></script>
+    <script src="pwa.js"></script>
+    <script src="backup.js"></script>
+    <script src="tasks.js"></script>
+    <script src="leaderboard.js"></script>
+</body>
+</html>
