@@ -5197,3 +5197,41 @@ body.dark .habit-modal-content h2 {
         font-size: 18px !important;
     }
 }
+/* ============================================ */
+/* TIL TANLASH */
+/* ============================================ */
+.lang-switcher {
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px;
+    border-radius: 20px;
+    margin-right: 8px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 15px;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+.lang-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.lang-btn.active {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .lang-btn {
+        font-size: 16px;
+        padding: 3px 6px;
+    }
+}
