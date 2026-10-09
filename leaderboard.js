@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Leaderboard (Supabase, real foydalanuvchilar)
+// HABITGO — Leaderboard (i18n bilan)
 // ============================================
 
 let currentLeaderboardFilter = 'streak';
@@ -10,57 +10,27 @@ let allUsersCache = [];
 // ============================================
 async function getAllUsersStats() {
     try {
-        // 1. Hamma profillar
         const { data: profiles, error: pErr } = await supabaseClient
-            .from('user_profiles')
-            .select('*');
+            .from('user_profiles').select('*');
+        if (pErr) { console.error('[LB] profiles xatosi:', pErr); return []; }
 
-        if (pErr) {
-            console.error('[LB] profiles xatosi:', pErr);
-            return [];
-        }
+        const { data: stats } = await supabaseClient
+            .from('user_stats').select('*');
 
-        // 2. Hamma stats
-        const { data: stats, error: sErr } = await supabaseClient
-            .from('user_stats')
-            .select('*');
+        const { data: allHabits } = await supabaseClient
+            .from('habits').select('*');
 
-        if (sErr) {
-            console.error('[LB] stats xatosi:', sErr);
-        }
+        const { data: allBadges } = await supabaseClient
+            .from('badges').select('*');
 
-        // 3. Hamma odatlar
-        const { data: allHabits, error: hErr } = await supabaseClient
-            .from('habits')
-            .select('*');
-
-        if (hErr) {
-            console.error('[LB] habits xatosi:', hErr);
-        }
-
-        // 4. Hamma badges
-        const { data: allBadges, error: bErr } = await supabaseClient
-            .from('badges')
-            .select('*');
-
-        if (bErr) {
-            console.error('[LB] badges xatosi:', bErr);
-        }
-
-        // 5. Har bir foydalanuvchi uchun hisoblash
         return (profiles || []).map(profile => {
             const userStats = (stats || []).find(s => s.user_id === profile.user_id) || {};
             const userHabits = (allHabits || []).filter(h => h.user_id === profile.user_id);
             const userBadges = (allBadges || []).filter(b => b.user_id === profile.user_id);
 
-            const totalCompleted = userHabits.reduce((sum, h) => {
-                const days = h.completed_days || [];
-                return sum + days.length;
-            }, 0);
-
+            const totalCompleted = userHabits.reduce((sum, h) => sum + (h.completed_days || []).length, 0);
             const bestStreak = userHabits.length > 0
-                ? Math.max(...userHabits.map(h => h.streak || 0))
-                : 0;
+                ? Math.max(...userHabits.map(h => h.streak || 0)) : 0;
 
             const totalXP = userStats.total_xp || 0;
             const level = userStats.level || 1;
@@ -73,7 +43,7 @@ async function getAllUsersStats() {
                     try {
                         const start = strToDate(h.start_date);
                         const end = strToDate(h.end_date);
-                        const totalDaysSpan = Math.ceil((end - start) / (1000*60*60*24)) + 1;
+                        const totalDaysSpan = Math.ceil((end - start) / 86400000) + 1;
                         const weeksCount = totalDaysSpan / 7;
                         const daysArr = (h.days || []).map(Number);
                         const totalDaysNeeded = Math.round(daysArr.length * weeksCount);
@@ -86,17 +56,10 @@ async function getAllUsersStats() {
             }
 
             return {
-                id: profile.user_id,
-                name: profile.name,
-                email: profile.email,
+                id: profile.user_id, name: profile.name, email: profile.email,
                 isCurrentUser: currentUser && profile.user_id === currentUser.id,
-                totalHabits: userHabits.length,
-                totalCompleted,
-                bestStreak,
-                totalXP,
-                level,
-                badgesCount,
-                avgPercent,
+                totalHabits: userHabits.length, totalCompleted, bestStreak,
+                totalXP, level, badgesCount, avgPercent,
                 plan: userStats.plan || 'free'
             };
         });
@@ -131,12 +94,10 @@ async function showLeaderboard() {
 
     const container = document.getElementById('leaderboardList');
     if (container) {
-        container.innerHTML = '<p style="text-align:center;color:#999;padding:20px;">⏳ Yuklanmoqda...</p>';
+        container.innerHTML = `<p style="text-align:center;color:#999;padding:20px;">⏳ ${t('loading')}</p>`;
     }
 
     allUsersCache = await getAllUsersStats();
-    console.log('[LB] Foydalanuvchilar:', allUsersCache.length);
-
     renderLeaderboardHeader();
     renderLeaderboard();
 }
@@ -145,9 +106,6 @@ function closeLeaderboard() {
     document.getElementById('leaderboardPage').style.display = 'none';
 }
 
-// ============================================
-// FILTR
-// ============================================
 function setLeaderboardFilter(filter) {
     currentLeaderboardFilter = filter;
     document.querySelectorAll('.leaderboard-filter-btn').forEach(btn => {
@@ -172,8 +130,8 @@ function renderLeaderboard() {
         container.innerHTML = `
             <div class="leaderboard-empty">
                 <div class="leaderboard-empty-icon">🏆</div>
-                <p>Hali reyting yo'q</p>
-                <small>Ko'proq odat bajaring!</small>
+                <p>${t('leaderboard_empty')}</p>
+                <small>${t('leaderboard_empty_hint')}</small>
             </div>
         `;
         if (podiumContainer) podiumContainer.innerHTML = '';
@@ -181,27 +139,21 @@ function renderLeaderboard() {
         return;
     }
 
-    // Podium (top 3)
-    if (podiumContainer) {
-        renderPodium(podiumContainer, sorted.slice(0, 3));
-    }
+    if (podiumContainer) renderPodium(podiumContainer, sorted.slice(0, 3));
 
-    // Qolganlar
     const rest = sorted.slice(3);
     if (rest.length === 0) {
-        container.innerHTML = '<p style="text-align:center;color:#999;padding:15px;font-size:13px;">Faqat 3 ta foydalanuvchi bor</p>';
+        container.innerHTML = `<p style="text-align:center;color:#999;padding:15px;font-size:13px;">${t('leaderboard_only_3')}</p>`;
     } else {
         container.innerHTML = rest.map((user, idx) => renderLeaderboardRow(user, idx + 4)).join('');
     }
 
-    // O'z o'rni
     if (selfContainer && currentUser) {
         const selfIndex = sorted.findIndex(u => u.id === currentUser.id);
         if (selfIndex !== -1) {
-            const selfUser = sorted[selfIndex];
             selfContainer.innerHTML = `
-                <div class="leaderboard-self-title">📍 Sizning o'rningiz</div>
-                ${renderLeaderboardRow(selfUser, selfIndex + 1, true)}
+                <div class="leaderboard-self-title">${t('leaderboard_your_place')}</div>
+                ${renderLeaderboardRow(sorted[selfIndex], selfIndex + 1, true)}
             `;
         }
     }
@@ -228,7 +180,7 @@ function renderPodium(container, top3) {
                             ${user.plan !== 'free' ? '<div class="podium-crown">👑</div>' : ''}
                         </div>
                         <div class="podium-medal">${medal}</div>
-                        <div class="podium-name">${escapeHtml(user.name || 'Foydalanuvchi')}${user.isCurrentUser ? ' (siz)' : ''}</div>
+                        <div class="podium-name">${escapeHtml(user.name || 'Foydalanuvchi')}${user.isCurrentUser ? ' (' + t('leaderboard_you') + ')' : ''}</div>
                         <div class="podium-value">${value}</div>
                         <div class="podium-bar ${height}"></div>
                     </div>
@@ -254,11 +206,11 @@ function renderLeaderboardRow(user, rank, highlight = false) {
             <div class="leaderboard-avatar">${initials}</div>
             <div class="leaderboard-user">
                 <div class="leaderboard-name">
-                    ${escapeHtml(user.name || 'Foydalanuvchi')}${user.isCurrentUser ? ' <span class="you-badge">SIZ</span>' : ''}
+                    ${escapeHtml(user.name || 'Foydalanuvchi')}${user.isCurrentUser ? ` <span class="you-badge">${t('leaderboard_you')}</span>` : ''}
                     ${user.plan !== 'free' ? ' <span class="premium-badge">💎</span>' : ''}
                 </div>
                 <div class="leaderboard-meta">
-                    <span>📋 ${user.totalHabits} odat</span>
+                    <span>📋 ${user.totalHabits}</span>
                     <span>🏆 ${user.badgesCount}</span>
                 </div>
             </div>
@@ -286,10 +238,7 @@ function renderLeaderboardHeader() {
     if (!container) return;
 
     const myStats = allUsersCache.find(u => u.isCurrentUser);
-    if (!myStats) {
-        container.innerHTML = '';
-        return;
-    }
+    if (!myStats) { container.innerHTML = ''; return; }
 
     const sortedByStreak = sortUsersByFilter(allUsersCache, 'streak');
     const myRank = sortedByStreak.findIndex(u => u.id === myStats.id) + 1;
@@ -298,7 +247,7 @@ function renderLeaderboardHeader() {
         <div class="lb-header-card">
             <div class="lb-header-rank">
                 <div class="lb-header-rank-value">#${myRank}</div>
-                <div class="lb-header-rank-label">Sizning o'rningiz</div>
+                <div class="lb-header-rank-label">${t('leaderboard_your_rank')}</div>
             </div>
             <div class="lb-header-info">
                 <div class="lb-header-info-item">
@@ -312,7 +261,7 @@ function renderLeaderboardHeader() {
                     <span class="lb-header-icon">✅</span>
                     <div>
                         <strong>${myStats.totalCompleted}</strong>
-                        <span>Bajarilgan</span>
+                        <span>${t('task_stats_done')}</span>
                     </div>
                 </div>
                 <div class="lb-header-info-item">
@@ -331,14 +280,13 @@ function renderLeaderboardHeader() {
 // TAKLIF
 // ============================================
 function inviteFriends() {
-    const shareText = 'HabitGo — Odatlaringizni kuzatib boring! 🚀\n\nMen bilan birga odat yig\'ing va reytingda raqobatlashing!';
+    const shareText = 'HabitGo — ' + t('challenge_title');
 
     if (navigator.share) {
         navigator.share({ title: 'HabitGo', text: shareText, url: window.location.href }).catch(() => {});
     } else {
         navigator.clipboard.writeText(shareText + '\n' + window.location.href).then(() => {
-            if (typeof showToast === 'function') showToast('📋 Havola nusxalandi!');
-            else alert('📋 Havola nusxalandi!');
+            if (typeof showToast === 'function') showToast('📋');
         });
     }
 }
