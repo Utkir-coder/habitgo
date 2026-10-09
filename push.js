@@ -2,7 +2,8 @@
 // HABITGO — Push Notification
 // ============================================
 
-const VAPID_PUBLIC_KEY = 'Bxxxxxxxxxxxxxxxxxxxxxxxx'; // ← O'zingizning public key
+const VAPID_PUBLIC_KEY = 'BMVBsQsDCaHhWV-we_NniHUsxzotUVNARGnc1lX8iH7hq8PpIEki2G8NF22aXg08JGJPpKEbX7fhA60Utjk1kEI
+'; // ← O'zingizning public key
 
 // Base64 → Uint8Array
 function urlBase64ToUint8Array(base64String) {
