@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Eslatmalar (Supabase)
+// HABITGO — Eslatmalar (i18n bilan)
 // ============================================
 
 let currentNoteHabitId = null;
@@ -13,10 +13,7 @@ async function getHabitNotes(habitId) {
     try {
         const data = await getNotes(currentUser.id, habitId);
         return data.map(n => ({
-            id: n.id,
-            text: n.text,
-            mood: n.mood,
-            date: n.created_at
+            id: n.id, text: n.text, mood: n.mood, date: n.created_at
         }));
     } catch (err) {
         console.error('[Notes] getHabitNotes xatosi:', err);
@@ -47,19 +44,14 @@ async function openNotesModal(habitId) {
     if (!habit) return;
 
     currentNoteHabitId = habitId;
-
     document.getElementById('notesHabitName').textContent = habit.name;
     document.getElementById('noteInput').value = '';
 
-    // Eslatmalarni yuklash
     currentNotes = await getHabitNotes(habitId);
     renderNotesList();
 
     document.getElementById('notesModal').style.display = 'flex';
-
-    setTimeout(() => {
-        document.getElementById('noteInput').focus();
-    }, 100);
+    setTimeout(() => document.getElementById('noteInput').focus(), 100);
 }
 
 function closeNotesModal() {
@@ -78,15 +70,8 @@ async function addNote() {
     const text = input.value.trim();
     const mood = document.getElementById('noteMood').value;
 
-    if (!text) {
-        alert('❌ Eslatma matnini kiriting!');
-        return;
-    }
-
-    if (text.length > 500) {
-        alert('❌ 500 belgidan oshmasligi kerak!');
-        return;
-    }
+    if (!text) { alert('❌ ' + t('notes_enter_text')); return; }
+    if (text.length > 500) { alert('❌ ' + t('notes_too_long')); return; }
 
     const btn = document.querySelector('#notesModal .btn-primary');
     const originalText = btn.textContent;
@@ -97,23 +82,18 @@ async function addNote() {
         const result = await insertNote({
             user_id: currentUser.id,
             habit_id: currentNoteHabitId,
-            text: text,
-            mood: mood
+            text: text, mood: mood
         });
 
         currentNotes.unshift({
-            id: result.id,
-            text: result.text,
-            mood: result.mood,
-            date: result.created_at
+            id: result.id, text: result.text, mood: result.mood, date: result.created_at
         });
 
         input.value = '';
         renderNotesList();
-        renderHabits(); // Habit kartochkasidagi badge yangilash
+        renderHabits();
 
         if (typeof playSound === 'function') playSound('success');
-
     } catch (err) {
         console.error('[Notes] addNote xatosi:', err);
         alert('❌ ' + err.message);
@@ -127,14 +107,14 @@ async function addNote() {
 // O'CHIRISH
 // ============================================
 async function deleteNote(noteId) {
-    if (!confirm('Bu eslatmani o\'chirmoqchimisiz?')) return;
+    if (!confirm(t('notes_delete_confirm'))) return;
 
     try {
         const success = await deleteNoteFromDB(noteId);
         if (success) {
             currentNotes = currentNotes.filter(n => n.id !== noteId);
             renderNotesList();
-            renderHabits(); // Habit badge yangilash
+            renderHabits();
         }
     } catch (err) {
         console.error('[Notes] deleteNote xatosi:', err);
@@ -152,8 +132,8 @@ function renderNotesList() {
         container.innerHTML = `
             <div class="notes-empty">
                 <div class="notes-empty-icon">📝</div>
-                <p>Hali eslatma yo'q</p>
-                <small>Birinchi eslatmangizni yozing!</small>
+                <p>${t('notes_empty')}</p>
+                <small>${t('notes_empty_hint')}</small>
             </div>
         `;
         return;
@@ -168,7 +148,7 @@ function renderNotesList() {
             <div class="note-item">
                 <div class="note-header">
                     <div class="note-date">${mood} ${dateStr}</div>
-                    <button class="note-delete" onclick="deleteNote(${note.id})" title="O'chirish">🗑</button>
+                    <button class="note-delete" onclick="deleteNote(${note.id})" title="${t('deleted')}">🗑</button>
                 </div>
                 <div class="note-text">${escapeHtml(note.text)}</div>
             </div>
@@ -183,28 +163,29 @@ function formatNoteDate(date) {
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
 
-    if (mins < 1) return 'Hozir';
-    if (mins < 60) return `${mins} daqiqa oldin`;
-    if (hours < 24) return `${hours} soat oldin`;
-    if (days < 7) return `${days} kun oldin`;
+    if (mins < 1) return t('notes_now');
+    if (mins < 60) return `${mins} ${t('notes_min_ago')}`;
+    if (hours < 24) return `${hours} ${t('notes_hour_ago')}`;
+    if (days < 7) return `${days} ${t('notes_day_ago')}`;
 
-    const months = ['Yan', 'Fev', 'Mar', 'Apr', 'May', 'Iyn', 'Iyl', 'Avg', 'Sen', 'Okt', 'Noy', 'Dek'];
-    return `${date.getDate()}-${months[date.getMonth()]}, ${date.getFullYear()}`;
+    const months = {
+        uz: ['Yan', 'Fev', 'Mar', 'Apr', 'May', 'Iyn', 'Iyl', 'Avg', 'Sen', 'Okt', 'Noy', 'Dek'],
+        ru: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+        en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    };
+    const monthNames = months[currentLang] || months.uz;
+    return `${date.getDate()}-${monthNames[date.getMonth()]}, ${date.getFullYear()}`;
 }
 
 function getMoodEmoji(mood) {
     const moods = {
-        great: '😄',
-        good: '😊',
-        neutral: '😐',
-        bad: '😔',
-        terrible: '😢'
+        great: '😄', good: '😊', neutral: '😐', bad: '😔', terrible: '😢'
     };
     return moods[mood] || '😐';
 }
 
 // ============================================
-// Ctrl+Enter — tez qo'shish
+// CTRL+ENTER
 // ============================================
 document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.key === 'Enter') {
@@ -215,7 +196,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Modal tashqarisiga bosilganda yopish
 document.addEventListener('click', (e) => {
     const modal = document.getElementById('notesModal');
     if (modal && modal.style.display === 'flex' && e.target === modal) {
