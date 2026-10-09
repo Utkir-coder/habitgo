@@ -5632,3 +5632,50 @@ body.dark .auth-lang-switcher .lang-btn {
         color: #e0e0e0 !important;
     }
 }
+/* ============================================ */
+/* SAFARI UCHUN MAXSUS — DROPDOWN FIX */
+/* ============================================ */
+
+/* Safari uchun aniqlash */
+@supports (-webkit-touch-callout: none) {
+    @media (max-width: 768px) {
+        .dropdown {
+            position: absolute !important;
+            top: 100% !important;
+            right: 0 !important;
+            left: auto !important;
+            margin-top: 8px !important;
+            width: 240px !important;
+            max-width: calc(100vw - 24px) !important;
+            background: #ffffff !important;
+            border-radius: 14px !important;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35) !important;
+            padding: 8px !important;
+            display: none !important;
+            z-index: 99999 !important;
+            max-height: 70vh !important;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            border: 1px solid #e0e0e0 !important;
+            -webkit-transform: translateZ(0) !important;
+            transform: translateZ(0) !important;
+        }
+
+        .dropdown.show {
+            display: block !important;
+        }
+
+        .profile-menu {
+            position: relative !important;
+        }
+
+        .header {
+            position: relative !important;
+            z-index: 1000 !important;
+        }
+
+        .header-right {
+            position: relative !important;
+        }
+    }
+}

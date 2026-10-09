@@ -7,6 +7,22 @@ var currentUserProfile = null;
 var currentUserStats = null;
 var authReady = false;
 
+// ============================================
+// SAFARI ANIQLASH
+// ============================================
+function isSafariBrowser() {
+    var ua = navigator.userAgent;
+    var isSafari = /Safari/i.test(ua) && !/Chrome/i.test(ua) && !/CriOS/i.test(ua) && !/FxiOS/i.test(ua);
+    return isSafari;
+}
+
+function isIOSDevice() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+
+// ============================================
+// SAHIFA BOSHQARUVI
+// ============================================
 function showLanding() {
     document.getElementById('landingPage').style.display = 'block';
     document.getElementById('appPage').style.display = 'none';
@@ -28,6 +44,9 @@ function showApp() {
     }
 }
 
+// ============================================
+// MODAL BOSHQARUVI
+// ============================================
 function showLogin() {
     document.getElementById('authModal').style.display = 'flex';
     document.getElementById('loginForm').style.display = 'block';
@@ -176,73 +195,122 @@ async function logout() {
 }
 
 // ============================================
-// PROFIL MENYUSI — MOBIL DROPDOWN FIX
+// PROFIL MENYUSI — SAFARI + MOBIL FIX
 // ============================================
 function toggleProfileMenu() {
     var dropdown = document.getElementById('profileDropdown');
     var menu = document.querySelector('.profile-menu');
+    var header = document.querySelector('.header');
+
     if (!dropdown || !menu) return;
 
     var isOpen = dropdown.classList.contains('show');
 
     if (isOpen) {
         dropdown.classList.remove('show');
+        dropdown.removeAttribute('style');
         return;
     }
 
-    // Mobil uchun pozitsiyani hisoblash
-    if (window.innerWidth <= 768) {
-        var header = document.querySelector('.header');
-        var headerRect = header ? header.getBoundingClientRect() : { bottom: 60 };
+    var safari = isSafariBrowser();
+    var ios = isIOSDevice();
+    var isMobile = window.innerWidth <= 768;
 
-        dropdown.style.position = 'fixed';
-        dropdown.style.top = (headerRect.bottom + 4) + 'px';
-        dropdown.style.right = '10px';
-        dropdown.style.left = 'auto';
-        dropdown.style.width = '220px';
-        dropdown.style.maxWidth = 'calc(100vw - 20px)';
-        dropdown.style.maxHeight = (window.innerHeight - headerRect.bottom - 20) + 'px';
-        dropdown.style.overflowY = 'auto';
-        dropdown.style.zIndex = '9999';
+    // Barcha inline stillarni tozalash
+    dropdown.removeAttribute('style');
+
+    if (isMobile) {
+        if (safari || ios) {
+            // ========== SAFARI / iOS ==========
+            // Safari position:absolute ni to'g'ri ishlatadi (relative parent bilan)
+            dropdown.style.cssText =
+                'position: absolute !important;' +
+                'top: 100% !important;' +
+                'right: 0 !important;' +
+                'left: auto !important;' +
+                'margin-top: 8px !important;' +
+                'width: 240px !important;' +
+                'max-width: calc(100vw - 24px) !important;' +
+                'background: #ffffff !important;' +
+                'border-radius: 14px !important;' +
+                'box-shadow: 0 15px 50px rgba(0,0,0,0.35) !important;' +
+                'padding: 8px !important;' +
+                'z-index: 99999 !important;' +
+                'max-height: 70vh !important;' +
+                'overflow-y: auto !important;' +
+                '-webkit-overflow-scrolling: touch !important;' +
+                'border: 1px solid #e0e0e0 !important;';
+        } else {
+            // ========== CHROME / ANDROID ==========
+            var headerRect = header ? header.getBoundingClientRect() : { bottom: 60 };
+            dropdown.style.cssText =
+                'position: fixed !important;' +
+                'top: ' + (headerRect.bottom + 4) + 'px !important;' +
+                'right: 10px !important;' +
+                'left: auto !important;' +
+                'width: 240px !important;' +
+                'max-width: calc(100vw - 20px) !important;' +
+                'background: #ffffff !important;' +
+                'border-radius: 14px !important;' +
+                'box-shadow: 0 15px 50px rgba(0,0,0,0.35) !important;' +
+                'padding: 8px !important;' +
+                'z-index: 99999 !important;' +
+                'max-height: ' + (window.innerHeight - headerRect.bottom - 20) + 'px !important;' +
+                'overflow-y: auto !important;' +
+                '-webkit-overflow-scrolling: touch !important;' +
+                'border: 1px solid #e0e0e0 !important;';
+        }
     } else {
-        dropdown.style.position = '';
-        dropdown.style.top = '';
-        dropdown.style.right = '';
-        dropdown.style.left = '';
-        dropdown.style.width = '';
-        dropdown.style.maxWidth = '';
-        dropdown.style.maxHeight = '';
-        dropdown.style.overflowY = '';
-        dropdown.style.zIndex = '';
+        // Desktop — standart holat
+        dropdown.removeAttribute('style');
+    }
+
+    // Dark mode uchun rang
+    if (document.body.classList.contains('dark')) {
+        dropdown.style.background = '#1e1e2e';
+        dropdown.style.borderColor = '#3a3a4e';
     }
 
     dropdown.classList.add('show');
 }
 
-// Tashqariga bosilganda yopish
+// ============================================
+// TASHQARIGA BOSILGANDA YOPISH
+// ============================================
 document.addEventListener('click', function(e) {
     var menu = document.querySelector('.profile-menu');
     var dropdown = document.getElementById('profileDropdown');
     if (menu && dropdown && !menu.contains(e.target)) {
         dropdown.classList.remove('show');
+        dropdown.removeAttribute('style');
     }
 });
 
-// Sahifa o'lchami o'zgarganda pozitsiyani yangilash
+// ============================================
+// SKROLL BO'LGanda YOPISH (mobil)
+// ============================================
+var lastScrollY = window.scrollY;
+window.addEventListener('scroll', function() {
+    if (window.innerWidth <= 768 && Math.abs(window.scrollY - lastScrollY) > 50) {
+        var dropdown = document.getElementById('profileDropdown');
+        if (dropdown && dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
+            dropdown.removeAttribute('style');
+        }
+        lastScrollY = window.scrollY;
+    }
+}, { passive: true });
+
+// ============================================
+// SAHIFA O'LCHAMI O'ZGARGANDA
+// ============================================
 window.addEventListener('resize', function() {
     var dropdown = document.getElementById('profileDropdown');
     if (dropdown && dropdown.classList.contains('show')) {
         dropdown.classList.remove('show');
+        dropdown.removeAttribute('style');
     }
 });
-
-// Skroll bo'lganda yopish
-window.addEventListener('scroll', function() {
-    var dropdown = document.getElementById('profileDropdown');
-    if (dropdown && dropdown.classList.contains('show')) {
-        dropdown.classList.remove('show');
-    }
-}, { passive: true });
 
 // ============================================
 // AVTOMATIK KIRISH
@@ -252,6 +320,8 @@ async function initializeAuth() {
     authReady = true;
 
     console.log('[Auth] ===== Boshlash =====');
+    console.log('[Auth] Safari:', isSafariBrowser() ? 'Ha' : 'Yo\'q');
+    console.log('[Auth] iOS:', isIOSDevice() ? 'Ha' : 'Yo\'q');
 
     try {
         var session = await getSession();
