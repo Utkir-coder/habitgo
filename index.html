@@ -26,9 +26,16 @@
     <div id="landingPage" class="landing-page">
         <nav class="landing-nav">
             <div class="logo">🚀 <span data-i18n="app_name">HabitGo</span></div>
-            <div class="nav-buttons">
-                <button onclick="showLogin()" class="btn-outline" data-i18n="login">Kirish</button>
-                <button onclick="showRegister()" class="btn-primary" data-i18n="register">Ro'yxatdan o'tish</button>
+            <div class="nav-right">
+                <div class="lang-switcher landing-lang">
+                    <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">🇺🇿</button>
+                    <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">🇷🇺</button>
+                    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧</button>
+                </div>
+                <div class="nav-buttons">
+                    <button onclick="showLogin()" class="btn-outline" data-i18n="login">Kirish</button>
+                    <button onclick="showRegister()" class="btn-primary" data-i18n="register">Ro'yxatdan o'tish</button>
+                </div>
             </div>
         </nav>
 
@@ -114,6 +121,13 @@
     <div id="authModal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">×</span>
+
+            <div class="auth-lang-switcher">
+                <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">🇺🇿 UZ</button>
+                <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">🇷🇺 RU</button>
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
+            </div>
+
             <div id="loginForm">
                 <h2 data-i18n="login_title">Kirish</h2>
                 <input type="email" id="loginEmail" data-i18n-placeholder="email" placeholder="Email">

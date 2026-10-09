@@ -5250,3 +5250,94 @@ body.dark .habit-modal-content h2 {
     text-align: center;
     flex-shrink: 0;
 }
+/* ============================================ */
+/* NAV RIGHT (Landing) */
+/* ============================================ */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Landing lang switcher */
+.landing-lang {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Auth modal lang switcher */
+.auth-lang-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+body.dark .auth-lang-switcher {
+    border-bottom-color: #3a3a4e;
+}
+
+.auth-lang-switcher .lang-btn {
+    padding: 6px 12px;
+    background: #f0f0f5;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #555;
+}
+
+body.dark .auth-lang-switcher .lang-btn {
+    background: #2a2a3e;
+    color: #c0c0d0;
+}
+
+.auth-lang-switcher .lang-btn:hover {
+    border-color: var(--primary);
+}
+
+.auth-lang-switcher .lang-btn.active {
+    background: var(--gradient);
+    color: white;
+    border-color: transparent;
+}
+
+/* ============================================ */
+/* DROPDOWN IKONKALAR */
+/* ============================================ */
+.dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* Mobil */
+@media (max-width: 768px) {
+    .nav-right {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .landing-lang {
+        display: flex;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 6px;
+    }
+
+    .auth-lang-switcher {
+        margin-bottom: 16px;
+    }
+}
