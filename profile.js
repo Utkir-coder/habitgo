@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Profil sahifasi
+// HABITGO — Profil (i18n bilan)
 // ============================================
 
 function showProfile() {
@@ -25,15 +25,23 @@ function showProfile() {
 }
 
 function getPlanName(plan) {
-    return { free: 'Bepul', monthly: 'Premium', yearly: 'Yillik Premium' }[plan] || 'Bepul';
+    return {
+        free: t('plan_free'),
+        monthly: t('plan_monthly'),
+        yearly: t('plan_yearly')
+    }[plan] || t('plan_free');
 }
 
 function formatDate(isoStr) {
     if (!isoStr) return '-';
     const d = new Date(isoStr);
-    const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun',
-                    'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
-    return `${d.getDate()}-${months[d.getMonth()]}, ${d.getFullYear()}`;
+    const months = {
+        uz: ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'],
+        ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    };
+    const monthNames = months[currentLang] || months.uz;
+    return `${d.getDate()}-${monthNames[d.getMonth()]}, ${d.getFullYear()}`;
 }
 
 function closePage() {
