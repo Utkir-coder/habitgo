@@ -1,27 +1,19 @@
 // ============================================
-// HABITGO — Leaderboard (i18n bilan)
+// HABITGO — Leaderboard (i18n to'liq)
 // ============================================
 
 let currentLeaderboardFilter = 'streak';
 let allUsersCache = [];
 
-// ============================================
-// FOYDALANUVCHILARNI YIG'ISH
-// ============================================
 async function getAllUsersStats() {
     try {
         const { data: profiles, error: pErr } = await supabaseClient
             .from('user_profiles').select('*');
         if (pErr) { console.error('[LB] profiles xatosi:', pErr); return []; }
 
-        const { data: stats } = await supabaseClient
-            .from('user_stats').select('*');
-
-        const { data: allHabits } = await supabaseClient
-            .from('habits').select('*');
-
-        const { data: allBadges } = await supabaseClient
-            .from('badges').select('*');
+        const { data: stats } = await supabaseClient.from('user_stats').select('*');
+        const { data: allHabits } = await supabaseClient.from('habits').select('*');
+        const { data: allBadges } = await supabaseClient.from('badges').select('*');
 
         return (profiles || []).map(profile => {
             const userStats = (stats || []).find(s => s.user_id === profile.user_id) || {};
@@ -69,9 +61,6 @@ async function getAllUsersStats() {
     }
 }
 
-// ============================================
-// SARALASH
-// ============================================
 function sortUsersByFilter(users, filter) {
     const sorted = [...users];
     switch (filter) {
@@ -85,12 +74,22 @@ function sortUsersByFilter(users, filter) {
     return sorted;
 }
 
-// ============================================
-// SAHIFA
-// ============================================
 async function showLeaderboard() {
     document.getElementById('leaderboardPage').style.display = 'flex';
     document.getElementById('profileDropdown').classList.remove('show');
+
+    // Sahifa sarlavhalarini tarjima qilish
+    const pageTitle = document.querySelector('#leaderboardPage h2');
+    if (pageTitle) pageTitle.textContent = t('leaderboard_title');
+    const intro = document.querySelector('#leaderboardPage .leaderboard-intro');
+    if (intro) intro.textContent = t('leaderboard_subtitle');
+
+    // Filtrlar tarjimasi
+    const filterBtns = document.querySelectorAll('#leaderboardPage .leaderboard-filter-btn');
+    const filterKeys = ['leaderboard_filter_streak', 'leaderboard_filter_completed', 'leaderboard_filter_level', 'leaderboard_filter_xp'];
+    filterBtns.forEach((btn, idx) => {
+        if (filterKeys[idx]) btn.textContent = t(filterKeys[idx]);
+    });
 
     const container = document.getElementById('leaderboardList');
     if (container) {
@@ -114,9 +113,6 @@ function setLeaderboardFilter(filter) {
     renderLeaderboard();
 }
 
-// ============================================
-// RENDER
-// ============================================
 function renderLeaderboard() {
     const container = document.getElementById('leaderboardList');
     const podiumContainer = document.getElementById('leaderboardPodium');
@@ -210,7 +206,7 @@ function renderLeaderboardRow(user, rank, highlight = false) {
                     ${user.plan !== 'free' ? ' <span class="premium-badge">💎</span>' : ''}
                 </div>
                 <div class="leaderboard-meta">
-                    <span>📋 ${user.totalHabits}</span>
+                    <span>📋 ${user.totalHabits} ${t('backup_habits').toLowerCase()}</span>
                     <span>🏆 ${user.badgesCount}</span>
                 </div>
             </div>
@@ -230,9 +226,6 @@ function getLeaderboardValue(user, filter) {
     }
 }
 
-// ============================================
-// HEADER
-// ============================================
 function renderLeaderboardHeader() {
     const container = document.getElementById('leaderboardHeader');
     if (!container) return;
@@ -276,12 +269,8 @@ function renderLeaderboardHeader() {
     `;
 }
 
-// ============================================
-// TAKLIF
-// ============================================
 function inviteFriends() {
     const shareText = 'HabitGo — ' + t('challenge_title');
-
     if (navigator.share) {
         navigator.share({ title: 'HabitGo', text: shareText, url: window.location.href }).catch(() => {});
     } else {
