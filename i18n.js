@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Ko'p tilli (i18n) — TO'LIQ
+// HABITGO — Ko'p tilli (i18n) — Safari-compatible
 // ============================================
 
 const translations = {
@@ -1180,25 +1180,28 @@ const translations = {
     }
 };
 
-let currentLang = localStorage.getItem('habitgo_lang') || 'uz';
+var currentLang = localStorage.getItem('habitgo_lang') || 'uz';
 
 function t(key, params) {
-    let text = translations[currentLang]?.[key] || translations.uz[key] || key;
+    var lang = translations[currentLang] || translations.uz;
+    var text = lang[key] || translations.uz[key] || key;
     if (params && typeof text === 'string') {
-        Object.keys(params).forEach(k => {
-            text = text.replace(new RegExp(`\\{${k}\\}`, 'g'), params[k]);
+        Object.keys(params).forEach(function(k) {
+            text = text.replace(new RegExp('\\{' + k + '\\}', 'g'), params[k]);
         });
     }
     return text;
 }
 
 function tDay(dayIndex) {
-    const days = translations[currentLang]?.days_full || translations.uz.days_full;
+    var lang = translations[currentLang] || translations.uz;
+    var days = lang.days_full || translations.uz.days_full;
     return days[dayIndex] || '';
 }
 
 function tRandom(key) {
-    const arr = translations[currentLang]?.[key] || translations.uz[key] || [];
+    var lang = translations[currentLang] || translations.uz;
+    var arr = lang[key] || translations.uz[key] || [];
     if (!Array.isArray(arr) || arr.length === 0) return '';
     return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -1219,16 +1222,21 @@ function setLanguage(lang) {
     if (typeof renderBadgesPreview === 'function') renderBadgesPreview();
     if (typeof renderChallenge === 'function') renderChallenge();
     if (typeof updateTasksQuickInfo === 'function') updateTasksQuickInfo();
-    if (typeof renderLeaderboard === 'function' && document.getElementById('leaderboardPage')?.style.display === 'flex') {
+
+    var lbPage = document.getElementById('leaderboardPage');
+    if (typeof renderLeaderboard === 'function' && lbPage && lbPage.style.display === 'flex') {
         renderLeaderboardHeader();
         renderLeaderboard();
     }
-    if (typeof renderStatsSummary === 'function' && document.getElementById('statisticsPage')?.style.display === 'flex') {
+
+    var stPage = document.getElementById('statisticsPage');
+    if (typeof renderStatsSummary === 'function' && stPage && stPage.style.display === 'flex') {
         renderStatsSummary();
         if (typeof renderHeatmap === 'function') renderHeatmap();
         if (typeof renderHabitBreakdown === 'function') renderHabitBreakdown();
         if (typeof renderCharts === 'function') setTimeout(renderCharts, 100);
     }
+
     if (typeof showMotivation === 'function') showMotivation();
     if (typeof showCurrentDate === 'function') showCurrentDate();
     if (typeof renderNotesList === 'function' && typeof currentNoteHabitId !== 'undefined' && currentNoteHabitId) renderNotesList();
@@ -1238,40 +1246,57 @@ function setLanguage(lang) {
 }
 
 function applyTranslations() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        const translation = t(key);
+    var i18nEls = document.querySelectorAll('[data-i18n]');
+    for (var i = 0; i < i18nEls.length; i++) {
+        var el = i18nEls[i];
+        var key = el.getAttribute('data-i18n');
+        var translation = t(key);
         if (translation && translation !== key) {
             el.textContent = translation;
         }
-    });
+    }
 
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        const translation = t(key);
-        if (translation && translation !== key) {
-            el.placeholder = translation;
+    var placeholderEls = document.querySelectorAll('[data-i18n-placeholder]');
+    for (var j = 0; j < placeholderEls.length; j++) {
+        var pel = placeholderEls[j];
+        var pkey = pel.getAttribute('data-i18n-placeholder');
+        var ptranslation = t(pkey);
+        if (ptranslation && ptranslation !== pkey) {
+            pel.placeholder = ptranslation;
         }
-    });
+    }
 
-    document.querySelectorAll('[data-i18n-title]').forEach(el => {
-        const key = el.getAttribute('data-i18n-title');
-        const translation = t(key);
-        if (translation && translation !== key) {
-            el.title = translation;
+    var titleEls = document.querySelectorAll('[data-i18n-title]');
+    for (var k = 0; k < titleEls.length; k++) {
+        var tel = titleEls[k];
+        var tkey = tel.getAttribute('data-i18n-title');
+        var ttranslation = t(tkey);
+        if (ttranslation && ttranslation !== tkey) {
+            tel.title = ttranslation;
         }
-    });
+    }
 }
 
 function updateLanguageButtons() {
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === currentLang);
-    });
+    var btns = document.querySelectorAll('.lang-btn');
+    for (var i = 0; i < btns.length; i++) {
+        var btn = btns[i];
+        if (btn.dataset.lang === currentLang) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        applyTranslations();
+        updateLanguageButtons();
+    });
+} else {
     applyTranslations();
     updateLanguageButtons();
-});
+}
 
 console.log('[i18n] Tayyor');

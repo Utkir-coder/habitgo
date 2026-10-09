@@ -5341,3 +5341,61 @@ body.dark .auth-lang-switcher .lang-btn {
         margin-bottom: 16px;
     }
 }
+/* ============================================ */
+/* MOBIL HEADER — DROPDOWN TUZATISH */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    .header {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+    }
+
+    .header-right {
+        position: relative !important;
+        z-index: 1001 !important;
+    }
+
+    .profile-menu {
+        position: relative !important;
+    }
+
+    .dropdown {
+        position: fixed !important;
+        top: 70px !important;
+        right: 15px !important;
+        left: auto !important;
+        width: 220px !important;
+        max-width: calc(100vw - 30px) !important;
+        z-index: 2000 !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25) !important;
+        max-height: calc(100vh - 90px) !important;
+        overflow-y: auto !important;
+    }
+
+    .dropdown.show {
+        display: block !important;
+    }
+
+    .dropdown a {
+        padding: 12px 15px !important;
+        font-size: 14px !important;
+    }
+
+    .header-right .lang-switcher {
+        display: none !important;
+    }
+}
+
+/* Safari uchun qo'shimcha */
+@supports (-webkit-touch-callout: none) {
+    .dropdown {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-content,
+    .page-content {
+        -webkit-overflow-scrolling: touch;
+    }
+}
