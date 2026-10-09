@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Payment (Demo)
+// HABITGO — Payment (i18n bilan)
 // ============================================
 
 function showSubscription() {
@@ -14,110 +14,99 @@ function showSubscription() {
 
 async function buyPremium(type) {
     if (!currentUser || !currentUserStats) {
-        alert('❌ Tizimga kiring!');
+        alert('❌ ' + t('alert_signin_required'));
         return;
     }
 
     const prices = {
-        monthly: { amount: 9900, days: 30, name: 'Premium (1 oy)' },
-        yearly: { amount: 99000, days: 365, name: 'Premium (1 yil)' }
+        monthly: { amount: 9900, days: 30, name: t('payment_plan_monthly') },
+        yearly: { amount: 99000, days: 365, name: t('payment_plan_yearly') }
     };
 
     const plan = prices[type];
     if (!plan) {
-        alert('❌ Noto\'g\'ri tarif!');
+        alert('❌ ' + t('payment_invalid_plan'));
         return;
     }
 
-    // Tasdiqlash
     const confirmMsg = `💎 ${plan.name}\n\n` +
-        `Narxi: ${plan.amount.toLocaleString()} so'm\n` +
-        `Muddat: ${plan.days} kun\n\n` +
-        `To'lovni tasdiqlaysizmi?`;
+        `${t('payment_plan_price')}: ${plan.amount.toLocaleString()} ${t('payment_amount')}\n` +
+        `${t('payment_plan_days')}: ${plan.days} ${t('payment_days')}\n\n` +
+        `${t('payment_confirm')}`;
 
     if (!confirm(confirmMsg)) return;
 
-    // Tugmani bloklash
     const buttons = document.querySelectorAll('#subscriptionPage .btn-primary, #subscriptionPage .btn-outline');
     buttons.forEach(btn => { btn.disabled = true; });
 
     try {
-        // To'lov simulyatsiyasi
         await simulatePayment(plan.amount, plan.name);
 
-        // Premium faollashtirish
         const expiresAt = new Date();
         expiresAt.setDate(expiresAt.getDate() + plan.days);
 
         const planType = type === 'yearly' ? 'yearly' : 'monthly';
 
-        // Supabase'ga yozish
         await updateUserStats(currentUser.id, {
             plan: planType,
             plan_expires_at: expiresAt.toISOString()
         });
 
-        // Local yangilash
         currentUserStats.plan = planType;
         currentUserStats.plan_expires_at = expiresAt.toISOString();
 
-        // Effektlar
         if (typeof playSound === 'function') playSound('success');
         if (typeof triggerConfetti === 'function') triggerConfetti();
 
-        // Tabrik
-        alert(`🎉 Tabriklayman!\n\n${plan.name} faollashtirildi!\n\n📅 Tugash sanasi: ${formatDate(expiresAt.toISOString())}`);
+        alert(`🎉 ${t('payment_success')}\n\n${plan.name} ${t('payment_activated')}\n\n📅 ${t('payment_until')}: ${formatDate(expiresAt.toISOString())}`);
 
-        // Sahifani yopish
         closePage();
 
-        // UI yangilash
         if (typeof checkPremiumLimit === 'function') checkPremiumLimit();
         if (typeof renderHabits === 'function') renderHabits();
         if (typeof renderBadgesPreview === 'function') renderBadgesPreview();
+        if (typeof checkForNewBadges === 'function') setTimeout(checkForNewBadges, 500);
 
     } catch (err) {
         console.error('[Payment] Xato:', err);
-        alert('❌ To\'lovda xato: ' + err.message);
+        alert('❌ ' + t('payment_error') + ': ' + err.message);
     } finally {
         buttons.forEach(btn => { btn.disabled = false; });
     }
 }
 
-// To'lov simulyatsiyasi
 function simulatePayment(amount, planName) {
     return new Promise((resolve) => {
         const loading = document.createElement('div');
         loading.className = 'payment-loading';
         loading.innerHTML = `
             <div class="payment-spinner"></div>
-            <p>To'lov amalga oshirilmoqda...</p>
+            <p>${t('payment_loading')}</p>
             <p style="font-size:12px;color:#aaa;margin-top:8px;">${planName}</p>
-            <p style="font-size:14px;color:#fff;font-weight:bold;margin-top:4px;">${amount.toLocaleString()} so'm</p>
+            <p style="font-size:14px;color:#fff;font-weight:bold;margin-top:4px;">${amount.toLocaleString()} ${t('payment_amount')}</p>
         `;
         document.body.appendChild(loading);
 
-        setTimeout(() => {
-            loading.remove();
-            resolve(true);
-        }, 2000);
+        setTimeout(() => { loading.remove(); resolve(true); }, 2000);
     });
 }
 
-// Reja nomi
 function getPlanName(plan) {
     return {
-        free: 'Bepul',
-        monthly: 'Premium',
-        yearly: 'Yillik Premium'
-    }[plan] || 'Bepul';
+        free: t('plan_free'),
+        monthly: t('plan_monthly'),
+        yearly: t('plan_yearly')
+    }[plan] || t('plan_free');
 }
 
-// Sana formatlash
 function formatDate(isoStr) {
     if (!isoStr) return '-';
     const d = new Date(isoStr);
-    const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun',
-                    'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
-    return `${d.getDate()}-${months[d.getMonth()]}, ${d.getFullYear()}`;
+    const months = {
+        uz: ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'],
+        ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    };
+    const monthNames = months[currentLang] || months.uz;
+    return `${d.getDate()}-${monthNames[d.getMonth()]}, ${d.getFullYear()}`;
 }
