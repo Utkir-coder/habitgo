@@ -370,7 +370,29 @@ const translations = {
         stats_progress: 'Bajarildi',
         stats_period_weekly: 'Haftalik',
         stats_period_monthly: 'Oylik',
-        stats_period_yearly: 'Yillik'
+        stats_period_yearly: 'Yillik',
+
+        motivations: [
+            "Bugun ajoyib kun bo'ladi! ✨",
+            "Kichik qadamlar katta natijalarga olib keladi! 🚀",
+            "Sen bugun kechagidan yaxshiroqsan! 💪",
+            "Intizom — erkinlikdir! 🎯",
+            "Har kuni 1% yaxshilanish = yiliga 37x o'sish! 📈",
+            "Sen qila olasan! Faqat boshla! 🔥",
+            "Muvaffaqiyat — bu odatlar yig'indisi! ⭐",
+            "Bugun qilgan mehnating — ertangi muvaffaqiyating! 🌟",
+            "To'xtama! Sen zo'r ketayapsan! 💫",
+            "Kichik odatlar, katta o'zgarishlar! 🌱"
+        ],
+        praise: [
+            "Zo'r ketayapsan! 🔥", "Sen haqiqiy qahramonsan! 💪",
+            "Ajoyib intizom! Davom et! ⭐", "Bugun sen g'olibsан! 🏆", "Shu tarzda davom et! 🚀"
+        ],
+        encourage: [
+            "Bugun biroz qiyin bo'ldi, lekin ertaga yaxshiroq bo'ladi! 💪",
+            "To'xtama! Har bir qadam muhim! 🌱", "Kichik qadamlar katta natijalar beradi! 🚀",
+            "Sen qila olasan! Ertaga yangi imkoniyat! ✨", "Muvaffaqiyat — bu qayta urinishlar soni! 🎯"
+        ]
     },
 
     ru: {
@@ -740,7 +762,29 @@ const translations = {
         stats_progress: 'Выполнено',
         stats_period_weekly: 'Недельный',
         stats_period_monthly: 'Месячный',
-        stats_period_yearly: 'Годовой'
+        stats_period_yearly: 'Годовой',
+
+        motivations: [
+            "Сегодня будет отличный день! ✨",
+            "Маленькие шаги ведут к большим результатам! 🚀",
+            "Ты сегодня лучше, чем вчера! 💪",
+            "Дисциплина — это свобода! 🎯",
+            "1% улучшения в день = 37x рост за год! 📈",
+            "Ты сможешь! Просто начни! 🔥",
+            "Успех — это сумма привычек! ⭐",
+            "Твой труд сегодня — твой успех завтра! 🌟",
+            "Не останавливайся! Ты отлично идёшь! 💫",
+            "Маленькие привычки, большие перемены! 🌱"
+        ],
+        praise: [
+            "Отлично идёшь! 🔥", "Ты настоящий герой! 💪",
+            "Отличная дисциплина! Продолжай! ⭐", "Сегодня ты победитель! 🏆", "Так держать! 🚀"
+        ],
+        encourage: [
+            "Сегодня было немного сложно, но завтра будет лучше! 💪",
+            "Не останавливайся! Каждый шаг важен! 🌱", "Маленькие шаги дают большие результаты! 🚀",
+            "Ты сможешь! Завтра новая возможность! ✨", "Успех — это количество попыток! 🎯"
+        ]
     },
 
     en: {
@@ -1110,7 +1154,29 @@ const translations = {
         stats_progress: 'Done',
         stats_period_weekly: 'Weekly',
         stats_period_monthly: 'Monthly',
-        stats_period_yearly: 'Yearly'
+        stats_period_yearly: 'Yearly',
+
+        motivations: [
+            "Today will be a great day! ✨",
+            "Small steps lead to big results! 🚀",
+            "You are better today than yesterday! 💪",
+            "Discipline is freedom! 🎯",
+            "1% improvement daily = 37x growth per year! 📈",
+            "You can do it! Just start! 🔥",
+            "Success is the sum of habits! ⭐",
+            "Your work today — your success tomorrow! 🌟",
+            "Don't stop! You're doing great! 💫",
+            "Small habits, big changes! 🌱"
+        ],
+        praise: [
+            "You're doing great! 🔥", "You're a real hero! 💪",
+            "Excellent discipline! Keep going! ⭐", "Today you're a winner! 🏆", "Keep it up! 🚀"
+        ],
+        encourage: [
+            "Today was a bit tough, but tomorrow will be better! 💪",
+            "Don't stop! Every step matters! 🌱", "Small steps lead to big results! 🚀",
+            "You can do it! Tomorrow is a new opportunity! ✨", "Success is the number of attempts! 🎯"
+        ]
     }
 };
 
@@ -1131,6 +1197,12 @@ function tDay(dayIndex) {
     return days[dayIndex] || '';
 }
 
+function tRandom(key) {
+    const arr = translations[currentLang]?.[key] || translations.uz[key] || [];
+    if (!Array.isArray(arr) || arr.length === 0) return '';
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
 function setLanguage(lang) {
     if (!translations[lang]) return;
     currentLang = lang;
@@ -1140,7 +1212,6 @@ function setLanguage(lang) {
     applyTranslations();
     updateLanguageButtons();
 
-    // Barcha sahifalarni qayta chizish
     if (typeof renderHabits === 'function') renderHabits();
     if (typeof updateStats === 'function') updateStats();
     if (typeof renderTasks === 'function') renderTasks();
@@ -1148,19 +1219,19 @@ function setLanguage(lang) {
     if (typeof renderBadgesPreview === 'function') renderBadgesPreview();
     if (typeof renderChallenge === 'function') renderChallenge();
     if (typeof updateTasksQuickInfo === 'function') updateTasksQuickInfo();
-    if (typeof renderLeaderboard === 'function' && document.getElementById('leaderboardPage').style.display === 'flex') {
+    if (typeof renderLeaderboard === 'function' && document.getElementById('leaderboardPage')?.style.display === 'flex') {
         renderLeaderboardHeader();
         renderLeaderboard();
     }
-    if (typeof renderStatsSummary === 'function' && document.getElementById('statisticsPage').style.display === 'flex') {
+    if (typeof renderStatsSummary === 'function' && document.getElementById('statisticsPage')?.style.display === 'flex') {
         renderStatsSummary();
-        renderHeatmap();
-        renderHabitBreakdown();
+        if (typeof renderHeatmap === 'function') renderHeatmap();
+        if (typeof renderHabitBreakdown === 'function') renderHabitBreakdown();
         if (typeof renderCharts === 'function') setTimeout(renderCharts, 100);
     }
     if (typeof showMotivation === 'function') showMotivation();
     if (typeof showCurrentDate === 'function') showCurrentDate();
-    if (typeof renderNotesList === 'function' && currentNoteHabitId) renderNotesList();
+    if (typeof renderNotesList === 'function' && typeof currentNoteHabitId !== 'undefined' && currentNoteHabitId) renderNotesList();
     if (typeof renderColorOptions === 'function') renderColorOptions();
 
     console.log('[i18n] Til:', lang);

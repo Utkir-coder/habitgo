@@ -6,25 +6,6 @@ let habits = [];
 let habitsLoaded = false;
 let lastReportDate = localStorage.getItem('habitgo_last_report') || null;
 
-const praiseMessages = [
-    "Zo'r ketayapsan! 🔥", "Sen haqiqiy qahramonsan! 💪",
-    "Ajoyib intizom! Davom et! ⭐", "Bugun sen g'olibsан! 🏆", "Shu tarzda davom et! 🚀"
-];
-
-const encourageMessages = [
-    "Bugun biroz qiyin bo'ldi, lekin ertaga yaxshiroq bo'ladi! 💪",
-    "To'xtama! Har bir qadam muhim! 🌱", "Kichik qadamlar katta natijalar beradi! 🚀",
-    "Sen qila olasan! Ertaga yangi imkoniyat! ✨", "Muvaffaqiyat — bu qayta urinishlar soni! 🎯"
-];
-
-const allMotivations = [
-    "Bugun ajoyib kun bo'ladi! ✨", "Kichik qadamlar katta natijalarga olib keladi! 🚀",
-    "Sen bugun kechagidan yaxshiroqsan! 💪", "Intizom — erkinlikdir! 🎯",
-    "Har kuni 1% yaxshilanish = yiliga 37x o'sish! 📈", "Sen qila olasan! Faqat boshla! 🔥",
-    "Muvaffaqiyat — bu odatlar yig'indisi! ⭐", "Bugun qilgan mehnating — ertangi muvaffaqiyating! 🌟",
-    "To'xtama! Sen zo'r ketayapsan! 💫", "Kichik odatlar, katta o'zgarishlar! 🌱"
-];
-
 async function initApp() {
     console.log('[App] initApp');
     showLoadingState(true);
@@ -136,9 +117,9 @@ function showCurrentDate() {
 }
 
 function showMotivation() {
-    const random = allMotivations[Math.floor(Math.random() * allMotivations.length)];
+    const text = tRandom('motivations');
     const el = document.getElementById('motivationText');
-    if (el) el.textContent = random;
+    if (el) el.textContent = text || 'HabitGo';
 
     if (typeof updateMotivationWithAI === 'function' && currentUser) {
         setTimeout(() => updateMotivationWithAI(), 1500);
@@ -464,19 +445,19 @@ function checkDailyReport() {
     let title, text;
     if (percent === 100) {
         title = t('daily_report_perfect');
-        text = t('report_all_done') + `\n\n${actuallyDone.length}/${shouldDone.length} ✅\n\n` + randomFrom(praiseMessages);
+        text = t('report_all_done') + `\n\n${actuallyDone.length}/${shouldDone.length} ✅\n\n` + tRandom('praise');
     }
     else if (percent >= 70) {
         title = t('daily_report_good');
-        text = `${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n` + randomFrom(praiseMessages);
+        text = `${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n` + tRandom('praise');
     }
     else if (percent >= 50) {
         title = t('daily_report_ok');
-        text = `${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n` + randomFrom(encourageMessages);
+        text = `${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n` + tRandom('encourage');
     }
     else {
         title = t('daily_report_bad');
-        text = t('report_only') + ` ${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n` + randomFrom(encourageMessages);
+        text = t('report_only') + ` ${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n` + tRandom('encourage');
     }
 
     const titleEl = document.getElementById('reportTitle');
@@ -493,8 +474,6 @@ function closeReport() {
     const el = document.getElementById('dailyReport');
     if (el) el.style.display = 'none';
 }
-
-function randomFrom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 function escapeHtml(text) {
     const div = document.createElement('div');
