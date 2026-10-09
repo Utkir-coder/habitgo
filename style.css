@@ -5552,3 +5552,83 @@ body.dark .auth-lang-switcher .lang-btn {
         background: #2a2a3e !important;
     }
 }
+/* ============================================ */
+/* MOBIL DROPDOWN — YAKUNIY FIX */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    .dropdown {
+        position: fixed !important;
+        top: 70px !important;
+        right: 12px !important;
+        left: auto !important;
+        width: 240px !important;
+        max-width: calc(100vw - 24px) !important;
+        background: #ffffff !important;
+        border-radius: 14px !important;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35) !important;
+        padding: 8px !important;
+        display: none;
+        z-index: 99999 !important;
+        max-height: calc(100vh - 90px) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        border: 1px solid #e0e0e0 !important;
+    }
+
+    .dropdown.show {
+        display: block !important;
+    }
+
+    .dropdown a {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        padding: 14px 16px !important;
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        color: #333333 !important;
+        background: transparent !important;
+        text-decoration: none !important;
+        border-radius: 10px !important;
+        transition: background 0.15s !important;
+        line-height: 1.2 !important;
+    }
+
+    .dropdown a:hover,
+    .dropdown a:active {
+        background: #f0f0f5 !important;
+    }
+
+    .dropdown-icon {
+        font-size: 18px !important;
+        width: 22px !important;
+        text-align: center !important;
+        flex-shrink: 0 !important;
+        display: inline-block !important;
+    }
+
+    .dropdown a span:not(.dropdown-icon) {
+        display: inline-block !important;
+        color: #333333 !important;
+    }
+
+    /* Dark mode */
+    body.dark .dropdown {
+        background: #1e1e2e !important;
+        border-color: #3a3a4e !important;
+    }
+
+    body.dark .dropdown a {
+        color: #e0e0e0 !important;
+    }
+
+    body.dark .dropdown a:hover,
+    body.dark .dropdown a:active {
+        background: #2a2a3e !important;
+    }
+
+    body.dark .dropdown a span:not(.dropdown-icon) {
+        color: #e0e0e0 !important;
+    }
+}
