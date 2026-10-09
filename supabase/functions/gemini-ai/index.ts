@@ -13,11 +13,20 @@ serve(async (req) => {
   }
 
   try {
-    const { prompt, context } = await req.json()
+    const { prompt, context, lang } = await req.json()
+
+    const langInstruction = {
+      uz: 'Javobni o\'zbek tilida yozing.',
+      ru: 'Напишите ответ на русском языке.',
+      en: 'Write the response in English.'
+    };
+
+    const instruction = langInstruction[lang] || langInstruction.uz;
 
     const fullPrompt = `Sen HabitGo ilovasining AI motivatsiya yordamchisisan.
+${instruction}
 Foydalanuvchi haqida: ${context}
-Vazifa: Qisqa, motivatsion va shaxsiy javob yozing (maksimum 2-3 gap, o'zbek tilida).
+Vazifa: Qisqa, motivatsion va shaxsiy javob yozing (maksimum 2-3 gap).
 
 Foydalanuvchi so'rovi: ${prompt}`
 
@@ -35,8 +44,6 @@ Foydalanuvchi so'rovi: ${prompt}`
     )
 
     const data = await response.json()
-    console.log('[Gemini] Response:', JSON.stringify(data).substring(0, 200))
-
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Bugun ajoyib kun bo\'ladi! ✨'
 
     return new Response(JSON.stringify({ text }), {
