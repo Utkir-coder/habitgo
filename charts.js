@@ -1,19 +1,18 @@
 // ============================================
-// HABITGO — Chart.js grafiklari
+// HABITGO — Chart.js grafiklari (i18n bilan)
 // ============================================
 
 let weeklyChartInstance = null;
 let monthlyChartInstance = null;
 
-// Oxirgi 7 kunlik grafik
+// ============================================
+// HAFTALIK GRAFIK
+// ============================================
 function renderWeeklyChart() {
     const canvas = document.getElementById('weeklyChart');
     if (!canvas) return;
 
-    // Eski grafikni o'chirish
-    if (weeklyChartInstance) {
-        weeklyChartInstance.destroy();
-    }
+    if (weeklyChartInstance) weeklyChartInstance.destroy();
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -21,7 +20,8 @@ function renderWeeklyChart() {
     const labels = [];
     const doneData = [];
     const totalData = [];
-    const dayNames = ['Yak', 'Dush', 'Sesh', 'Chor', 'Pay', 'Jum', 'Shan'];
+
+    const dayKeys = ['day_sun', 'day_mon', 'day_tue', 'day_wed', 'day_thu', 'day_fri', 'day_sat'];
 
     for (let i = 6; i >= 0; i--) {
         const d = new Date(today);
@@ -29,10 +29,8 @@ function renderWeeklyChart() {
         const dStr = heatmapDateStr(d);
         const dDay = d.getDay();
 
-        // Kun yorlig'i
-        labels.push(dayNames[dDay] + ' ' + d.getDate());
+        labels.push(t(dayKeys[dDay]) + ' ' + d.getDate());
 
-        // Bajarilgan va jami
         let done = 0;
         let total = 0;
 
@@ -57,14 +55,14 @@ function renderWeeklyChart() {
             labels: labels,
             datasets: [
                 {
-                    label: 'Bajarilgan',
+                    label: t('stats_progress'),
                     data: doneData,
                     backgroundColor: 'rgba(76, 175, 80, 0.8)',
                     borderRadius: 8,
                     borderSkipped: false
                 },
                 {
-                    label: 'Jami kerak',
+                    label: t('task_stats_active'),
                     data: totalData,
                     backgroundColor: 'rgba(102, 126, 234, 0.2)',
                     borderRadius: 8,
@@ -102,14 +100,14 @@ function renderWeeklyChart() {
     });
 }
 
-// Oxirgi 30 kunlik grafik (line)
+// ============================================
+// OYLIK GRAFIK
+// ============================================
 function renderMonthlyChart() {
     const canvas = document.getElementById('monthlyChart');
     if (!canvas) return;
 
-    if (monthlyChartInstance) {
-        monthlyChartInstance.destroy();
-    }
+    if (monthlyChartInstance) monthlyChartInstance.destroy();
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -123,14 +121,12 @@ function renderMonthlyChart() {
         const dStr = heatmapDateStr(d);
         const dDay = d.getDay();
 
-        // Yorliq (har 5 kunda bir marta ko'rsatamiz)
         if (i % 5 === 0 || i === 0) {
             labels.push(d.getDate() + '-' + (d.getMonth() + 1));
         } else {
             labels.push('');
         }
 
-        // Foiz hisoblash
         let done = 0;
         let total = 0;
 
@@ -154,7 +150,7 @@ function renderMonthlyChart() {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Bajarilish foizi',
+                label: t('stats_percent'),
                 data: percentData,
                 borderColor: '#667eea',
                 backgroundColor: 'rgba(102, 126, 234, 0.15)',
@@ -182,7 +178,7 @@ function renderMonthlyChart() {
                     padding: 10,
                     cornerRadius: 8,
                     callbacks: {
-                        label: (ctx) => `Bajarildi: ${ctx.parsed.y}%`
+                        label: (ctx) => `${t('stats_progress')}: ${ctx.parsed.y}%`
                     }
                 }
             },
@@ -205,7 +201,6 @@ function renderMonthlyChart() {
     });
 }
 
-// Ikkala grafikni yangilash
 function renderCharts() {
     if (typeof Chart === 'undefined') {
         console.warn('Chart.js yuklanmagan');
