@@ -1,11 +1,10 @@
 // ============================================
-// HABITGO — Kalendar Heatmap (GitHub kabi)
+// HABITGO — Heatmap (i18n bilan)
 // ============================================
 
 function getColorLevel(count, maxCount) {
     if (count === 0) return 0;
     if (maxCount === 0) return 1;
-
     const ratio = count / maxCount;
     if (ratio <= 0.25) return 1;
     if (ratio <= 0.5) return 2;
@@ -25,7 +24,6 @@ function showStatistics() {
     renderHeatmap();
     renderHabitBreakdown();
 
-    // Grafiklarni chizish (chart.js dan keyin)
     setTimeout(() => {
         if (typeof renderCharts === 'function') renderCharts();
     }, 100);
@@ -35,8 +33,22 @@ function renderHeatmap() {
     const container = document.getElementById('heatmapContainer');
     if (!container) return;
 
-    const months = ['Yan', 'Fev', 'Mar', 'Apr', 'May', 'Iyn', 'Iyl', 'Avg', 'Sen', 'Okt', 'Noy', 'Dek'];
-    const dayLabels = ['Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh', 'Ya'];
+    const months = {
+        uz: ['Yan', 'Fev', 'Mar', 'Apr', 'May', 'Iyn', 'Iyl', 'Avg', 'Sen', 'Okt', 'Noy', 'Dek'],
+        ru: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+        en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    };
+    const monthNames = months[currentLang] || months.uz;
+
+    const dayLabels = [
+        t('day_mon').charAt(0),
+        t('day_tue').charAt(0),
+        t('day_wed').charAt(0),
+        t('day_thu').charAt(0),
+        t('day_fri').charAt(0),
+        t('day_sat').charAt(0),
+        t('day_sun').charAt(0)
+    ];
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -79,12 +91,8 @@ function renderHeatmap() {
         const isToday = dateStr === todayStr;
 
         cells.push({
-            date: dateStr,
-            count: count,
-            level: level,
-            isToday: isToday,
-            dayOfWeek: cursor.getDay(),
-            month: cursor.getMonth()
+            date: dateStr, count: count, level: level, isToday: isToday,
+            dayOfWeek: cursor.getDay(), month: cursor.getMonth()
         });
 
         cursor.setDate(cursor.getDate() + 1);
@@ -103,23 +111,18 @@ function renderHeatmap() {
         const firstCell = week[0];
         if (firstCell && firstCell.month !== currentMonth) {
             currentMonth = firstCell.month;
-            monthPositions.push({
-                month: months[currentMonth],
-                position: weekIdx
-            });
+            monthPositions.push({ month: monthNames[currentMonth], position: weekIdx });
         }
 
         html += '<div class="heatmap-week">';
         week.forEach(cell => {
-            const title = `${cell.date}: ${cell.count} ta odat`;
-            html += `<div class="heatmap-cell level-${cell.level} ${cell.isToday ? 'today' : ''}"
-                          title="${title}"></div>`;
+            const title = `${cell.date}: ${cell.count}`;
+            html += `<div class="heatmap-cell level-${cell.level} ${cell.isToday ? 'today' : ''}" title="${title}"></div>`;
         });
         html += '</div>';
     });
 
-    html += '</div>';
-    html += '</div>';
+    html += '</div></div>';
 
     let monthsHtml = '<div class="heatmap-months-row">';
     monthPositions.forEach((mp, idx) => {
@@ -134,13 +137,13 @@ function renderHeatmap() {
     const legend = document.getElementById('heatmapLegend');
     if (legend) {
         legend.innerHTML = `
-            <span class="legend-text">Kam</span>
+            <span class="legend-text">${t('stats_legend_less')}</span>
             <div class="heatmap-cell level-0"></div>
             <div class="heatmap-cell level-1"></div>
             <div class="heatmap-cell level-2"></div>
             <div class="heatmap-cell level-3"></div>
             <div class="heatmap-cell level-4"></div>
-            <span class="legend-text">Ko'p</span>
+            <span class="legend-text">${t('stats_legend_more')}</span>
         `;
     }
 }
@@ -157,12 +160,7 @@ function renderStatsSummary() {
     const activeHabits = habits.filter(h => typeof isHabitActive === 'function' && isHabitActive(h));
     const finishedHabits = habits.filter(h => typeof isHabitFinished === 'function' && isHabitFinished(h));
 
-    const todayDay = today.getDay();
-    const todayHabits = activeHabits.filter(h => h.days.includes(todayDay));
-    const todayDone = todayHabits.filter(h => h.completedDays.includes(todayStr));
-
-    let weekDone = 0;
-    let weekTotal = 0;
+    let weekDone = 0, weekTotal = 0;
     for (let i = 0; i < 7; i++) {
         const d = new Date(today);
         d.setDate(d.getDate() - i);
@@ -177,8 +175,7 @@ function renderStatsSummary() {
         });
     }
 
-    let monthDone = 0;
-    let monthTotal = 0;
+    let monthDone = 0, monthTotal = 0;
     for (let i = 0; i < 30; i++) {
         const d = new Date(today);
         d.setDate(d.getDate() - i);
@@ -201,32 +198,32 @@ function renderStatsSummary() {
             <div class="summary-card">
                 <div class="summary-icon">📊</div>
                 <div class="summary-value">${totalCompleted}</div>
-                <div class="summary-label">Jami bajarilgan</div>
+                <div class="summary-label">${t('stats_total')}</div>
             </div>
             <div class="summary-card">
                 <div class="summary-icon">📅</div>
                 <div class="summary-value">${weekPercent}%</div>
-                <div class="summary-label">Bu hafta (${weekDone}/${weekTotal})</div>
+                <div class="summary-label">${t('stats_week')} (${weekDone}/${weekTotal})</div>
             </div>
             <div class="summary-card">
                 <div class="summary-icon">🗓</div>
                 <div class="summary-value">${monthPercent}%</div>
-                <div class="summary-label">Bu oy (${monthDone}/${monthTotal})</div>
+                <div class="summary-label">${t('stats_month')} (${monthDone}/${monthTotal})</div>
             </div>
             <div class="summary-card">
                 <div class="summary-icon">🔥</div>
                 <div class="summary-value">${habits.length > 0 ? Math.max(...habits.map(h => h.streak)) : 0}</div>
-                <div class="summary-label">Eng yaxshi streak</div>
+                <div class="summary-label">${t('best_streak')}</div>
             </div>
             <div class="summary-card">
                 <div class="summary-icon">✅</div>
                 <div class="summary-value">${activeHabits.length}</div>
-                <div class="summary-label">Faol odatlar</div>
+                <div class="summary-label">${t('stats_active')}</div>
             </div>
             <div class="summary-card">
                 <div class="summary-icon">🏆</div>
                 <div class="summary-value">${finishedHabits.length}</div>
-                <div class="summary-label">Tugallangan</div>
+                <div class="summary-label">${t('stats_finished')}</div>
             </div>
         </div>
     `;
@@ -237,22 +234,20 @@ function renderHabitBreakdown() {
     if (!container) return;
 
     if (habits.length === 0) {
-        container.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Hali odat yo\'q 🌱</p>';
+        container.innerHTML = `<p style="color:#999;text-align:center;padding:20px;">${t('empty_message')}</p>`;
         return;
     }
 
     container.innerHTML = habits.map(habit => {
-        const totalDaysSpan = Math.ceil(
-            (strToDate(habit.endDate) - strToDate(habit.startDate)) / (1000*60*60*24) + 1
-        );
+        const totalDaysSpan = Math.ceil((strToDate(habit.endDate) - strToDate(habit.startDate)) / 86400000) + 1;
         const weeksCount = totalDaysSpan / 7;
         const totalDaysNeeded = Math.round(habit.days.length * weeksCount);
         const doneCount = habit.completedDays.length;
         const percent = Math.min(100, Math.round((doneCount / Math.max(1, totalDaysNeeded)) * 100));
 
         const status = typeof isHabitActive === 'function' && isHabitActive(habit)
-            ? '🟢 Faol'
-            : '✅ Tugallangan';
+            ? '🟢 ' + t('stats_active')
+            : '✅ ' + t('stats_finished');
 
         return `
             <div class="breakdown-item">
@@ -261,7 +256,7 @@ function renderHabitBreakdown() {
                     <div class="breakdown-status">${status}</div>
                 </div>
                 <div class="breakdown-meta">
-                    <span>${getPeriodName(habit.period)}</span>
+                    <span>${t('period_' + habit.period)}</span>
                     <span>🔥 ${habit.streak}</span>
                     <span>✅ ${doneCount}/${totalDaysNeeded}</span>
                 </div>
@@ -277,7 +272,6 @@ function renderHabitBreakdown() {
 function closeStatistics() {
     document.getElementById('statisticsPage').style.display = 'none';
 
-    // Grafiklarni tozalash (resurslarni bo'shatish)
     if (typeof weeklyChartInstance !== 'undefined' && weeklyChartInstance) {
         weeklyChartInstance.destroy();
         weeklyChartInstance = null;
