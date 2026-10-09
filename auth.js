@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Auth
+// HABITGO — Auth (i18n bilan)
 // ============================================
 
 let currentUser = null;
@@ -53,11 +53,15 @@ async function register() {
     const password = document.getElementById('regPassword').value;
 
     if (!name || !email || !password) {
-        alert('❌ Barcha maydonlarni to\'ldiring!');
+        alert('❌ ' + t('auth_fill_all'));
         return;
     }
     if (password.length < 6) {
-        alert('❌ Parol kamida 6 belgi!');
+        alert('❌ ' + t('auth_password_short'));
+        return;
+    }
+    if (!email.includes('@')) {
+        alert('❌ ' + t('auth_email_invalid'));
         return;
     }
 
@@ -67,8 +71,6 @@ async function register() {
     btn.disabled = true;
 
     try {
-        console.log('[Auth] Register:', email);
-
         const { data, error } = await supabaseClient.auth.signUp({
             email: email,
             password: password,
@@ -81,26 +83,24 @@ async function register() {
         }
 
         if (!data.user) {
-            alert('❌ Foydalanuvchi yaratilmadi!');
+            alert('❌ ' + t('error'));
             return;
         }
 
         currentUser = data.user;
 
-        // Profil va stats yaratish
+        await new Promise(r => setTimeout(r, 1500));
+
         const { profile, stats } = await ensureUserProfile(currentUser.id, name, email);
         currentUserProfile = profile;
         currentUserStats = stats;
 
-        console.log('[Auth] Profil:', profile);
-        console.log('[Auth] Stats:', stats);
-
         closeModal();
         showApp();
-        alert(`🎉 Xush kelibsiz, ${name}!`);
+        alert(`🎉 ${t('auth_welcome')}, ${name}!`);
 
     } catch (err) {
-        console.error('[Auth] Xato:', err);
+        console.error('[Auth] Register xatosi:', err);
         alert('❌ ' + err.message);
     } finally {
         btn.textContent = originalText;
@@ -116,7 +116,7 @@ async function login() {
     const password = document.getElementById('loginPassword').value;
 
     if (!email || !password) {
-        alert('❌ Email va parolni kiriting!');
+        alert('❌ ' + t('auth_fill_all'));
         return;
     }
 
@@ -126,15 +126,13 @@ async function login() {
     btn.disabled = true;
 
     try {
-        console.log('[Auth] Login:', email);
-
         const { data, error } = await supabaseClient.auth.signInWithPassword({
             email: email,
             password: password
         });
 
         if (error) {
-            alert('❌ Email yoki parol noto\'g\'ri!');
+            alert('❌ ' + t('auth_login_error'));
             return;
         }
 
@@ -145,15 +143,12 @@ async function login() {
         currentUserProfile = profile;
         currentUserStats = stats;
 
-        console.log('[Auth] Profil:', profile);
-        console.log('[Auth] Stats:', stats);
-
         closeModal();
         showApp();
-        alert(`👋 Xush kelibsiz!`);
+        alert(`👋 ${t('auth_welcome')}!`);
 
     } catch (err) {
-        console.error('[Auth] Xato:', err);
+        console.error('[Auth] Login xatosi:', err);
         alert('❌ ' + err.message);
     } finally {
         btn.textContent = originalText;
@@ -165,7 +160,7 @@ async function login() {
 // CHIQISH
 // ============================================
 async function logout() {
-    if (!confirm('Chiqishni xohlaysizmi?')) return;
+    if (!confirm(t('auth_logout_confirm'))) return;
 
     try {
         await supabaseClient.auth.signOut();
@@ -174,6 +169,7 @@ async function logout() {
         currentUserStats = null;
         document.getElementById('profileDropdown').classList.remove('show');
         showLanding();
+        alert('👋 ' + t('auth_bye'));
     } catch (err) {
         console.error('[Auth] Logout xatosi:', err);
     }
@@ -219,14 +215,11 @@ async function initializeAuth() {
         currentUserProfile = profile;
         currentUserStats = stats;
 
-        console.log('[Auth] Profil:', profile);
-        console.log('[Auth] Stats:', stats);
-
         showApp();
         console.log('[Auth] ===== Tayyor =====');
 
     } catch (err) {
-        console.error('[Auth] Xato:', err);
+        console.error('[Auth] initializeAuth xatosi:', err);
         showLanding();
     }
 }
