@@ -1,23 +1,20 @@
 // ============================================
-// HABITGO — Ko'p tilli (i18n)
+// HABITGO — Ko'p tilli (i18n) — TO'LIQ
 // ============================================
 
 const translations = {
     uz: {
-        // Header
         app_name: 'HabitGo',
         login: 'Kirish',
         register: 'Ro\'yxatdan o\'tish',
         logout: 'Chiqish',
 
-        // Landing
         hero_title_1: 'Odatlaringizni',
         hero_title_2: 'o\'zgartiring',
         hero_title_3: 'hayotingizni o\'zgartiring',
         hero_sub: 'Har qanday maqsad sari yo\'l. Rejalashtir, kuzat, muvaffaqiyatga erish!',
         hero_btn: '🚀 Bepul boshlash',
 
-        // Features
         why_habitgo: 'Nega HabitGo?',
         feature_stats: 'Statistika',
         feature_stats_desc: 'Natijalaringizni kuzatib boring',
@@ -28,7 +25,6 @@ const translations = {
         feature_mobile: 'Telefonda ham',
         feature_mobile_desc: 'PWA — o\'rnatib oling',
 
-        // Pricing
         pricing: 'Narxlar',
         free: 'Bepul',
         premium: 'Premium',
@@ -50,7 +46,6 @@ const translations = {
         habits_3: '3 tagacha odat',
         your_plan: 'Sizning tarifingiz',
 
-        // Auth Modal
         login_title: 'Kirish',
         register_title: 'Ro\'yxatdan o\'tish',
         email: 'Email',
@@ -60,7 +55,6 @@ const translations = {
         have_account: 'Akkauntingiz bormi?',
         no_account: 'Akkauntingiz yo\'qmi?',
 
-        // Profile menu
         profile: 'Profil',
         tasks: 'Rejalar',
         statistics: 'Statistika',
@@ -69,21 +63,19 @@ const translations = {
         subscription: 'Obuna',
         reminders: 'Eslatmalar',
 
-        // Stats
         active_habits: 'Faol odatlar',
         today_done: 'Bugun bajarildi',
         best_streak: 'Eng yaxshi streak',
         total_habits: 'Jami odatlar',
         completed_count: 'Bajarilgan',
 
-        // Tasks
         tasks_manage: 'Vazifalarni boshqarish',
         tasks_today: 'Bugun {n} ta vazifa',
-        task_new: 'Yangi vazifa',
+        task_new: '➕ Yangi vazifa',
         task_name: 'Vazifa nomi',
         task_desc: 'Tavsif (ixtiyoriy)',
-        task_date: 'Sana',
-        task_time: 'Vaqt',
+        task_date: '📅 Sana',
+        task_time: '⏰ Vaqt',
         task_category: 'Kategoriya',
         task_priority: 'Prioritet',
         task_add: '✅ Vazifani qo\'shish',
@@ -113,8 +105,7 @@ const translations = {
         task_delete_confirm: 'Bu vazifani o\'chirmoqchimisiz?',
         task_added: 'qo\'shildi!',
 
-        // Habit form
-        add_habit: 'Yanggi odat qo\'shish',
+        add_habit: 'Yangi odat',
         add_habit_title: '➕ Yangi odat qo\'shish',
         habit_name: '1️⃣ Odat nomi',
         habit_name_placeholder: 'Masalan: Kitob o\'qish',
@@ -129,7 +120,6 @@ const translations = {
         place_placeholder: 'Masalan: Bog\'da',
         add_habit_btn: '✅ Odatni qo\'shish',
 
-        // Day names
         day_sun: 'Yak',
         day_mon: 'Dush',
         day_tue: 'Sesh',
@@ -139,20 +129,16 @@ const translations = {
         day_sat: 'Shan',
         days_full: ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba'],
 
-        // Habit states
         active_habits_title: '📋 Faol odatlar',
         completed_habits_title: '🏆 Tugallangan odatlar',
         empty_message: 'Hali odat qo\'shmadingiz. Tepadagi ➕ tugmasini bosing! 🌱',
         not_done: '⚠️ Bajarilmadi',
+        footer_text: 'HabitGo — Sen har kuni yaxshilanasan! 💪',
 
-        // Premium banner
         premium_limit: '⚠️ Bepul tarifda faqat 3 ta odat.',
         get_premium_link: '💎 Premium olish',
 
-        // Language
         language: 'Til',
-
-        // Messages
         loading: 'Yuklanmoqda...',
         welcome: 'Xush kelibsiz',
         bye: 'Xayr! Yana kutamiz!',
@@ -162,7 +148,6 @@ const translations = {
         close: 'Yopish',
         ok: 'OK',
 
-        // Alerts (app.js)
         toast_habit_added: 'qo\'shildi!',
         toast_habit_deleted: 'O\'chirildi',
         alert_enter_habit_name: 'Odat nomini kiriting!',
@@ -178,7 +163,6 @@ const translations = {
         streak_30: '🏆 30 kun ketma-ket!',
         days_label: 'kun',
 
-        // Daily report
         daily_report_title: 'Kunlik hisobot',
         daily_report_perfect: '🎉 Ajoyib!',
         daily_report_good: '👏 Yaxshi!',
@@ -187,18 +171,15 @@ const translations = {
         report_all_done: 'Barcha odatlarni bajarding!',
         report_only: 'Faqat',
 
-        // Periods
         period_weekly: 'Haftalik',
         period_monthly: 'Oylik',
         period_yearly: 'Yillik',
 
-        // Feedback
         feedback_90: '🏆 Ajoyib natija!',
         feedback_70: '🎉 Yaxshi natija!',
         feedback_50: '💪 Yaxshi, lekin yaxshiroq bo\'lishi mumkin',
         feedback_low: '🌱 Keyingi safar yaxshiroq qilasan!',
 
-        // Auth (auth.js)
         auth_welcome: 'Xush kelibsiz',
         auth_register_success: 'Ro\'yxatdan o\'tdingiz!',
         auth_fill_all: 'Barcha maydonlarni to\'ldiring!',
@@ -208,7 +189,6 @@ const translations = {
         auth_logout_confirm: 'Chiqishni xohlaysizmi?',
         auth_bye: 'Xayr! Yana kutamiz!',
 
-        // Badges (badges.js)
         badge_unlocked: '🎉 Yangi yutuq!',
         badge_first_habit: 'Birinchi qadam',
         badge_first_habit_desc: 'Birinchi odatni qo\'shding',
@@ -248,13 +228,12 @@ const translations = {
         badge_no_badges: 'Hali yutuq yo\'q. Odatlaringizni bajarib boshlang! 🌱',
         achievements_subtitle: 'Odatlaringizni bajarib badge\'lar yig\'ing!',
 
-        // Challenge (challenge.js)
         challenge_title: '🎯 Kunlik Challenge',
         challenge_complete: 'Challenge bajarildi!',
         challenge_reward: 'Mukofotni olish',
         challenge_continue: 'Davom eting...',
         challenge_done: '🎉 Bugungi challenge bajarildi! Ertaga yangisi keladi!',
-        challenge_done_btn: '✅ Bajarildi!',
+        challenge_done_btn: 'Bajarildi!',
         challenge_xp: 'XP',
         challenge_level: 'Level',
         challenge_not_done: 'Challenge hali bajarilmagan!',
@@ -273,7 +252,6 @@ const translations = {
         challenge_half_done_desc: 'Bugungi odatlarning yarmini bajaring',
         challenge_level_up: 'Level up!',
 
-        // Notes (notes.js)
         notes_title: '📝 Eslatmalar',
         notes_for: 'uchun',
         notes_placeholder: 'Bugun qanday o\'tdi?',
@@ -294,18 +272,16 @@ const translations = {
         notes_mood_bad: '😔 Yomon',
         notes_mood_terrible: '😢 Juda yomon',
 
-        // Profile (profile.js)
         profile_title: '👤 Profil',
-        profile_name_label: 'Ism',
-        profile_email_label: 'Email',
-        profile_plan_label: 'Tarif',
-        profile_joined_label: 'Ro\'yxatdan o\'tgan',
+        profile_name_label: 'Ism:',
+        profile_email_label: 'Email:',
+        profile_plan_label: 'Tarif:',
+        profile_joined_label: 'Ro\'yxatdan o\'tgan:',
         profile_stats: '📊 Umumiy statistika',
         plan_free: 'Bepul',
         plan_monthly: 'Premium',
         plan_yearly: 'Yillik Premium',
 
-        // Leaderboard (leaderboard.js)
         leaderboard_title: '🏅 Leaderboard',
         leaderboard_subtitle: 'Eng faol foydalanuvchilar reytingi.',
         leaderboard_filter_streak: '🔥 Streak',
@@ -319,7 +295,6 @@ const translations = {
         leaderboard_only_3: 'Faqat 3 ta foydalanuvchi bor',
         leaderboard_you: 'SIZ',
 
-        // Backup
         backup_title: '💾 Backup',
         backup_desc: 'Ma\'lumotlaringizni JSON faylga saqlang.',
         backup_current: '📊 Hozirgi ma\'lumotlar',
@@ -335,7 +310,6 @@ const translations = {
         backup_done: 'Bajarilgan',
         backup_size: 'Hajmi',
 
-        // Payment (payment.js)
         payment_confirm: 'To\'lovni tasdiqlaysizmi?',
         payment_loading: 'To\'lov amalga oshirilmoqda...',
         payment_success: 'Tabriklayman!',
@@ -352,7 +326,6 @@ const translations = {
         payment_demo: '(Demo versiyada to\'lov simulyatsiya qilinadi)',
         payment_amount: 'so\'m',
 
-        // PWA (pwa.js)
         pwa_install: 'HabitGo\'ni o\'rnating',
         pwa_install_desc: 'Telefoningizga qo\'shing',
         pwa_install_btn: 'O\'rnatish',
@@ -362,18 +335,15 @@ const translations = {
         pwa_ios_hint: 'Safari\'da pastdagi Share (⬆️) tugmasini bosing, keyin "Add to Home Screen" ni tanlang.',
         pwa_got_it: 'Tushundim',
 
-        // Push
         push_enabled: '🔔 Eslatmalar yoqildi!',
         push_disabled: '🔕 Eslatmalar o\'chirildi',
         push_not_supported: 'Brauzer push notification qo\'llab-quvvatlamaydi',
         push_permission_denied: 'Bildirishnoma ruxsati berilmadi',
         push_error: 'Xato',
 
-        // Theme
         theme_dark: 'Tungi rejim',
         theme_light: 'Kunduzgi rejim',
 
-        // Color
         color_title: '🎨 Rang mavzusi',
         color_subtitle: 'O\'zingizga yoqqan rangni tanlang',
         color_purple: 'Binafsha',
@@ -384,7 +354,6 @@ const translations = {
         color_red: 'Qizil',
         color_changed: 'mavzusi yoqildi!',
 
-        // Statistics
         stats_title: '📊 Statistika',
         stats_weekly: '📊 Haftalik faollik',
         stats_monthly: '📈 Oylik tendentsiya',
@@ -405,20 +374,17 @@ const translations = {
     },
 
     ru: {
-        // Header
         app_name: 'HabitGo',
         login: 'Войти',
         register: 'Регистрация',
         logout: 'Выйти',
 
-        // Landing
         hero_title_1: 'Измените свои',
         hero_title_2: 'привычки',
         hero_title_3: 'измените свою жизнь',
         hero_sub: 'Путь к любой цели. Планируйте, отслеживайте, достигайте успеха!',
         hero_btn: '🚀 Начать бесплатно',
 
-        // Features
         why_habitgo: 'Почему HabitGo?',
         feature_stats: 'Статистика',
         feature_stats_desc: 'Отслеживайте свои результаты',
@@ -429,7 +395,6 @@ const translations = {
         feature_mobile: 'И на телефоне',
         feature_mobile_desc: 'PWA — установите',
 
-        // Pricing
         pricing: 'Цены',
         free: 'Бесплатно',
         premium: 'Премиум',
@@ -451,7 +416,6 @@ const translations = {
         habits_3: 'До 3 привычек',
         your_plan: 'Ваш тариф',
 
-        // Auth Modal
         login_title: 'Войти',
         register_title: 'Регистрация',
         email: 'Email',
@@ -461,7 +425,6 @@ const translations = {
         have_account: 'Уже есть аккаунт?',
         no_account: 'Нет аккаунта?',
 
-        // Profile menu
         profile: 'Профиль',
         tasks: 'Задачи',
         statistics: 'Статистика',
@@ -470,21 +433,19 @@ const translations = {
         subscription: 'Подписка',
         reminders: 'Напоминания',
 
-        // Stats
         active_habits: 'Активные привычки',
         today_done: 'Сегодня выполнено',
         best_streak: 'Лучшая серия',
         total_habits: 'Всего привычек',
         completed_count: 'Выполнено',
 
-        // Tasks
         tasks_manage: 'Управление задачами',
         tasks_today: 'Сегодня {n} задач',
-        task_new: 'Новая задача',
+        task_new: '➕ Новая задача',
         task_name: 'Название задачи',
         task_desc: 'Описание (опционально)',
-        task_date: 'Дата',
-        task_time: 'Время',
+        task_date: '📅 Дата',
+        task_time: '⏰ Время',
         task_category: 'Категория',
         task_priority: 'Приоритет',
         task_add: '✅ Добавить задачу',
@@ -514,8 +475,7 @@ const translations = {
         task_delete_confirm: 'Удалить эту задачу?',
         task_added: 'добавлена!',
 
-        // Habit form
-        add_habit: 'Добавить привычку',
+        add_habit: 'Новая привычка',
         add_habit_title: '➕ Добавить привычку',
         habit_name: '1️⃣ Название привычки',
         habit_name_placeholder: 'Например: Чтение книги',
@@ -530,7 +490,6 @@ const translations = {
         place_placeholder: 'Например: В парке',
         add_habit_btn: '✅ Добавить привычку',
 
-        // Day names
         day_sun: 'Вс',
         day_mon: 'Пн',
         day_tue: 'Вт',
@@ -540,20 +499,16 @@ const translations = {
         day_sat: 'Сб',
         days_full: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
 
-        // Habit states
         active_habits_title: '📋 Активные привычки',
         completed_habits_title: '🏆 Завершённые привычки',
         empty_message: 'Ещё нет привычек. Нажмите ➕ сверху! 🌱',
         not_done: '⚠️ Не выполнено',
+        footer_text: 'HabitGo — Ты становишься лучше каждый день! 💪',
 
-        // Premium banner
         premium_limit: '⚠️ В бесплатном тарифе только 3 привычки.',
         get_premium_link: '💎 Получить Премиум',
 
-        // Language
         language: 'Язык',
-
-        // Messages
         loading: 'Загрузка...',
         welcome: 'Добро пожаловать',
         bye: 'Пока! Ждём вас снова!',
@@ -563,7 +518,6 @@ const translations = {
         close: 'Закрыть',
         ok: 'OK',
 
-        // Alerts (app.js)
         toast_habit_added: 'добавлена!',
         toast_habit_deleted: 'Удалено',
         alert_enter_habit_name: 'Введите название привычки!',
@@ -579,7 +533,6 @@ const translations = {
         streak_30: '🏆 30 дней подряд!',
         days_label: 'дней',
 
-        // Daily report
         daily_report_title: 'Ежедневный отчёт',
         daily_report_perfect: '🎉 Отлично!',
         daily_report_good: '👏 Хорошо!',
@@ -588,18 +541,15 @@ const translations = {
         report_all_done: 'Вы выполнили все привычки!',
         report_only: 'Только',
 
-        // Periods
         period_weekly: 'Недельный',
         period_monthly: 'Месячный',
         period_yearly: 'Годовой',
 
-        // Feedback
         feedback_90: '🏆 Отличный результат!',
         feedback_70: '🎉 Хороший результат!',
         feedback_50: '💪 Хорошо, но можно лучше',
         feedback_low: '🌱 В следующий раз получится лучше!',
 
-        // Auth (auth.js)
         auth_welcome: 'Добро пожаловать',
         auth_register_success: 'Вы зарегистрированы!',
         auth_fill_all: 'Заполните все поля!',
@@ -609,7 +559,6 @@ const translations = {
         auth_logout_confirm: 'Выйти?',
         auth_bye: 'Пока! Ждём вас снова!',
 
-        // Badges (badges.js)
         badge_unlocked: '🎉 Новое достижение!',
         badge_first_habit: 'Первый шаг',
         badge_first_habit_desc: 'Добавили первую привычку',
@@ -649,13 +598,12 @@ const translations = {
         badge_no_badges: 'Пока нет достижений. Начните выполнять привычки! 🌱',
         achievements_subtitle: 'Выполняйте привычки и получайте значки!',
 
-        // Challenge (challenge.js)
         challenge_title: '🎯 Ежедневный челлендж',
         challenge_complete: 'Челлендж выполнен!',
         challenge_reward: 'Получить награду',
         challenge_continue: 'Продолжайте...',
         challenge_done: '🎉 Сегодняшний челлендж выполнен! Завтра новый!',
-        challenge_done_btn: '✅ Выполнено!',
+        challenge_done_btn: 'Выполнено!',
         challenge_xp: 'XP',
         challenge_level: 'Уровень',
         challenge_not_done: 'Челлендж ещё не выполнен!',
@@ -674,7 +622,6 @@ const translations = {
         challenge_half_done_desc: 'Выполните половину привычек',
         challenge_level_up: 'Новый уровень!',
 
-        // Notes (notes.js)
         notes_title: '📝 Заметки',
         notes_for: 'для',
         notes_placeholder: 'Как прошёл день?',
@@ -695,18 +642,16 @@ const translations = {
         notes_mood_bad: '😔 Плохо',
         notes_mood_terrible: '😢 Очень плохо',
 
-        // Profile (profile.js)
         profile_title: '👤 Профиль',
-        profile_name_label: 'Имя',
-        profile_email_label: 'Email',
-        profile_plan_label: 'Тариф',
-        profile_joined_label: 'Дата регистрации',
+        profile_name_label: 'Имя:',
+        profile_email_label: 'Email:',
+        profile_plan_label: 'Тариф:',
+        profile_joined_label: 'Дата регистрации:',
         profile_stats: '📊 Общая статистика',
         plan_free: 'Бесплатно',
         plan_monthly: 'Премиум',
         plan_yearly: 'Годовой Премиум',
 
-        // Leaderboard (leaderboard.js)
         leaderboard_title: '🏅 Рейтинг',
         leaderboard_subtitle: 'Рейтинг самых активных.',
         leaderboard_filter_streak: '🔥 Серия',
@@ -720,7 +665,6 @@ const translations = {
         leaderboard_only_3: 'Только 3 пользователя',
         leaderboard_you: 'ВЫ',
 
-        // Backup
         backup_title: '💾 Резервная копия',
         backup_desc: 'Сохраните данные в JSON файл.',
         backup_current: '📊 Текущие данные',
@@ -736,7 +680,6 @@ const translations = {
         backup_done: 'Выполнено',
         backup_size: 'Размер',
 
-        // Payment (payment.js)
         payment_confirm: 'Подтвердить оплату?',
         payment_loading: 'Обработка платежа...',
         payment_success: 'Поздравляю!',
@@ -753,7 +696,6 @@ const translations = {
         payment_demo: '(В демо-версии платёж имитируется)',
         payment_amount: 'сум',
 
-        // PWA (pwa.js)
         pwa_install: 'Установите HabitGo',
         pwa_install_desc: 'Добавьте на телефон',
         pwa_install_btn: 'Установить',
@@ -763,18 +705,15 @@ const translations = {
         pwa_ios_hint: 'В Safari нажмите Share (⬆️), затем "Add to Home Screen".',
         pwa_got_it: 'Понятно',
 
-        // Push
         push_enabled: '🔔 Напоминания включены!',
         push_disabled: '🔕 Напоминания отключены',
         push_not_supported: 'Браузер не поддерживает push-уведомления',
         push_permission_denied: 'Разрешение не получено',
         push_error: 'Ошибка',
 
-        // Theme
         theme_dark: 'Тёмная тема',
         theme_light: 'Светлая тема',
 
-        // Color
         color_title: '🎨 Цветовая тема',
         color_subtitle: 'Выберите понравившийся цвет',
         color_purple: 'Фиолетовый',
@@ -785,7 +724,6 @@ const translations = {
         color_red: 'Красный',
         color_changed: 'тема включена!',
 
-        // Statistics
         stats_title: '📊 Статистика',
         stats_weekly: '📊 Недельная активность',
         stats_monthly: '📈 Месячный тренд',
@@ -806,20 +744,17 @@ const translations = {
     },
 
     en: {
-        // Header
         app_name: 'HabitGo',
         login: 'Login',
         register: 'Register',
         logout: 'Logout',
 
-        // Landing
         hero_title_1: 'Change your',
         hero_title_2: 'habits',
         hero_title_3: 'change your life',
         hero_sub: 'The path to any goal. Plan, track, achieve success!',
         hero_btn: '🚀 Start for free',
 
-        // Features
         why_habitgo: 'Why HabitGo?',
         feature_stats: 'Statistics',
         feature_stats_desc: 'Track your results',
@@ -830,7 +765,6 @@ const translations = {
         feature_mobile: 'On mobile too',
         feature_mobile_desc: 'PWA — install it',
 
-        // Pricing
         pricing: 'Pricing',
         free: 'Free',
         premium: 'Premium',
@@ -852,7 +786,6 @@ const translations = {
         habits_3: 'Up to 3 habits',
         your_plan: 'Your plan',
 
-        // Auth Modal
         login_title: 'Login',
         register_title: 'Register',
         email: 'Email',
@@ -862,7 +795,6 @@ const translations = {
         have_account: 'Already have an account?',
         no_account: 'No account?',
 
-        // Profile menu
         profile: 'Profile',
         tasks: 'Tasks',
         statistics: 'Statistics',
@@ -871,21 +803,19 @@ const translations = {
         subscription: 'Subscription',
         reminders: 'Reminders',
 
-        // Stats
         active_habits: 'Active habits',
         today_done: 'Done today',
         best_streak: 'Best streak',
         total_habits: 'Total habits',
         completed_count: 'Completed',
 
-        // Tasks
         tasks_manage: 'Manage tasks',
         tasks_today: '{n} tasks today',
-        task_new: 'New task',
+        task_new: '➕ New task',
         task_name: 'Task name',
         task_desc: 'Description (optional)',
-        task_date: 'Date',
-        task_time: 'Time',
+        task_date: '📅 Date',
+        task_time: '⏰ Time',
         task_category: 'Category',
         task_priority: 'Priority',
         task_add: '✅ Add task',
@@ -915,8 +845,7 @@ const translations = {
         task_delete_confirm: 'Delete this task?',
         task_added: 'added!',
 
-        // Habit form
-        add_habit: 'Add habit',
+        add_habit: 'New habit',
         add_habit_title: '➕ Add new habit',
         habit_name: '1️⃣ Habit name',
         habit_name_placeholder: 'e.g. Reading a book',
@@ -931,7 +860,6 @@ const translations = {
         place_placeholder: 'e.g. At the park',
         add_habit_btn: '✅ Add habit',
 
-        // Day names
         day_sun: 'Sun',
         day_mon: 'Mon',
         day_tue: 'Tue',
@@ -941,20 +869,16 @@ const translations = {
         day_sat: 'Sat',
         days_full: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 
-        // Habit states
         active_habits_title: '📋 Active habits',
         completed_habits_title: '🏆 Completed habits',
         empty_message: 'No habits yet. Tap ➕ at the top! 🌱',
         not_done: '⚠️ Not done',
+        footer_text: 'HabitGo — You get better every day! 💪',
 
-        // Premium banner
         premium_limit: '⚠️ Free tier has only 3 habits.',
         get_premium_link: '💎 Get Premium',
 
-        // Language
         language: 'Language',
-
-        // Messages
         loading: 'Loading...',
         welcome: 'Welcome',
         bye: 'Bye! See you again!',
@@ -964,7 +888,6 @@ const translations = {
         close: 'Close',
         ok: 'OK',
 
-        // Alerts (app.js)
         toast_habit_added: 'added!',
         toast_habit_deleted: 'Deleted',
         alert_enter_habit_name: 'Enter habit name!',
@@ -980,7 +903,6 @@ const translations = {
         streak_30: '🏆 30 days in a row!',
         days_label: 'days',
 
-        // Daily report
         daily_report_title: 'Daily report',
         daily_report_perfect: '🎉 Excellent!',
         daily_report_good: '👏 Good!',
@@ -989,18 +911,15 @@ const translations = {
         report_all_done: 'You completed all habits!',
         report_only: 'Only',
 
-        // Periods
         period_weekly: 'Weekly',
         period_monthly: 'Monthly',
         period_yearly: 'Yearly',
 
-        // Feedback
         feedback_90: '🏆 Excellent result!',
         feedback_70: '🎉 Good result!',
         feedback_50: '💪 Good, but can be better',
         feedback_low: '🌱 Next time will be better!',
 
-        // Auth (auth.js)
         auth_welcome: 'Welcome',
         auth_register_success: 'You are registered!',
         auth_fill_all: 'Fill in all fields!',
@@ -1010,7 +929,6 @@ const translations = {
         auth_logout_confirm: 'Log out?',
         auth_bye: 'Bye! See you again!',
 
-        // Badges (badges.js)
         badge_unlocked: '🎉 New achievement!',
         badge_first_habit: 'First step',
         badge_first_habit_desc: 'Added first habit',
@@ -1050,13 +968,12 @@ const translations = {
         badge_no_badges: 'No achievements yet. Start completing habits! 🌱',
         achievements_subtitle: 'Complete habits and earn badges!',
 
-        // Challenge (challenge.js)
         challenge_title: '🎯 Daily Challenge',
         challenge_complete: 'Challenge completed!',
         challenge_reward: 'Claim reward',
         challenge_continue: 'Continue...',
         challenge_done: '🎉 Today\'s challenge done! New one tomorrow!',
-        challenge_done_btn: '✅ Done!',
+        challenge_done_btn: 'Done!',
         challenge_xp: 'XP',
         challenge_level: 'Level',
         challenge_not_done: 'Challenge not completed yet!',
@@ -1075,7 +992,6 @@ const translations = {
         challenge_half_done_desc: 'Complete half of today\'s habits',
         challenge_level_up: 'Level up!',
 
-        // Notes (notes.js)
         notes_title: '📝 Notes',
         notes_for: 'for',
         notes_placeholder: 'How was your day?',
@@ -1096,18 +1012,16 @@ const translations = {
         notes_mood_bad: '😔 Bad',
         notes_mood_terrible: '😢 Terrible',
 
-        // Profile (profile.js)
         profile_title: '👤 Profile',
-        profile_name_label: 'Name',
-        profile_email_label: 'Email',
-        profile_plan_label: 'Plan',
-        profile_joined_label: 'Joined',
+        profile_name_label: 'Name:',
+        profile_email_label: 'Email:',
+        profile_plan_label: 'Plan:',
+        profile_joined_label: 'Joined:',
         profile_stats: '📊 General statistics',
         plan_free: 'Free',
         plan_monthly: 'Premium',
         plan_yearly: 'Yearly Premium',
 
-        // Leaderboard (leaderboard.js)
         leaderboard_title: '🏅 Leaderboard',
         leaderboard_subtitle: 'Most active users ranking.',
         leaderboard_filter_streak: '🔥 Streak',
@@ -1121,7 +1035,6 @@ const translations = {
         leaderboard_only_3: 'Only 3 users',
         leaderboard_you: 'YOU',
 
-        // Backup
         backup_title: '💾 Backup',
         backup_desc: 'Save your data to a JSON file.',
         backup_current: '📊 Current data',
@@ -1137,7 +1050,6 @@ const translations = {
         backup_done: 'Completed',
         backup_size: 'Size',
 
-        // Payment (payment.js)
         payment_confirm: 'Confirm payment?',
         payment_loading: 'Processing payment...',
         payment_success: 'Congratulations!',
@@ -1154,7 +1066,6 @@ const translations = {
         payment_demo: '(In demo version, payment is simulated)',
         payment_amount: 'sum',
 
-        // PWA (pwa.js)
         pwa_install: 'Install HabitGo',
         pwa_install_desc: 'Add to your phone',
         pwa_install_btn: 'Install',
@@ -1164,18 +1075,15 @@ const translations = {
         pwa_ios_hint: 'In Safari tap Share (⬆️), then "Add to Home Screen".',
         pwa_got_it: 'Got it',
 
-        // Push
         push_enabled: '🔔 Reminders enabled!',
         push_disabled: '🔕 Reminders disabled',
         push_not_supported: 'Browser does not support push notifications',
         push_permission_denied: 'Permission denied',
         push_error: 'Error',
 
-        // Theme
         theme_dark: 'Dark mode',
         theme_light: 'Light mode',
 
-        // Color
         color_title: '🎨 Color theme',
         color_subtitle: 'Choose your favorite color',
         color_purple: 'Purple',
@@ -1186,7 +1094,6 @@ const translations = {
         color_red: 'Red',
         color_changed: 'theme enabled!',
 
-        // Statistics
         stats_title: '📊 Statistics',
         stats_weekly: '📊 Weekly activity',
         stats_monthly: '📈 Monthly trend',
@@ -1207,55 +1114,58 @@ const translations = {
     }
 };
 
-// Joriy til
 let currentLang = localStorage.getItem('habitgo_lang') || 'uz';
 
-// Tarjima olish
 function t(key, params) {
     let text = translations[currentLang]?.[key] || translations.uz[key] || key;
-
-    // {n} kabi parametrlarni almashtirish
     if (params && typeof text === 'string') {
         Object.keys(params).forEach(k => {
             text = text.replace(new RegExp(`\\{${k}\\}`, 'g'), params[k]);
         });
     }
-
     return text;
 }
 
-// Kun nomlarini olish
 function tDay(dayIndex) {
     const days = translations[currentLang]?.days_full || translations.uz.days_full;
     return days[dayIndex] || '';
 }
 
-// Tilni o'zgartirish
 function setLanguage(lang) {
     if (!translations[lang]) return;
     currentLang = lang;
     localStorage.setItem('habitgo_lang', lang);
-
-    // HTML lang atributi
-    document.documentElement.lang = lang === 'uz' ? 'uz' : lang;
+    document.documentElement.lang = lang;
 
     applyTranslations();
     updateLanguageButtons();
 
-    // Sahifani qayta chizish
+    // Barcha sahifalarni qayta chizish
     if (typeof renderHabits === 'function') renderHabits();
+    if (typeof updateStats === 'function') updateStats();
     if (typeof renderTasks === 'function') renderTasks();
     if (typeof renderTasksHeader === 'function') renderTasksHeader();
     if (typeof renderBadgesPreview === 'function') renderBadgesPreview();
     if (typeof renderChallenge === 'function') renderChallenge();
-    if (typeof updateStats === 'function') updateStats();
     if (typeof updateTasksQuickInfo === 'function') updateTasksQuickInfo();
-    if (typeof renderLeaderboard === 'function') renderLeaderboard();
+    if (typeof renderLeaderboard === 'function' && document.getElementById('leaderboardPage').style.display === 'flex') {
+        renderLeaderboardHeader();
+        renderLeaderboard();
+    }
+    if (typeof renderStatsSummary === 'function' && document.getElementById('statisticsPage').style.display === 'flex') {
+        renderStatsSummary();
+        renderHeatmap();
+        renderHabitBreakdown();
+        if (typeof renderCharts === 'function') setTimeout(renderCharts, 100);
+    }
+    if (typeof showMotivation === 'function') showMotivation();
+    if (typeof showCurrentDate === 'function') showCurrentDate();
+    if (typeof renderNotesList === 'function' && currentNoteHabitId) renderNotesList();
+    if (typeof renderColorOptions === 'function') renderColorOptions();
 
     console.log('[i18n] Til:', lang);
 }
 
-// Sahifadagi barcha matnlarni tarjima qilish
 function applyTranslations() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -1282,14 +1192,12 @@ function applyTranslations() {
     });
 }
 
-// Til tugmalarini yangilash
 function updateLanguageButtons() {
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === currentLang);
     });
 }
 
-// Sahifa yuklanganda
 document.addEventListener('DOMContentLoaded', () => {
     applyTranslations();
     updateLanguageButtons();

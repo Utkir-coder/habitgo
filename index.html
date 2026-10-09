@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>HabitGo — Odatlaringizni boshqaring</title>
-    <meta name="description" content="HabitGo — habit tracker">
+    <title>HabitGo</title>
     <meta name="theme-color" content="#0d2818">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -24,7 +23,6 @@
         <p data-i18n="loading">Yuklanmoqda...</p>
     </div>
 
-    <!-- LANDING PAGE -->
     <div id="landingPage" class="landing-page">
         <nav class="landing-nav">
             <div class="logo">🚀 <span data-i18n="app_name">HabitGo</span></div>
@@ -77,7 +75,7 @@
                     <h3 data-i18n="free">Bepul</h3>
                     <div class="price"><span>0</span> <span data-i18n="per_month">so'm/oy</span></div>
                     <ul>
-                        <li>✅ 3 <span data-i18n="unlimited_habits">odatlar</span></li>
+                        <li>✅ <span data-i18n="habits_3">3 tagacha odat</span></li>
                         <li>✅ <span data-i18n="basic_stats">Asosiy statistika</span></li>
                     </ul>
                     <button onclick="showRegister()" class="btn-outline" data-i18n="start">Boshlash</button>
@@ -99,7 +97,7 @@
                     <h3 data-i18n="yearly">Yillik</h3>
                     <div class="price"><span>99,000</span> <span data-i18n="per_year">so'm/yil</span></div>
                     <ul>
-                        <li>✅ <span data-i18n="unlimited_habits">Premium'ning hammasi</span></li>
+                        <li>✅ <span data-i18n="premium_all">Premium'ning hammasi</span></li>
                         <li>✅ <span data-i18n="discount_17">17% chegirma</span></li>
                     </ul>
                     <button onclick="showRegister()" class="btn-outline" data-i18n="get_yearly">Yillik olish</button>
@@ -113,7 +111,6 @@
         </footer>
     </div>
 
-    <!-- KIRISH MODAL -->
     <div id="authModal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">×</span>
@@ -141,7 +138,6 @@
         </div>
     </div>
 
-    <!-- ASOSIY APP -->
     <div id="appPage" style="display:none;">
         <header class="header">
             <div class="logo">🚀 <span data-i18n="app_name">HabitGo</span></div>
@@ -191,7 +187,7 @@
             <div class="report-content">
                 <h3 id="reportTitle">Kunlik hisobot</h3>
                 <p id="reportText"></p>
-                <button onclick="closeReport()">OK</button>
+                <button onclick="closeReport()" data-i18n="close">Yopish</button>
             </div>
         </section>
 
@@ -238,21 +234,20 @@
             </section>
 
             <section class="completed-section" id="completedSection" style="display: none;">
-                <h2 data-i18n="completed_habits">🏆 Tugallangan odatlar</h2>
+                <h2 data-i18n="completed_habits_title">🏆 Tugallangan odatlar</h2>
                 <div id="completedList" class="habits-list"></div>
             </section>
         </main>
 
         <footer class="footer">
-            <p>HabitGo — Sen har kuni yaxshilanasan! 💪</p>
+            <p data-i18n="footer_text">HabitGo — Sen har kuni yaxshilanasan! 💪</p>
         </footer>
     </div>
 
-    <!-- YANGI ODAT MODALI -->
     <div id="habitModal" class="modal" style="display:none;">
         <div class="modal-content habit-modal-content">
             <span class="close-btn" onclick="closeHabitModal()">×</span>
-            <h2 data-i18n="add_habit">➕ Yangi odat qo'shish</h2>
+            <h2 data-i18n="add_habit_title">➕ Yangi odat qo'shish</h2>
 
             <div class="form-group">
                 <label data-i18n="habit_name">1️⃣ Odat nomi</label>
@@ -305,42 +300,40 @@
         </div>
     </div>
 
-    <!-- PROFIL -->
     <div id="profilePage" class="page-modal" style="display:none;">
         <div class="page-content">
             <span class="close-btn" onclick="closePage()">×</span>
-            <h2 data-i18n="profile">👤 Profil</h2>
+            <h2 data-i18n="profile_title">👤 Profil</h2>
             <div class="profile-info">
                 <div class="profile-avatar-large" id="profileAvatar">👤</div>
                 <div class="profile-details">
-                    <p><strong>Ism:</strong> <span id="profileName">-</span></p>
-                    <p><strong>Email:</strong> <span id="profileEmail">-</span></p>
-                    <p><strong data-i18n="subscription">Tarif:</strong> <span id="profilePlan" class="plan-badge">Bepul</span></p>
-                    <p><strong>Ro'yxatdan o'tgan:</strong> <span id="profileJoined">-</span></p>
+                    <p><strong data-i18n="profile_name_label">Ism:</strong> <span id="profileName">-</span></p>
+                    <p><strong data-i18n="profile_email_label">Email:</strong> <span id="profileEmail">-</span></p>
+                    <p><strong data-i18n="profile_plan_label">Tarif:</strong> <span id="profilePlan" class="plan-badge">Bepul</span></p>
+                    <p><strong data-i18n="profile_joined_label">Ro'yxatdan o'tgan:</strong> <span id="profileJoined">-</span></p>
                 </div>
             </div>
-            <h3 data-i18n="statistics">📊 Statistika</h3>
+            <h3 data-i18n="profile_stats">📊 Umumiy statistika</h3>
             <div class="profile-stats">
-                <div><strong id="pTotalHabits">0</strong><span data-i18n="active_habits">Jami odatlar</span></div>
-                <div><strong id="pTotalDone">0</strong><span data-i18n="today_done">Bajarilgan</span></div>
+                <div><strong id="pTotalHabits">0</strong><span data-i18n="total_habits">Jami odatlar</span></div>
+                <div><strong id="pTotalDone">0</strong><span data-i18n="completed_count">Bajarilgan</span></div>
                 <div><strong id="pBestStreak">0</strong><span data-i18n="best_streak">Eng yaxshi streak</span></div>
             </div>
             <button onclick="logout()" class="btn-danger full" data-i18n="logout">🚪 Chiqish</button>
         </div>
     </div>
 
-    <!-- LEADERBOARD -->
     <div id="leaderboardPage" class="page-modal" style="display:none;">
         <div class="page-content leaderboard-page-content">
             <span class="close-btn" onclick="closeLeaderboard()">×</span>
-            <h2 data-i18n="leaderboard">🏅 Leaderboard</h2>
-            <p class="leaderboard-intro">Eng faol foydalanuvchilar reytingi.</p>
+            <h2 data-i18n="leaderboard_title">🏅 Leaderboard</h2>
+            <p class="leaderboard-intro" data-i18n="leaderboard_subtitle">Eng faol foydalanuvchilar reytingi.</p>
             <div id="leaderboardHeader"></div>
             <div class="leaderboard-filters">
-                <button class="leaderboard-filter-btn active" data-filter="streak" onclick="setLeaderboardFilter('streak')">🔥 Streak</button>
-                <button class="leaderboard-filter-btn" data-filter="completed" onclick="setLeaderboardFilter('completed')">✅</button>
-                <button class="leaderboard-filter-btn" data-filter="level" onclick="setLeaderboardFilter('level')">⭐ Level</button>
-                <button class="leaderboard-filter-btn" data-filter="xp" onclick="setLeaderboardFilter('xp')">⚡ XP</button>
+                <button class="leaderboard-filter-btn active" data-filter="streak" onclick="setLeaderboardFilter('streak')" data-i18n="leaderboard_filter_streak">🔥 Streak</button>
+                <button class="leaderboard-filter-btn" data-filter="completed" onclick="setLeaderboardFilter('completed')" data-i18n="leaderboard_filter_completed">✅ Bajarilgan</button>
+                <button class="leaderboard-filter-btn" data-filter="level" onclick="setLeaderboardFilter('level')" data-i18n="leaderboard_filter_level">⭐ Level</button>
+                <button class="leaderboard-filter-btn" data-filter="xp" onclick="setLeaderboardFilter('xp')" data-i18n="leaderboard_filter_xp">⚡ XP</button>
             </div>
             <div id="leaderboardPodium"></div>
             <div id="leaderboardList" class="leaderboard-list"></div>
@@ -348,113 +341,109 @@
         </div>
     </div>
 
-    <!-- REJALAR -->
     <div id="tasksPage" class="page-modal" style="display:none;">
         <div class="page-content tasks-page-content">
             <span class="close-btn" onclick="closeTasks()">×</span>
             <h2 data-i18n="tasks">📝 Rejalar</h2>
             <div id="tasksHeader" class="tasks-header"></div>
             <div class="task-add-form">
-                <h3>➕</h3>
-                <div class="form-group"><input type="text" id="taskName" placeholder="Vazifa nomi" maxlength="100"></div>
-                <div class="form-group"><textarea id="taskDesc" placeholder="Tavsif" maxlength="300" rows="2"></textarea></div>
+                <h3 data-i18n="task_new">➕ Yangi vazifa</h3>
+                <div class="form-group"><input type="text" id="taskName" data-i18n-placeholder="task_name" placeholder="Vazifa nomi" maxlength="100"></div>
+                <div class="form-group"><textarea id="taskDesc" data-i18n-placeholder="task_desc" placeholder="Tavsif (ixtiyoriy)" maxlength="300" rows="2"></textarea></div>
                 <div class="task-form-row">
-                    <div class="form-group"><label>📅</label><input type="date" id="taskDate"></div>
-                    <div class="form-group"><label>⏰</label><input type="time" id="taskTime"></div>
+                    <div class="form-group"><label data-i18n="task_date">📅 Sana</label><input type="date" id="taskDate"></div>
+                    <div class="form-group"><label data-i18n="task_time">⏰ Vaqt</label><input type="time" id="taskTime"></div>
                 </div>
                 <div class="form-group">
-                    <label>Kategoriya</label>
+                    <label data-i18n="task_category">Kategoriya</label>
                     <select id="taskCategory">
-                        <option value="study">📚 O'qish</option>
-                        <option value="work">💼 Ish</option>
-                        <option value="sport">💪 Sport</option>
-                        <option value="personal">🏠 Shaxsiy</option>
-                        <option value="other">📌 Boshqa</option>
+                        <option value="study" data-i18n="task_category_study">📚 O'qish</option>
+                        <option value="work" data-i18n="task_category_work">💼 Ish</option>
+                        <option value="sport" data-i18n="task_category_sport">💪 Sport</option>
+                        <option value="personal" data-i18n="task_category_personal">🏠 Shaxsiy</option>
+                        <option value="other" data-i18n="task_category_other">📌 Boshqa</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Prioritet</label>
+                    <label data-i18n="task_priority">Prioritet</label>
                     <div class="priority-options">
-                        <label class="priority-chip"><input type="radio" name="taskPriority" value="low"><span>🟢</span></label>
-                        <label class="priority-chip"><input type="radio" name="taskPriority" value="medium" checked><span>🟡</span></label>
-                        <label class="priority-chip"><input type="radio" name="taskPriority" value="high"><span>🔴</span></label>
+                        <label class="priority-chip"><input type="radio" name="taskPriority" value="low"><span data-i18n="task_priority_low">🟢 Past</span></label>
+                        <label class="priority-chip"><input type="radio" name="taskPriority" value="medium" checked><span data-i18n="task_priority_medium">🟡 O'rta</span></label>
+                        <label class="priority-chip"><input type="radio" name="taskPriority" value="high"><span data-i18n="task_priority_high">🔴 Yuqori</span></label>
                     </div>
                 </div>
-                <button class="btn-add" onclick="addTask()">✅</button>
+                <button class="btn-add" onclick="addTask()" data-i18n="task_add">✅ Vazifani qo'shish</button>
             </div>
             <div class="task-filters">
-                <button class="task-filter-btn active" data-filter="active" onclick="setTaskFilter('active')">Faol</button>
-                <button class="task-filter-btn" data-filter="today" onclick="setTaskFilter('today')">Bugun</button>
-                <button class="task-filter-btn" data-filter="week" onclick="setTaskFilter('week')">Hafta</button>
-                <button class="task-filter-btn" data-filter="done" onclick="setTaskFilter('done')">Bajarilgan</button>
-                <button class="task-filter-btn" data-filter="all" onclick="setTaskFilter('all')">Hammasi</button>
+                <button class="task-filter-btn active" data-filter="active" onclick="setTaskFilter('active')" data-i18n="task_filter_active">Faol</button>
+                <button class="task-filter-btn" data-filter="today" onclick="setTaskFilter('today')" data-i18n="task_filter_today">Bugun</button>
+                <button class="task-filter-btn" data-filter="week" onclick="setTaskFilter('week')" data-i18n="task_filter_week">Hafta</button>
+                <button class="task-filter-btn" data-filter="done" onclick="setTaskFilter('done')" data-i18n="task_filter_done">Bajarilgan</button>
+                <button class="task-filter-btn" data-filter="all" onclick="setTaskFilter('all')" data-i18n="task_filter_all">Hammasi</button>
             </div>
             <div id="tasksList" class="tasks-list"></div>
         </div>
     </div>
 
-    <!-- STATISTIKA -->
     <div id="statisticsPage" class="page-modal" style="display:none;">
         <div class="page-content stats-page-content">
             <span class="close-btn" onclick="closeStatistics()">×</span>
-            <h2 data-i18n="statistics">📊 Statistika</h2>
+            <h2 data-i18n="stats_title">📊 Statistika</h2>
             <div id="statsSummary"></div>
-            <h3>📊</h3>
+            <h3 data-i18n="stats_weekly">📊 Haftalik faollik</h3>
             <div class="chart-container"><canvas id="weeklyChart"></canvas></div>
-            <h3>📈</h3>
+            <h3 data-i18n="stats_monthly">📈 Oylik tendentsiya</h3>
             <div class="chart-container"><canvas id="monthlyChart"></canvas></div>
-            <h3>📅</h3>
+            <h3 data-i18n="stats_yearly">📅 Yillik faollik</h3>
             <div class="heatmap-section">
                 <div id="heatmapContainer"></div>
                 <div id="heatmapLegend" class="heatmap-legend"></div>
             </div>
-            <h3>📋</h3>
+            <h3 data-i18n="stats_breakdown">📋 Odatlar bo'yicha</h3>
             <div id="habitBreakdown"></div>
         </div>
     </div>
 
-    <!-- BACKUP -->
     <div id="backupPage" class="page-modal" style="display:none;">
         <div class="page-content backup-page-content">
             <span class="close-btn" onclick="closePage()">×</span>
             <h2 data-i18n="backup_title">💾 Backup</h2>
             <p class="backup-intro" data-i18n="backup_desc">Ma'lumotlaringizni JSON faylga saqlang.</p>
             <div class="backup-info-card">
-                <h3>📊</h3>
+                <h3 data-i18n="backup_current">📊 Hozirgi ma'lumotlar</h3>
                 <div id="backupInfo" class="backup-info-grid"></div>
             </div>
             <div class="backup-action">
                 <div class="backup-action-icon">📤</div>
                 <div class="backup-action-text">
-                    <strong data-i18n="export">Export</strong>
-                    <span data-i18n="export_desc">JSON faylga yuklab olish</span>
+                    <strong data-i18n="backup_export">Export</strong>
+                    <span data-i18n="backup_export_desc">JSON faylga yuklab olish</span>
                 </div>
-                <button class="backup-btn export" onclick="exportData()" data-i18n="upload">📤</button>
+                <button class="backup-btn export" onclick="exportData()" data-i18n="backup_upload">📤 Yuklash</button>
             </div>
             <div class="backup-action">
                 <div class="backup-action-icon">📥</div>
                 <div class="backup-action-text">
-                    <strong data-i18n="import">Import</strong>
-                    <span data-i18n="import_desc">JSON fayldan tiklash</span>
+                    <strong data-i18n="backup_import">Import</strong>
+                    <span data-i18n="backup_import_desc">JSON fayldan tiklash</span>
                 </div>
-                <button class="backup-btn import" onclick="importData()" data-i18n="upload">📥</button>
+                <button class="backup-btn import" onclick="importData()" data-i18n="backup_upload">📥 Yuklash</button>
             </div>
-            <div class="backup-warning">⚠️</div>
+            <div class="backup-warning" data-i18n="backup_warning">⚠️ Diqqat! Import qilganda hozirgi ma'lumotlar o'chiriladi.</div>
         </div>
     </div>
 
-    <!-- OBUNA -->
     <div id="subscriptionPage" class="page-modal" style="display:none;">
         <div class="page-content">
             <span class="close-btn" onclick="closePage()">×</span>
             <h2 data-i18n="subscription">💎 Obuna</h2>
-            <p class="subscription-info">Hozirgi tarif: <strong id="currentPlan" data-i18n="plan_free">Bepul</strong></p>
+            <p class="subscription-info"><span data-i18n="your_plan">Hozirgi tarif:</span> <strong id="currentPlan" data-i18n="plan_free">Bepul</strong></p>
             <div class="pricing-grid">
                 <div class="price-card">
                     <h3 data-i18n="free">Bepul</h3>
                     <div class="price"><span>0</span> <span data-i18n="per_month">so'm</span></div>
-                    <ul><li>✅ 3 <span data-i18n="unlimited_habits">odatlar</span></li><li>✅ <span data-i18n="basic_stats">Asosiy statistika</span></li></ul>
-                    <button class="btn-outline" disabled data-i18n="start">Sizning tarifingiz</button>
+                    <ul><li>✅ <span data-i18n="habits_3">3 tagacha odat</span></li><li>✅ <span data-i18n="basic_stats">Asosiy statistika</span></li></ul>
+                    <button class="btn-outline" disabled data-i18n="your_plan">Sizning tarifingiz</button>
                 </div>
                 <div class="price-card featured">
                     <div class="badge-popular" data-i18n="popular">🔥 Mashhur</div>
@@ -472,58 +461,60 @@
                     <div class="badge-save" data-i18n="save_2months">💰 2 oy bepul</div>
                     <h3 data-i18n="yearly">Yillik</h3>
                     <div class="price"><span>99,000</span> <span data-i18n="per_year">so'm/yil</span></div>
-                    <ul><li>✅ <span data-i18n="unlimited_habits">Premium'ning hammasi</span></li><li>✅ <span data-i18n="discount_17">17% chegirma</span></li></ul>
+                    <ul><li>✅ <span data-i18n="premium_all">Premium'ning hammasi</span></li><li>✅ <span data-i18n="discount_17">17% chegirma</span></li></ul>
                     <button class="btn-primary" onclick="buyPremium('yearly')" data-i18n="get_yearly">Yillik olish</button>
                 </div>
             </div>
-            <p class="payment-note">💳 Payme, Click, Uzcard</p>
+            <p class="payment-note">
+                <span data-i18n="payment_note">💳 To'lov: Payme, Click yoki Uzcard orqali</span><br>
+                <span data-i18n="payment_demo">(Demo versiyada to'lov simulyatsiya qilinadi)</span>
+            </p>
         </div>
     </div>
 
-    <!-- YUTUQLAR -->
     <div id="achievementsPage" class="page-modal" style="display:none;">
         <div class="page-content">
             <span class="close-btn" onclick="closePage()">×</span>
             <h2 data-i18n="achievements">🏆 Yutuqlar</h2>
+            <p style="color:#666; margin-bottom:20px;" data-i18n="achievements_subtitle">Odatlaringizni bajarib badge'lar yig'ing!</p>
             <div class="achievements-grid" id="achievementsGrid"></div>
         </div>
     </div>
 
-    <!-- ESLATMA MODAL -->
     <div id="notesModal" class="modal" style="display:none;">
         <div class="modal-content notes-modal-content">
             <span class="close-btn" onclick="closeNotesModal()">×</span>
-            <h2>📝</h2>
-            <p class="notes-habit-title">"<span id="notesHabitName">-</span>"</p>
+            <h2 data-i18n="notes_title">📝 Eslatmalar</h2>
+            <p class="notes-habit-title">"<span id="notesHabitName">-</span>" <span data-i18n="notes_for">uchun</span></p>
             <div class="note-input-group">
-                <textarea id="noteInput" placeholder="..." maxlength="500"></textarea>
+                <textarea id="noteInput" data-i18n-placeholder="notes_placeholder" placeholder="Bugun qanday o'tdi?" maxlength="500"></textarea>
                 <div class="note-input-footer">
                     <select id="noteMood" class="note-mood-select">
-                        <option value="great">😄</option>
-                        <option value="good">😊</option>
-                        <option value="neutral" selected>😐</option>
-                        <option value="bad">😔</option>
-                        <option value="terrible">😢</option>
+                        <option value="great" data-i18n="notes_mood_great">😄 Ajoyib</option>
+                        <option value="good" data-i18n="notes_mood_good">😊 Yaxshi</option>
+                        <option value="neutral" selected data-i18n="notes_mood_neutral">😐 O'rtacha</option>
+                        <option value="bad" data-i18n="notes_mood_bad">😔 Yomon</option>
+                        <option value="terrible" data-i18n="notes_mood_terrible">😢 Juda yomon</option>
                     </select>
-                    <button onclick="addNote()" class="btn-primary">+</button>
+                    <button onclick="addNote()" class="btn-primary" data-i18n="notes_add">Qo'shish</button>
                 </div>
             </div>
             <div id="notesList" class="notes-list"></div>
+            <p class="notes-hint" data-i18n="notes_hint">💡 Ctrl+Enter — tez qo'shish</p>
         </div>
     </div>
 
-    <!-- RANG TANLASH -->
     <div id="colorPickerModal" class="modal" style="display:none;">
         <div class="modal-content color-picker-content">
             <span class="close-btn" onclick="closeColorPicker()">×</span>
-            <h2>🎨</h2>
+            <h2 data-i18n="color_title">🎨 Rang mavzusi</h2>
+            <p style="color:#666; margin-bottom:20px; font-size:14px;" data-i18n="color_subtitle">O'zingizga yoqqan rangni tanlang</p>
             <div id="colorOptions" class="color-options"></div>
         </div>
     </div>
 
     <canvas id="confettiCanvas"></canvas>
 
-    <!-- SCRIPT'LAR -->
     <script src="supabase.js"></script>
     <script src="i18n.js"></script>
     <script src="push.js"></script>

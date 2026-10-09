@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Asosiy mantiq (i18n bilan)
+// HABITGO — Asosiy mantiq (i18n to'liq)
 // ============================================
 
 let habits = [];
@@ -25,9 +25,6 @@ const allMotivations = [
     "To'xtama! Sen zo'r ketayapsan! 💫", "Kichik odatlar, katta o'zgarishlar! 🌱"
 ];
 
-// ============================================
-// INIT
-// ============================================
 async function initApp() {
     console.log('[App] initApp');
     showLoadingState(true);
@@ -82,9 +79,6 @@ function showLoadingState(show) {
     if (loading) loading.style.display = show ? 'flex' : 'none';
 }
 
-// ============================================
-// MIGRATSIYA
-// ============================================
 async function migrateLocalDataIfNeeded() {
     if (!currentUser) return;
     const migrationKey = `habitgo_migrated_${currentUser.id}`;
@@ -112,9 +106,6 @@ async function migrateLocalDataIfNeeded() {
     localStorage.setItem(migrationKey, 'true');
 }
 
-// ============================================
-// LOAD HABITS
-// ============================================
 async function loadHabits() {
     if (!currentUser) { habits = []; return; }
     try {
@@ -130,9 +121,6 @@ async function loadHabits() {
     } catch (err) { habits = []; }
 }
 
-// ============================================
-// SANA
-// ============================================
 function showCurrentDate() {
     const now = new Date();
     const days = translations[currentLang]?.days_full || translations.uz.days_full;
@@ -147,9 +135,6 @@ function showCurrentDate() {
     if (el) el.textContent = `${days[now.getDay()]}, ${now.getDate()}-${monthNames[now.getMonth()]}, ${now.getFullYear()}`;
 }
 
-// ============================================
-// MOTIVATSIYA
-// ============================================
 function showMotivation() {
     const random = allMotivations[Math.floor(Math.random() * allMotivations.length)];
     const el = document.getElementById('motivationText');
@@ -202,9 +187,6 @@ function checkPremiumLimit() {
     }
 }
 
-// ============================================
-// MODAL
-// ============================================
 function openHabitModal() {
     document.getElementById('habitModal').style.display = 'flex';
     document.getElementById('habitName').focus();
@@ -229,9 +211,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// ============================================
-// ADD HABIT
-// ============================================
 async function addHabit() {
     if (!currentUser) { alert('❌ ' + t('alert_signin_required')); return; }
     if (typeof isPremium === 'function' && !isPremium() && habits.length >= 3) {
@@ -303,9 +282,6 @@ function resetForm() {
     document.querySelectorAll('.day').forEach(cb => { cb.checked = false; cb.disabled = true; });
 }
 
-// ============================================
-// DELETE
-// ============================================
 async function deleteHabit(id) {
     if (!confirm(t('alert_delete_confirm'))) return;
     try {
@@ -319,9 +295,6 @@ async function deleteHabit(id) {
     } catch (err) { alert('❌ ' + err.message); }
 }
 
-// ============================================
-// CHECK
-// ============================================
 async function checkHabit(id) {
     const habit = habits.find(h => h.id === id);
     if (!habit) return;
@@ -375,9 +348,6 @@ async function checkHabit(id) {
     }
 }
 
-// ============================================
-// RENDER
-// ============================================
 function renderHabits() {
     const list = document.getElementById('habitsList');
     const emptyMsg = document.getElementById('emptyMessage');
@@ -404,10 +374,10 @@ function renderHabits() {
             const totalDaysNeeded = Math.round(habit.days.length * weeksCount);
             const doneCount = habit.completedDays.length;
             const percent = Math.min(100, Math.round((doneCount / Math.max(1, totalDaysNeeded)) * 100));
-            const dayNames = ['day_sun', 'day_mon', 'day_tue', 'day_wed', 'day_thu', 'day_fri', 'day_sat'];
+            const dayKeys = ['day_sun', 'day_mon', 'day_tue', 'day_wed', 'day_thu', 'day_fri', 'day_sat'];
             const daysStr = habit.days.length === 7
                 ? t('every_day')
-                : habit.days.map(d => t(dayNames[d])).join(', ');
+                : habit.days.map(d => t(dayKeys[d])).join(', ');
             const warning = (isToday && !isDone) ? `<span class="habit-warning">${t('not_done')}</span>` : '';
 
             return `
