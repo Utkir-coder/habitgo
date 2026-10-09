@@ -148,20 +148,20 @@
                     <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧</button>
                 </div>
                 <button class="btn-add-habit" onclick="openHabitModal()" title="Yangi odat">➕</button>
-                <button class="btn-theme" onclick="showColorPicker()" title="Rang">🎨</button>
-                <button class="btn-theme" onclick="toggleTheme()" id="themeBtn" title="Tungi rejim">🌙</button>
+                <button class="btn-theme" onclick="showColorPicker()" data-i18n-title="color_title" title="Rang">🎨</button>
+                <button class="btn-theme" onclick="toggleTheme()" id="themeBtn" data-i18n-title="theme_dark" title="Tungi rejim">🌙</button>
                 <div class="profile-menu" onclick="toggleProfileMenu()">
                     <div class="avatar" id="userAvatar">👤</div>
                     <span id="userName">Foydalanuvchi</span>
                     <div class="dropdown" id="profileDropdown">
-                        <a href="#" onclick="showProfile()" data-i18n="profile">👤 Profil</a>
-                        <a href="#" onclick="showTasks()" data-i18n="tasks">📝 Rejalar</a>
-                        <a href="#" onclick="showLeaderboard()" data-i18n="leaderboard">🏅 Leaderboard</a>
-                        <a href="#" onclick="showStatistics()" data-i18n="statistics">📊 Statistika</a>
-                        <a href="#" onclick="showAchievements()" data-i18n="achievements">🏆 Yutuqlar</a>
-                        <a href="#" onclick="showBackup()" data-i18n="backup">💾 Backup</a>
-                        <a href="#" onclick="showSubscription()" data-i18n="subscription">💎 Obuna</a>
-                        <a href="#" onclick="logout()" data-i18n="logout">🚪 Chiqish</a>
+                        <a href="#" onclick="showProfile()"><span class="dropdown-icon">👤</span><span data-i18n="profile">Profil</span></a>
+                        <a href="#" onclick="showTasks()"><span class="dropdown-icon">📝</span><span data-i18n="tasks">Rejalar</span></a>
+                        <a href="#" onclick="showLeaderboard()"><span class="dropdown-icon">🏅</span><span data-i18n="leaderboard">Leaderboard</span></a>
+                        <a href="#" onclick="showStatistics()"><span class="dropdown-icon">📊</span><span data-i18n="statistics">Statistika</span></a>
+                        <a href="#" onclick="showAchievements()"><span class="dropdown-icon">🏆</span><span data-i18n="achievements">Yutuqlar</span></a>
+                        <a href="#" onclick="showBackup()"><span class="dropdown-icon">💾</span><span data-i18n="backup">Backup</span></a>
+                        <a href="#" onclick="showSubscription()"><span class="dropdown-icon">💎</span><span data-i18n="subscription">Obuna</span></a>
+                        <a href="#" onclick="logout()"><span class="dropdown-icon">🚪</span><span data-i18n="logout">Chiqish</span></a>
                     </div>
                 </div>
             </div>
