@@ -1,14 +1,18 @@
 // ============================================
-// HABITGO — Service Worker (PWA offline)
+// HABITGO — Service Worker v2.0.0
 // ============================================
 
-const CACHE_NAME = 'habitgo-v1.0.1';
+const CACHE_NAME = 'habitgo-v2.0.0';
+const RUNTIME_CACHE = 'habitgo-runtime-v2.0.0';
 
 // Keshga saqlanadigan fayllar
 const CACHE_FILES = [
     './',
     './index.html',
     './style.css',
+    './i18n.js',
+    './supabase.js',
+    './push.js',
     './theme.js',
     './colors.js',
     './confetti.js',
@@ -18,123 +22,128 @@ const CACHE_FILES = [
     './profile.js',
     './payment.js',
     './app.js',
+    './ai.js',
     './heatmap.js',
     './charts.js',
     './challenge.js',
     './notes.js',
+    './pwa.js',
+    './backup.js',
+    './tasks.js',
+    './leaderboard.js',
     './manifest.json',
-    './icon-192.svg',
-    './icon-512.svg',
-    'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js'
+    './icon-192.png',
+    './icon-512.png',
+    'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
 ];
 
-// O'rnatish — fayllarni keshga saqlash
-self.addEventListener('install', (event) => {
-    console.log('[SW] O\'rnatilmoqda...');
+// O'RNATISH
+self.addEventListener('install', function(event) {
+    console.log('[SW] O\'rnatilmoqda... v2.0.0');
 
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => {
-                console.log('[SW] Fayllar keshga saqlanmoqda');
-                return cache.addAll(CACHE_FILES);
-            })
-            .then(() => {
-                console.log('[SW] O\'rnatildi');
-                return self.skipWaiting();
-            })
-            .catch((err) => {
+        caches.open(CACHE_NAME).then(function(cache) {
+            console.log('[SW] Fayllar keshga saqlanmoqda');
+            return cache.addAll(CACHE_FILES).catch(function(err) {
                 console.error('[SW] Kesh xatosi:', err);
-            })
+            });
+        }).then(function() {
+            console.log('[SW] O\'rnatildi');
+            return self.skipWaiting();
+        })
     );
 });
 
-// Faollashtirish — eski keshni tozalash
-self.addEventListener('activate', (event) => {
-    console.log('[SW] Faollashtirilmoqda...');
+// FAOLLASHTIRISH — eski keshni o'chirish
+self.addEventListener('activate', function(event) {
+    console.log('[SW] Faollashtirilmoqda... v2.0.0');
 
     event.waitUntil(
-        caches.keys().then((cacheNames) => {
+        caches.keys().then(function(cacheNames) {
             return Promise.all(
-                cacheNames.map((name) => {
-                    if (name !== CACHE_NAME) {
+                cacheNames.map(function(name) {
+                    if (name !== CACHE_NAME && name !== RUNTIME_CACHE) {
                         console.log('[SW] Eski kesh o\'chirilmoqda:', name);
                         return caches.delete(name);
                     }
                 })
             );
-        }).then(() => {
+        }).then(function() {
             console.log('[SW] Faollashtirildi');
             return self.clients.claim();
         })
     );
 });
 
-// So'rovlarni ushlash — avval kesh, keyin internet
-self.addEventListener('fetch', (event) => {
-    // Faqat GET so'rovlar uchun
+// SO'ROVLARNI USHLASH — Network first (Safari uchun yaxshiroq)
+self.addEventListener('fetch', function(event) {
     if (event.request.method !== 'GET') return;
-
-    // Chrome extension va boshqalarni o'tkazib yuborish
     if (!event.request.url.startsWith('http')) return;
 
+    // Supabase API — har doim internetdan
+    if (event.request.url.includes('supabase.co')) {
+        return;
+    }
+
+    // HTML — har doim internetdan (Safari keshi uchun)
+    if (event.request.mode === 'navigate') {
+        event.respondWith(
+            fetch(event.request).catch(function() {
+                return caches.match('./index.html');
+            })
+        );
+        return;
+    }
+
+    // Qolgan fayllar — cache-first
     event.respondWith(
-        caches.match(event.request)
-            .then((cachedResponse) => {
-                // Keshda bo'lsa — qaytarish
-                if (cachedResponse) {
-                    return cachedResponse;
+        caches.match(event.request).then(function(cachedResponse) {
+            if (cachedResponse) {
+                return cachedResponse;
+            }
+
+            return fetch(event.request).then(function(response) {
+                if (!response || response.status !== 200 || response.type === 'opaque') {
+                    return response;
                 }
 
-                // Keshda bo'lmasa — internetdan yuklash
-                return fetch(event.request)
-                    .then((response) => {
-                        // Faqat muvaffaqiyatli so'rovlarni keshga saqlash
-                        if (!response || response.status !== 200 || response.type === 'opaque') {
-                            return response;
-                        }
+                var responseToCache = response.clone();
+                caches.open(RUNTIME_CACHE).then(function(cache) {
+                    cache.put(event.request, responseToCache);
+                });
 
-                        const responseToCache = response.clone();
-
-                        caches.open(CACHE_NAME).then((cache) => {
-                            cache.put(event.request, responseToCache);
-                        });
-
-                        return response;
-                    })
-                    .catch(() => {
-                        // Offline va keshda yo'q
-                        if (event.request.mode === 'navigate') {
-                            return caches.match('./index.html');
-                        }
-                    });
-            })
+                return response;
+            }).catch(function() {
+                if (event.request.mode === 'navigate') {
+                    return caches.match('./index.html');
+                }
+            });
+        })
     );
 });
 
-// Xabar qabul qilish (yangilash uchun)
-self.addEventListener('message', (event) => {
+// XABAR QABUL QILISH
+self.addEventListener('message', function(event) {
     if (event.data === 'SKIP_WAITING') {
         self.skipWaiting();
     }
 });
 
-console.log('[SW] Yuklandi');
 // ============================================
 // PUSH NOTIFICATION
 // ============================================
-self.addEventListener('push', (event) => {
+self.addEventListener('push', function(event) {
     console.log('[SW] Push keldi');
 
-    let data = { title: 'HabitGo', body: 'Eslatma!' };
+    var data = { title: 'HabitGo', body: 'Eslatma!' };
     try {
-        if (event.data) {
-            data = event.data.json();
-        }
+        if (event.data) data = event.data.json();
     } catch (e) {
         console.error('[SW] Push data xatosi:', e);
     }
 
-    const options = {
+    var options = {
         body: data.body || 'Bugungi odatlaringizni unutmang!',
         icon: '/icon-192.png',
         badge: '/icon-192.png',
@@ -151,16 +160,16 @@ self.addEventListener('push', (event) => {
     );
 });
 
-// Notification bosilganda
-self.addEventListener('notificationclick', (event) => {
+// BILDIRISHNOMA BOSILGANDA
+self.addEventListener('notificationclick', function(event) {
     event.notification.close();
-
     if (event.action === 'close') return;
 
     event.waitUntil(
-        clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
-            for (let client of clientList) {
-                if (client.url.includes(self.location.origin) && 'focus' in client) {
+        clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function(clientList) {
+            for (var i = 0; i < clientList.length; i++) {
+                var client = clientList[i];
+                if (client.url.indexOf(self.location.origin) !== -1 && 'focus' in client) {
                     return client.focus();
                 }
             }
@@ -170,3 +179,5 @@ self.addEventListener('notificationclick', (event) => {
         })
     );
 });
+
+console.log('[SW] Yuklandi v2.0.0');

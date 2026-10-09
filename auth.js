@@ -1,11 +1,11 @@
 // ============================================
-// HABITGO — Auth (i18n bilan)
+// HABITGO — Auth (Safari + mobil dropdown fix)
 // ============================================
 
-let currentUser = null;
-let currentUserProfile = null;
-let currentUserStats = null;
-let authReady = false;
+var currentUser = null;
+var currentUserProfile = null;
+var currentUserStats = null;
+var authReady = false;
 
 function showLanding() {
     document.getElementById('landingPage').style.display = 'block';
@@ -18,13 +18,13 @@ function showApp() {
     document.getElementById('appPage').style.display = 'block';
 
     if (currentUserProfile) {
-        const name = currentUserProfile.name || 'Foydalanuvchi';
+        var name = currentUserProfile.name || 'Foydalanuvchi';
         document.getElementById('userName').textContent = name;
         document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
     }
 
     if (typeof initApp === 'function') {
-        setTimeout(() => initApp(), 100);
+        setTimeout(function() { initApp(); }, 100);
     }
 }
 
@@ -48,9 +48,9 @@ function closeModal() {
 // RO'YXATDAN O'TISH
 // ============================================
 async function register() {
-    const name = document.getElementById('regName').value.trim();
-    const email = document.getElementById('regEmail').value.trim().toLowerCase();
-    const password = document.getElementById('regPassword').value;
+    var name = document.getElementById('regName').value.trim();
+    var email = document.getElementById('regEmail').value.trim().toLowerCase();
+    var password = document.getElementById('regPassword').value;
 
     if (!name || !email || !password) {
         alert('❌ ' + t('auth_fill_all'));
@@ -60,44 +60,44 @@ async function register() {
         alert('❌ ' + t('auth_password_short'));
         return;
     }
-    if (!email.includes('@')) {
+    if (email.indexOf('@') === -1) {
         alert('❌ ' + t('auth_email_invalid'));
         return;
     }
 
-    const btn = document.querySelector('#registerForm button');
-    const originalText = btn.textContent;
+    var btn = document.querySelector('#registerForm button');
+    var originalText = btn.textContent;
     btn.textContent = '⏳...';
     btn.disabled = true;
 
     try {
-        const { data, error } = await supabaseClient.auth.signUp({
+        var result = await supabaseClient.auth.signUp({
             email: email,
             password: password,
             options: { data: { name: name } }
         });
 
-        if (error) {
-            alert('❌ ' + error.message);
+        if (result.error) {
+            alert('❌ ' + result.error.message);
             return;
         }
 
-        if (!data.user) {
+        if (!result.data.user) {
             alert('❌ ' + t('error'));
             return;
         }
 
-        currentUser = data.user;
+        currentUser = result.data.user;
 
-        await new Promise(r => setTimeout(r, 1500));
+        await new Promise(function(r) { setTimeout(r, 1500); });
 
-        const { profile, stats } = await ensureUserProfile(currentUser.id, name, email);
-        currentUserProfile = profile;
-        currentUserStats = stats;
+        var profileData = await ensureUserProfile(currentUser.id, name, email);
+        currentUserProfile = profileData.profile;
+        currentUserStats = profileData.stats;
 
         closeModal();
         showApp();
-        alert(`🎉 ${t('auth_welcome')}, ${name}!`);
+        alert('🎉 ' + t('auth_welcome') + ', ' + name + '!');
 
     } catch (err) {
         console.error('[Auth] Register xatosi:', err);
@@ -112,40 +112,40 @@ async function register() {
 // KIRISH
 // ============================================
 async function login() {
-    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-    const password = document.getElementById('loginPassword').value;
+    var email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    var password = document.getElementById('loginPassword').value;
 
     if (!email || !password) {
         alert('❌ ' + t('auth_fill_all'));
         return;
     }
 
-    const btn = document.querySelector('#loginForm button');
-    const originalText = btn.textContent;
+    var btn = document.querySelector('#loginForm button');
+    var originalText = btn.textContent;
     btn.textContent = '⏳...';
     btn.disabled = true;
 
     try {
-        const { data, error } = await supabaseClient.auth.signInWithPassword({
+        var result = await supabaseClient.auth.signInWithPassword({
             email: email,
             password: password
         });
 
-        if (error) {
+        if (result.error) {
             alert('❌ ' + t('auth_login_error'));
             return;
         }
 
-        currentUser = data.user;
-        const name = currentUser.user_metadata?.name || email.split('@')[0];
+        currentUser = result.data.user;
+        var name = (currentUser.user_metadata && currentUser.user_metadata.name) || email.split('@')[0];
 
-        const { profile, stats } = await ensureUserProfile(currentUser.id, name, email);
-        currentUserProfile = profile;
-        currentUserStats = stats;
+        var profileData = await ensureUserProfile(currentUser.id, name, email);
+        currentUserProfile = profileData.profile;
+        currentUserStats = profileData.stats;
 
         closeModal();
         showApp();
-        alert(`👋 ${t('auth_welcome')}!`);
+        alert('👋 ' + t('auth_welcome') + '!');
 
     } catch (err) {
         console.error('[Auth] Login xatosi:', err);
@@ -176,19 +176,73 @@ async function logout() {
 }
 
 // ============================================
-// PROFIL MENYUSI
+// PROFIL MENYUSI — MOBIL DROPDOWN FIX
 // ============================================
 function toggleProfileMenu() {
-    document.getElementById('profileDropdown').classList.toggle('show');
+    var dropdown = document.getElementById('profileDropdown');
+    var menu = document.querySelector('.profile-menu');
+    if (!dropdown || !menu) return;
+
+    var isOpen = dropdown.classList.contains('show');
+
+    if (isOpen) {
+        dropdown.classList.remove('show');
+        return;
+    }
+
+    // Mobil uchun pozitsiyani hisoblash
+    if (window.innerWidth <= 768) {
+        var header = document.querySelector('.header');
+        var headerRect = header ? header.getBoundingClientRect() : { bottom: 60 };
+
+        dropdown.style.position = 'fixed';
+        dropdown.style.top = (headerRect.bottom + 4) + 'px';
+        dropdown.style.right = '10px';
+        dropdown.style.left = 'auto';
+        dropdown.style.width = '220px';
+        dropdown.style.maxWidth = 'calc(100vw - 20px)';
+        dropdown.style.maxHeight = (window.innerHeight - headerRect.bottom - 20) + 'px';
+        dropdown.style.overflowY = 'auto';
+        dropdown.style.zIndex = '9999';
+    } else {
+        dropdown.style.position = '';
+        dropdown.style.top = '';
+        dropdown.style.right = '';
+        dropdown.style.left = '';
+        dropdown.style.width = '';
+        dropdown.style.maxWidth = '';
+        dropdown.style.maxHeight = '';
+        dropdown.style.overflowY = '';
+        dropdown.style.zIndex = '';
+    }
+
+    dropdown.classList.add('show');
 }
 
-document.addEventListener('click', (e) => {
-    const menu = document.querySelector('.profile-menu');
-    if (menu && !menu.contains(e.target)) {
-        const dd = document.getElementById('profileDropdown');
-        if (dd) dd.classList.remove('show');
+// Tashqariga bosilganda yopish
+document.addEventListener('click', function(e) {
+    var menu = document.querySelector('.profile-menu');
+    var dropdown = document.getElementById('profileDropdown');
+    if (menu && dropdown && !menu.contains(e.target)) {
+        dropdown.classList.remove('show');
     }
 });
+
+// Sahifa o'lchami o'zgarganda pozitsiyani yangilash
+window.addEventListener('resize', function() {
+    var dropdown = document.getElementById('profileDropdown');
+    if (dropdown && dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+    }
+});
+
+// Skroll bo'lganda yopish
+window.addEventListener('scroll', function() {
+    var dropdown = document.getElementById('profileDropdown');
+    if (dropdown && dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+    }
+}, { passive: true });
 
 // ============================================
 // AVTOMATIK KIRISH
@@ -200,7 +254,7 @@ async function initializeAuth() {
     console.log('[Auth] ===== Boshlash =====');
 
     try {
-        const session = await getSession();
+        var session = await getSession();
         console.log('[Auth] Sessiya:', session ? session.user.email : 'yo\'q');
 
         if (!session || !session.user) {
@@ -209,11 +263,11 @@ async function initializeAuth() {
         }
 
         currentUser = session.user;
-        const name = currentUser.user_metadata?.name || currentUser.email.split('@')[0];
+        var name = (currentUser.user_metadata && currentUser.user_metadata.name) || currentUser.email.split('@')[0];
 
-        const { profile, stats } = await ensureUserProfile(currentUser.id, name, currentUser.email);
-        currentUserProfile = profile;
-        currentUserStats = stats;
+        var profileData = await ensureUserProfile(currentUser.id, name, currentUser.email);
+        currentUserProfile = profileData.profile;
+        currentUserStats = profileData.stats;
 
         showApp();
         console.log('[Auth] ===== Tayyor =====');
@@ -233,7 +287,7 @@ if (document.readyState === 'loading') {
 // ============================================
 // AUTH HOLATI
 // ============================================
-supabaseClient.auth.onAuthStateChange(async (event, session) => {
+supabaseClient.auth.onAuthStateChange(function(event, session) {
     console.log('[Auth] State:', event);
 
     if (event === 'SIGNED_OUT') {
