@@ -2,8 +2,7 @@
 // HABITGO — Push Notification
 // ============================================
 
-const VAPID_PUBLIC_KEY = 'BMVBsQsDCaHhWV-we_NniHUsxzotUVNARGnc1lX8iH7hq8PpIEki2G8NF22aXg08JGJPpKEbX7fhA60Utjk1kEI
-'; // ← O'zingizning public key
+const VAPID_PUBLIC_KEY = 'BMVBsQsDCaHhWV-we_NniHUsxzotUVNARGnc1lX8iH7hq8PpIEki2G8NF22aXg08JGJPpKEbX7fhA60Utjk1kEI';
 
 // Base64 → Uint8Array
 function urlBase64ToUint8Array(base64String) {
@@ -17,30 +16,26 @@ function urlBase64ToUint8Array(base64String) {
     return outputArray;
 }
 
-// Push subscription olish
 async function subscribeToPush() {
     if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
         console.log('[Push] Brauzer qo\'llab-quvvatlamaydi');
+        alert('❌ Brauzer push notification qo\'llab-quvvatlamaydi');
         return false;
     }
 
     if (!currentUser) {
-        console.log('[Push] Tizimga kirmagan');
+        alert('❌ Tizimga kiring!');
         return false;
     }
 
     try {
-        // 1. Ruxsat so'rash
         const permission = await Notification.requestPermission();
         if (permission !== 'granted') {
-            console.log('[Push] Ruxsat berilmadi');
+            alert('⚠️ Bildirishnoma ruxsati berilmadi');
             return false;
         }
 
-        // 2. Service Worker tayyor
         const registration = await navigator.serviceWorker.ready;
-
-        // 3. Subscription olish
         let subscription = await registration.pushManager.getSubscription();
 
         if (!subscription) {
@@ -50,7 +45,6 @@ async function subscribeToPush() {
             });
         }
 
-        // 4. Supabase'ga saqlash
         const subJson = subscription.toJSON();
 
         const { error } = await supabaseClient
@@ -64,20 +58,22 @@ async function subscribeToPush() {
 
         if (error) {
             console.error('[Push] Saqlash xatosi:', error);
+            alert('❌ Saqlashda xato: ' + error.message);
             return false;
         }
 
         console.log('[Push] Subscription saqlandi ✅');
-        showToast('🔔 Eslatmalar yoqildi!');
+        if (typeof showToast === 'function') showToast('🔔 Eslatmalar yoqildi!');
+        alert('✅ Eslatmalar yoqildi!');
         return true;
 
     } catch (err) {
         console.error('[Push] Xato:', err);
+        alert('❌ Xato: ' + err.message);
         return false;
     }
 }
 
-// Push'ni o'chirish
 async function unsubscribeFromPush() {
     try {
         const registration = await navigator.serviceWorker.ready;
@@ -85,14 +81,13 @@ async function unsubscribeFromPush() {
 
         if (subscription) {
             await subscription.unsubscribe();
-
             await supabaseClient
                 .from('push_subscriptions')
                 .delete()
                 .eq('endpoint', subscription.endpoint);
         }
 
-        showToast('🔕 Eslatmalar o\'chirildi');
+        if (typeof showToast === 'function') showToast('🔕 Eslatmalar o\'chirildi');
         return true;
     } catch (err) {
         console.error('[Push] O\'chirish xatosi:', err);
@@ -100,7 +95,6 @@ async function unsubscribeFromPush() {
     }
 }
 
-// Foydalanuvchi obuna bo'lganmi?
 async function isPushSubscribed() {
     if (!('serviceWorker' in navigator)) return false;
     try {
