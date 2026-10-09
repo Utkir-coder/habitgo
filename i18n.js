@@ -38,14 +38,17 @@ const translations = {
         start: 'Boshlash',
         get_premium: 'Premium olish',
         get_yearly: 'Yillik olish',
-        popular: 'Mashhur',
-        save_2months: '2 oy bepul',
+        popular: '🔥 Mashhur',
+        save_2months: '💰 2 oy bepul',
         unlimited_habits: 'Cheksiz odatlar',
         basic_stats: 'Asosiy statistika',
         tasks_section: 'Rejalar bo\'limi',
         leaderboard: 'Leaderboard',
         ai_motivation: 'AI motivatsiya',
         discount_17: '17% chegirma',
+        premium_all: 'Premium\'ning hammasi',
+        habits_3: '3 tagacha odat',
+        your_plan: 'Sizning tarifingiz',
 
         // Auth Modal
         login_title: 'Kirish',
@@ -57,7 +60,7 @@ const translations = {
         have_account: 'Akkauntingiz bormi?',
         no_account: 'Akkauntingiz yo\'qmi?',
 
-        // Profile
+        // Profile menu
         profile: 'Profil',
         tasks: 'Rejalar',
         statistics: 'Statistika',
@@ -70,25 +73,61 @@ const translations = {
         active_habits: 'Faol odatlar',
         today_done: 'Bugun bajarildi',
         best_streak: 'Eng yaxshi streak',
+        total_habits: 'Jami odatlar',
+        completed_count: 'Bajarilgan',
 
         // Tasks
         tasks_manage: 'Vazifalarni boshqarish',
-        today_tasks: 'Bugun X ta vazifa',
+        tasks_today: 'Bugun {n} ta vazifa',
+        task_new: 'Yangi vazifa',
+        task_name: 'Vazifa nomi',
+        task_desc: 'Tavsif (ixtiyoriy)',
+        task_date: 'Sana',
+        task_time: 'Vaqt',
+        task_category: 'Kategoriya',
+        task_priority: 'Prioritet',
+        task_add: '✅ Vazifani qo\'shish',
+        task_category_study: '📚 O\'qish',
+        task_category_work: '💼 Ish',
+        task_category_sport: '💪 Sport',
+        task_category_personal: '🏠 Shaxsiy',
+        task_category_other: '📌 Boshqa',
+        task_priority_low: '🟢 Past',
+        task_priority_medium: '🟡 O\'rta',
+        task_priority_high: '🔴 Yuqori',
+        task_filter_active: 'Faol',
+        task_filter_today: 'Bugun',
+        task_filter_week: 'Hafta',
+        task_filter_done: 'Bajarilgan',
+        task_filter_all: 'Hammasi',
+        task_stats_active: 'Faol',
+        task_stats_today: 'Bugun',
+        task_stats_overdue: 'Kechikkan',
+        task_stats_done: 'Bajarilgan',
+        task_empty: 'Hali vazifa yo\'q',
+        task_empty_hint: 'Yuqoridan yangi vazifa qo\'shing!',
+        task_overdue: '⚠️ Kechikkan',
+        task_today: '📅 Bugun',
+        task_tomorrow: '📅 Ertaga',
+        task_in_days: 'kun ichida',
+        task_delete_confirm: 'Bu vazifani o\'chirmoqchimisiz?',
+        task_added: 'qo\'shildi!',
 
         // Habit form
-        add_habit: 'Yangi odat qo\'shish',
-        habit_name: 'Odat nomi',
+        add_habit: 'Yanggi odat qo\'shish',
+        add_habit_title: '➕ Yangi odat qo\'shish',
+        habit_name: '1️⃣ Odat nomi',
         habit_name_placeholder: 'Masalan: Kitob o\'qish',
-        period: 'Davomiylik',
-        weekly: 'Haftalik',
-        monthly: 'Oylik',
-        yearly: 'Yillik',
-        days: 'Kunlar',
+        period: '2️⃣ Davomiylik',
+        weekly: '📅 Haftalik',
+        monthly: '🗓 Oylik',
+        yearly: '📆 Yillik',
+        days: '3️⃣ Kunlar',
         every_day: 'Har kuni',
-        time: 'Vaqt',
-        place: 'Joy',
+        time: '4️⃣ Vaqt',
+        place: '5️⃣ Joy',
         place_placeholder: 'Masalan: Bog\'da',
-        add_habit_btn: 'Odatni qo\'shish',
+        add_habit_btn: '✅ Odatni qo\'shish',
 
         // Day names
         day_sun: 'Yak',
@@ -98,15 +137,16 @@ const translations = {
         day_thu: 'Pay',
         day_fri: 'Jum',
         day_sat: 'Shan',
+        days_full: ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba'],
 
         // Habit states
-        active_habits_title: 'Faol odatlar',
-        completed_habits: 'Tugallangan odatlar',
+        active_habits_title: '📋 Faol odatlar',
+        completed_habits_title: '🏆 Tugallangan odatlar',
         empty_message: 'Hali odat qo\'shmadingiz. Tepadagi ➕ tugmasini bosing! 🌱',
-        not_done: 'Bajarilmadi',
+        not_done: '⚠️ Bajarilmadi',
 
         // Premium banner
-        premium_limit: 'Bepul tarifda faqat 3 ta odat.',
+        premium_limit: '⚠️ Bepul tarifda faqat 3 ta odat.',
         get_premium_link: '💎 Premium olish',
 
         // Language
@@ -116,26 +156,252 @@ const translations = {
         loading: 'Yuklanmoqda...',
         welcome: 'Xush kelibsiz',
         bye: 'Xayr! Yana kutamiz!',
-        saved: 'Saqlandi!',
+        saved: 'Saqlandi',
         deleted: 'O\'chirildi',
         error: 'Xato',
-        confirm_delete: 'Bu odatni o\'chirmoqchimisiz?',
-        reminders_on: 'Eslatmalar yoqildi!',
-        reminders_off: 'Eslatmalar o\'chirildi',
+        close: 'Yopish',
+        ok: 'OK',
 
-        // Premium
+        // Alerts (app.js)
+        toast_habit_added: 'qo\'shildi!',
+        toast_habit_deleted: 'O\'chirildi',
+        alert_enter_habit_name: 'Odat nomini kiriting!',
+        alert_select_day: 'Kamida bitta kun tanlang!',
+        alert_select_time: 'Vaqtni tanlang!',
+        alert_enter_place: 'Joyni kiriting!',
+        alert_not_today: 'Bugun bu odat kuni emas!',
+        alert_save_error: 'Saqlashda xato!',
+        alert_delete_confirm: 'Bu odatni o\'chirmoqchimisiz?',
+        alert_signin_required: 'Tizimga kiring!',
+        alert_limit_reached: 'Bepul tarifda faqat 3 ta odat!',
+        streak_7: '🔥 7 kun ketma-ket!',
+        streak_30: '🏆 30 kun ketma-ket!',
+        days_label: 'kun',
+
+        // Daily report
+        daily_report_title: 'Kunlik hisobot',
+        daily_report_perfect: '🎉 Ajoyib!',
+        daily_report_good: '👏 Yaxshi!',
+        daily_report_ok: '💪 Yaxshi...',
+        daily_report_bad: '⚠️ Diqqat!',
+        report_all_done: 'Barcha odatlarni bajarding!',
+        report_only: 'Faqat',
+
+        // Periods
+        period_weekly: 'Haftalik',
+        period_monthly: 'Oylik',
+        period_yearly: 'Yillik',
+
+        // Feedback
+        feedback_90: '🏆 Ajoyib natija!',
+        feedback_70: '🎉 Yaxshi natija!',
+        feedback_50: '💪 Yaxshi, lekin yaxshiroq bo\'lishi mumkin',
+        feedback_low: '🌱 Keyingi safar yaxshiroq qilasan!',
+
+        // Auth (auth.js)
+        auth_welcome: 'Xush kelibsiz',
+        auth_register_success: 'Ro\'yxatdan o\'tdingiz!',
+        auth_fill_all: 'Barcha maydonlarni to\'ldiring!',
+        auth_password_short: 'Parol kamida 6 belgi!',
+        auth_email_invalid: 'Email noto\'g\'ri!',
+        auth_login_error: 'Email yoki parol noto\'g\'ri!',
+        auth_logout_confirm: 'Chiqishni xohlaysizmi?',
+        auth_bye: 'Xayr! Yana kutamiz!',
+
+        // Badges (badges.js)
+        badge_unlocked: '🎉 Yangi yutuq!',
+        badge_first_habit: 'Birinchi qadam',
+        badge_first_habit_desc: 'Birinchi odatni qo\'shding',
+        badge_first_check: 'Birinchi belgi',
+        badge_first_check_desc: 'Birinchi odatni bajarding',
+        badge_streak_3: '3 kun ketma-ket',
+        badge_streak_3_desc: '3 kunlik streak',
+        badge_streak_7: 'Bir hafta!',
+        badge_streak_7_desc: '7 kunlik streak',
+        badge_streak_30: 'Bir oy!',
+        badge_streak_30_desc: '30 kunlik streak',
+        badge_streak_100: '100 kun!',
+        badge_streak_100_desc: '100 kunlik streak',
+        badge_habit_5: '5 ta odat',
+        badge_habit_5_desc: '5 ta odat qo\'shding',
+        badge_habit_10: '10 ta odat',
+        badge_habit_10_desc: '10 ta odat qo\'shding',
+        badge_done_10: '10 marta',
+        badge_done_10_desc: '10 marta bajarding',
+        badge_done_50: '50 marta',
+        badge_done_50_desc: '50 marta bajarding',
+        badge_done_100: '100 marta',
+        badge_done_100_desc: '100 marta bajarding',
+        badge_perfect_day: 'Mukammal kun',
+        badge_perfect_day_desc: 'Bir kunda hamma odatni bajarding',
+        badge_finished_habit: 'Tugallangan',
+        badge_finished_habit_desc: 'Birinchi odatni tugatding',
+        badge_finished_5: '5 ta tugallangan',
+        badge_finished_5_desc: '5 ta odatni tugatding',
+        badge_premium: 'Premium',
+        badge_premium_desc: 'Premium obunaga o\'tding',
+        badge_early_bird: 'Erta qush',
+        badge_early_bird_desc: 'Ertalab odat bajarding',
+        badge_night_owl: 'Tungi boyqush',
+        badge_night_owl_desc: 'Kechqurun odat bajarding',
+        badge_unlocked_label: '✅ Ochilgan',
+        badge_no_badges: 'Hali yutuq yo\'q. Odatlaringizni bajarib boshlang! 🌱',
+        achievements_subtitle: 'Odatlaringizni bajarib badge\'lar yig\'ing!',
+
+        // Challenge (challenge.js)
+        challenge_title: '🎯 Kunlik Challenge',
+        challenge_complete: 'Challenge bajarildi!',
+        challenge_reward: 'Mukofotni olish',
+        challenge_continue: 'Davom eting...',
+        challenge_done: '🎉 Bugungi challenge bajarildi! Ertaga yangisi keladi!',
+        challenge_done_btn: '✅ Bajarildi!',
+        challenge_xp: 'XP',
+        challenge_level: 'Level',
+        challenge_not_done: 'Challenge hali bajarilmagan!',
+        challenge_great: 'Zo\'r!',
+        challenge_perfect_day: 'Mukammal kun',
+        challenge_perfect_day_desc: 'Bugun barcha odatlarni bajaring',
+        challenge_three_checks: '3 ta belgi',
+        challenge_three_checks_desc: 'Bugun 3 ta odatni belgilang',
+        challenge_early_bird: 'Erta qush',
+        challenge_early_bird_desc: 'Soat 8:00 gacha bitta odat bajaring',
+        challenge_add_habit: 'Yangi odat',
+        challenge_add_habit_desc: 'Bugun yangi odat qo\'shing',
+        challenge_keep_streak: 'Streak saqlovchi',
+        challenge_keep_streak_desc: 'Streakni bugun ham davom ettiring',
+        challenge_half_done: 'Yarim yo\'l',
+        challenge_half_done_desc: 'Bugungi odatlarning yarmini bajaring',
+        challenge_level_up: 'Level up!',
+
+        // Notes (notes.js)
+        notes_title: '📝 Eslatmalar',
+        notes_for: 'uchun',
+        notes_placeholder: 'Bugun qanday o\'tdi?',
+        notes_add: 'Qo\'shish',
+        notes_hint: '💡 Ctrl+Enter — tez qo\'shish',
+        notes_empty: 'Hali eslatma yo\'q',
+        notes_empty_hint: 'Birinchi eslatmangizni yozing!',
+        notes_delete_confirm: 'Bu eslatmani o\'chirmoqchimisiz?',
+        notes_enter_text: 'Eslatma matnini kiriting!',
+        notes_too_long: '500 belgidan oshmasligi kerak!',
+        notes_now: 'Hozir',
+        notes_min_ago: 'daqiqa oldin',
+        notes_hour_ago: 'soat oldin',
+        notes_day_ago: 'kun oldin',
+        notes_mood_great: '😄 Ajoyib',
+        notes_mood_good: '😊 Yaxshi',
+        notes_mood_neutral: '😐 O\'rtacha',
+        notes_mood_bad: '😔 Yomon',
+        notes_mood_terrible: '😢 Juda yomon',
+
+        // Profile (profile.js)
+        profile_title: '👤 Profil',
+        profile_name_label: 'Ism',
+        profile_email_label: 'Email',
+        profile_plan_label: 'Tarif',
+        profile_joined_label: 'Ro\'yxatdan o\'tgan',
+        profile_stats: '📊 Umumiy statistika',
         plan_free: 'Bepul',
         plan_monthly: 'Premium',
         plan_yearly: 'Yillik Premium',
 
+        // Leaderboard (leaderboard.js)
+        leaderboard_title: '🏅 Leaderboard',
+        leaderboard_subtitle: 'Eng faol foydalanuvchilar reytingi.',
+        leaderboard_filter_streak: '🔥 Streak',
+        leaderboard_filter_completed: '✅ Bajarilgan',
+        leaderboard_filter_level: '⭐ Level',
+        leaderboard_filter_xp: '⚡ XP',
+        leaderboard_your_rank: 'Sizning o\'rningiz',
+        leaderboard_your_place: '📍 Sizning o\'rningiz',
+        leaderboard_empty: 'Hali reyting yo\'q',
+        leaderboard_empty_hint: 'Ko\'proq odat bajaring!',
+        leaderboard_only_3: 'Faqat 3 ta foydalanuvchi bor',
+        leaderboard_you: 'SIZ',
+
         // Backup
-        backup_title: 'Backup',
+        backup_title: '💾 Backup',
         backup_desc: 'Ma\'lumotlaringizni JSON faylga saqlang.',
-        export: 'Export',
-        export_desc: 'JSON faylga yuklab olish',
-        import: 'Import',
-        import_desc: 'JSON fayldan tiklash',
-        upload: 'Yuklash'
+        backup_current: '📊 Hozirgi ma\'lumotlar',
+        backup_export: 'Export',
+        backup_export_desc: 'JSON faylga yuklab olish',
+        backup_import: 'Import',
+        backup_import_desc: 'JSON fayldan tiklash',
+        backup_warning: '⚠️ Diqqat! Import qilganda hozirgi ma\'lumotlar o\'chiriladi.',
+        backup_upload: '📤 Yuklash',
+        backup_loaded: 'yuklab olindi!',
+        backup_restored: 'ta odat tiklandi!',
+        backup_habits: 'Odatlar',
+        backup_done: 'Bajarilgan',
+        backup_size: 'Hajmi',
+
+        // Payment (payment.js)
+        payment_confirm: 'To\'lovni tasdiqlaysizmi?',
+        payment_loading: 'To\'lov amalga oshirilmoqda...',
+        payment_success: 'Tabriklayman!',
+        payment_activated: 'faollashtirildi!',
+        payment_until: 'Tugash sanasi',
+        payment_error: 'To\'lovda xato',
+        payment_invalid_plan: 'Noto\'g\'ri tarif!',
+        payment_plan_monthly: 'Premium (1 oy)',
+        payment_plan_yearly: 'Premium (1 yil)',
+        payment_plan_price: 'Narxi',
+        payment_plan_days: 'Muddat',
+        payment_days: 'kun',
+        payment_note: '💳 To\'lov: Payme, Click yoki Uzcard orqali',
+        payment_demo: '(Demo versiyada to\'lov simulyatsiya qilinadi)',
+        payment_amount: 'so\'m',
+
+        // PWA (pwa.js)
+        pwa_install: 'HabitGo\'ni o\'rnating',
+        pwa_install_desc: 'Telefoningizga qo\'shing',
+        pwa_install_btn: 'O\'rnatish',
+        pwa_installed: 'Ilova o\'rnatildi!',
+        pwa_offline: 'Offline rejim — hammasi ishlaydi',
+        pwa_online: 'Internet qaytdi',
+        pwa_ios_hint: 'Safari\'da pastdagi Share (⬆️) tugmasini bosing, keyin "Add to Home Screen" ni tanlang.',
+        pwa_got_it: 'Tushundim',
+
+        // Push
+        push_enabled: '🔔 Eslatmalar yoqildi!',
+        push_disabled: '🔕 Eslatmalar o\'chirildi',
+        push_not_supported: 'Brauzer push notification qo\'llab-quvvatlamaydi',
+        push_permission_denied: 'Bildirishnoma ruxsati berilmadi',
+        push_error: 'Xato',
+
+        // Theme
+        theme_dark: 'Tungi rejim',
+        theme_light: 'Kunduzgi rejim',
+
+        // Color
+        color_title: '🎨 Rang mavzusi',
+        color_subtitle: 'O\'zingizga yoqqan rangni tanlang',
+        color_purple: 'Binafsha',
+        color_blue: 'Ko\'k',
+        color_green: 'Yashil',
+        color_orange: 'To\'q sariq',
+        color_pink: 'Pushti',
+        color_red: 'Qizil',
+        color_changed: 'mavzusi yoqildi!',
+
+        // Statistics
+        stats_title: '📊 Statistika',
+        stats_weekly: '📊 Haftalik faollik',
+        stats_monthly: '📈 Oylik tendentsiya',
+        stats_yearly: '📅 Yillik faollik',
+        stats_breakdown: '📋 Odatlar bo\'yicha',
+        stats_total: 'Jami bajarilgan',
+        stats_week: 'Bu hafta',
+        stats_month: 'Bu oy',
+        stats_percent: 'Bajarilish foizi',
+        stats_legend_less: 'Kam',
+        stats_legend_more: 'Ko\'p',
+        stats_active: 'Faol',
+        stats_finished: 'Tugallangan',
+        stats_progress: 'Bajarildi',
+        stats_period_weekly: 'Haftalik',
+        stats_period_monthly: 'Oylik',
+        stats_period_yearly: 'Yillik'
     },
 
     ru: {
@@ -173,14 +439,17 @@ const translations = {
         start: 'Начать',
         get_premium: 'Получить Премиум',
         get_yearly: 'Получить Годовой',
-        popular: 'Популярно',
-        save_2months: '2 месяца бесплатно',
+        popular: '🔥 Популярно',
+        save_2months: '💰 2 месяца бесплатно',
         unlimited_habits: 'Неограниченные привычки',
         basic_stats: 'Базовая статистика',
         tasks_section: 'Раздел задач',
         leaderboard: 'Рейтинг',
         ai_motivation: 'AI мотивация',
         discount_17: 'Скидка 17%',
+        premium_all: 'Всё из Премиум',
+        habits_3: 'До 3 привычек',
+        your_plan: 'Ваш тариф',
 
         // Auth Modal
         login_title: 'Войти',
@@ -192,7 +461,7 @@ const translations = {
         have_account: 'Уже есть аккаунт?',
         no_account: 'Нет аккаунта?',
 
-        // Profile
+        // Profile menu
         profile: 'Профиль',
         tasks: 'Задачи',
         statistics: 'Статистика',
@@ -205,25 +474,61 @@ const translations = {
         active_habits: 'Активные привычки',
         today_done: 'Сегодня выполнено',
         best_streak: 'Лучшая серия',
+        total_habits: 'Всего привычек',
+        completed_count: 'Выполнено',
 
         // Tasks
         tasks_manage: 'Управление задачами',
-        today_tasks: 'Сегодня X задач',
+        tasks_today: 'Сегодня {n} задач',
+        task_new: 'Новая задача',
+        task_name: 'Название задачи',
+        task_desc: 'Описание (опционально)',
+        task_date: 'Дата',
+        task_time: 'Время',
+        task_category: 'Категория',
+        task_priority: 'Приоритет',
+        task_add: '✅ Добавить задачу',
+        task_category_study: '📚 Учёба',
+        task_category_work: '💼 Работа',
+        task_category_sport: '💪 Спорт',
+        task_category_personal: '🏠 Личное',
+        task_category_other: '📌 Другое',
+        task_priority_low: '🟢 Низкий',
+        task_priority_medium: '🟡 Средний',
+        task_priority_high: '🔴 Высокий',
+        task_filter_active: 'Активные',
+        task_filter_today: 'Сегодня',
+        task_filter_week: 'Неделя',
+        task_filter_done: 'Выполненные',
+        task_filter_all: 'Все',
+        task_stats_active: 'Активные',
+        task_stats_today: 'Сегодня',
+        task_stats_overdue: 'Просрочено',
+        task_stats_done: 'Выполнено',
+        task_empty: 'Задач пока нет',
+        task_empty_hint: 'Добавьте задачу выше!',
+        task_overdue: '⚠️ Просрочено',
+        task_today: '📅 Сегодня',
+        task_tomorrow: '📅 Завтра',
+        task_in_days: 'дней',
+        task_delete_confirm: 'Удалить эту задачу?',
+        task_added: 'добавлена!',
 
         // Habit form
         add_habit: 'Добавить привычку',
-        habit_name: 'Название привычки',
+        add_habit_title: '➕ Добавить привычку',
+        habit_name: '1️⃣ Название привычки',
         habit_name_placeholder: 'Например: Чтение книги',
-        period: 'Период',
-        weekly: 'Недельный',
-        monthly: 'Месячный',
-        yearly: 'Годовой',
-        days: 'Дни',
+        period: '2️⃣ Период',
+        weekly: '📅 Недельный',
+        monthly: '🗓 Месячный',
+        yearly: '📆 Годовой',
+        days: '3️⃣ Дни',
         every_day: 'Каждый день',
-        time: 'Время',
-        place: 'Место',
+        time: '4️⃣ Время',
+        place: '5️⃣ Место',
         place_placeholder: 'Например: В парке',
-        add_habit_btn: 'Добавить привычку',
+        add_habit_btn: '✅ Добавить привычку',
 
         // Day names
         day_sun: 'Вс',
@@ -233,15 +538,16 @@ const translations = {
         day_thu: 'Чт',
         day_fri: 'Пт',
         day_sat: 'Сб',
+        days_full: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
 
         // Habit states
-        active_habits_title: 'Активные привычки',
-        completed_habits: 'Завершённые привычки',
+        active_habits_title: '📋 Активные привычки',
+        completed_habits_title: '🏆 Завершённые привычки',
         empty_message: 'Ещё нет привычек. Нажмите ➕ сверху! 🌱',
-        not_done: 'Не выполнено',
+        not_done: '⚠️ Не выполнено',
 
         // Premium banner
-        premium_limit: 'В бесплатном тарифе только 3 привычки.',
+        premium_limit: '⚠️ В бесплатном тарифе только 3 привычки.',
         get_premium_link: '💎 Получить Премиум',
 
         // Language
@@ -251,26 +557,252 @@ const translations = {
         loading: 'Загрузка...',
         welcome: 'Добро пожаловать',
         bye: 'Пока! Ждём вас снова!',
-        saved: 'Сохранено!',
+        saved: 'Сохранено',
         deleted: 'Удалено',
         error: 'Ошибка',
-        confirm_delete: 'Удалить эту привычку?',
-        reminders_on: 'Напоминания включены!',
-        reminders_off: 'Напоминания отключены',
+        close: 'Закрыть',
+        ok: 'OK',
 
-        // Premium
+        // Alerts (app.js)
+        toast_habit_added: 'добавлена!',
+        toast_habit_deleted: 'Удалено',
+        alert_enter_habit_name: 'Введите название привычки!',
+        alert_select_day: 'Выберите хотя бы один день!',
+        alert_select_time: 'Выберите время!',
+        alert_enter_place: 'Введите место!',
+        alert_not_today: 'Сегодня не день этой привычки!',
+        alert_save_error: 'Ошибка сохранения!',
+        alert_delete_confirm: 'Удалить эту привычку?',
+        alert_signin_required: 'Войдите в систему!',
+        alert_limit_reached: 'В бесплатном тарифе только 3 привычки!',
+        streak_7: '🔥 7 дней подряд!',
+        streak_30: '🏆 30 дней подряд!',
+        days_label: 'дней',
+
+        // Daily report
+        daily_report_title: 'Ежедневный отчёт',
+        daily_report_perfect: '🎉 Отлично!',
+        daily_report_good: '👏 Хорошо!',
+        daily_report_ok: '💪 Хорошо...',
+        daily_report_bad: '⚠️ Внимание!',
+        report_all_done: 'Вы выполнили все привычки!',
+        report_only: 'Только',
+
+        // Periods
+        period_weekly: 'Недельный',
+        period_monthly: 'Месячный',
+        period_yearly: 'Годовой',
+
+        // Feedback
+        feedback_90: '🏆 Отличный результат!',
+        feedback_70: '🎉 Хороший результат!',
+        feedback_50: '💪 Хорошо, но можно лучше',
+        feedback_low: '🌱 В следующий раз получится лучше!',
+
+        // Auth (auth.js)
+        auth_welcome: 'Добро пожаловать',
+        auth_register_success: 'Вы зарегистрированы!',
+        auth_fill_all: 'Заполните все поля!',
+        auth_password_short: 'Пароль минимум 6 символов!',
+        auth_email_invalid: 'Неверный email!',
+        auth_login_error: 'Неверный email или пароль!',
+        auth_logout_confirm: 'Выйти?',
+        auth_bye: 'Пока! Ждём вас снова!',
+
+        // Badges (badges.js)
+        badge_unlocked: '🎉 Новое достижение!',
+        badge_first_habit: 'Первый шаг',
+        badge_first_habit_desc: 'Добавили первую привычку',
+        badge_first_check: 'Первая отметка',
+        badge_first_check_desc: 'Выполнили первую привычку',
+        badge_streak_3: '3 дня подряд',
+        badge_streak_3_desc: '3-дневная серия',
+        badge_streak_7: 'Неделя!',
+        badge_streak_7_desc: '7-дневная серия',
+        badge_streak_30: 'Месяц!',
+        badge_streak_30_desc: '30-дневная серия',
+        badge_streak_100: '100 дней!',
+        badge_streak_100_desc: '100-дневная серия',
+        badge_habit_5: '5 привычек',
+        badge_habit_5_desc: 'Добавили 5 привычек',
+        badge_habit_10: '10 привычек',
+        badge_habit_10_desc: 'Добавили 10 привычек',
+        badge_done_10: '10 раз',
+        badge_done_10_desc: 'Выполнили 10 раз',
+        badge_done_50: '50 раз',
+        badge_done_50_desc: 'Выполнили 50 раз',
+        badge_done_100: '100 раз',
+        badge_done_100_desc: 'Выполнили 100 раз',
+        badge_perfect_day: 'Идеальный день',
+        badge_perfect_day_desc: 'Все привычки за день',
+        badge_finished_habit: 'Завершено',
+        badge_finished_habit_desc: 'Завершили первую привычку',
+        badge_finished_5: '5 завершено',
+        badge_finished_5_desc: 'Завершили 5 привычек',
+        badge_premium: 'Премиум',
+        badge_premium_desc: 'Перешли на Премиум',
+        badge_early_bird: 'Ранняя пташка',
+        badge_early_bird_desc: 'Утром выполнили привычку',
+        badge_night_owl: 'Ночная сова',
+        badge_night_owl_desc: 'Вечером выполнили привычку',
+        badge_unlocked_label: '✅ Получено',
+        badge_no_badges: 'Пока нет достижений. Начните выполнять привычки! 🌱',
+        achievements_subtitle: 'Выполняйте привычки и получайте значки!',
+
+        // Challenge (challenge.js)
+        challenge_title: '🎯 Ежедневный челлендж',
+        challenge_complete: 'Челлендж выполнен!',
+        challenge_reward: 'Получить награду',
+        challenge_continue: 'Продолжайте...',
+        challenge_done: '🎉 Сегодняшний челлендж выполнен! Завтра новый!',
+        challenge_done_btn: '✅ Выполнено!',
+        challenge_xp: 'XP',
+        challenge_level: 'Уровень',
+        challenge_not_done: 'Челлендж ещё не выполнен!',
+        challenge_great: 'Отлично!',
+        challenge_perfect_day: 'Идеальный день',
+        challenge_perfect_day_desc: 'Выполните все привычки сегодня',
+        challenge_three_checks: '3 отметки',
+        challenge_three_checks_desc: 'Отметьте 3 привычки сегодня',
+        challenge_early_bird: 'Ранняя пташка',
+        challenge_early_bird_desc: 'Выполните привычку до 8:00',
+        challenge_add_habit: 'Новая привычка',
+        challenge_add_habit_desc: 'Добавьте новую привычку сегодня',
+        challenge_keep_streak: 'Хранитель серии',
+        challenge_keep_streak_desc: 'Продолжите серию сегодня',
+        challenge_half_done: 'Половина пути',
+        challenge_half_done_desc: 'Выполните половину привычек',
+        challenge_level_up: 'Новый уровень!',
+
+        // Notes (notes.js)
+        notes_title: '📝 Заметки',
+        notes_for: 'для',
+        notes_placeholder: 'Как прошёл день?',
+        notes_add: 'Добавить',
+        notes_hint: '💡 Ctrl+Enter — быстрое добавление',
+        notes_empty: 'Заметок пока нет',
+        notes_empty_hint: 'Напишите первую заметку!',
+        notes_delete_confirm: 'Удалить эту заметку?',
+        notes_enter_text: 'Введите текст заметки!',
+        notes_too_long: 'Не более 500 символов!',
+        notes_now: 'Сейчас',
+        notes_min_ago: 'минут назад',
+        notes_hour_ago: 'часов назад',
+        notes_day_ago: 'дней назад',
+        notes_mood_great: '😄 Отлично',
+        notes_mood_good: '😊 Хорошо',
+        notes_mood_neutral: '😐 Нормально',
+        notes_mood_bad: '😔 Плохо',
+        notes_mood_terrible: '😢 Очень плохо',
+
+        // Profile (profile.js)
+        profile_title: '👤 Профиль',
+        profile_name_label: 'Имя',
+        profile_email_label: 'Email',
+        profile_plan_label: 'Тариф',
+        profile_joined_label: 'Дата регистрации',
+        profile_stats: '📊 Общая статистика',
         plan_free: 'Бесплатно',
         plan_monthly: 'Премиум',
         plan_yearly: 'Годовой Премиум',
 
+        // Leaderboard (leaderboard.js)
+        leaderboard_title: '🏅 Рейтинг',
+        leaderboard_subtitle: 'Рейтинг самых активных.',
+        leaderboard_filter_streak: '🔥 Серия',
+        leaderboard_filter_completed: '✅ Выполнено',
+        leaderboard_filter_level: '⭐ Уровень',
+        leaderboard_filter_xp: '⚡ XP',
+        leaderboard_your_rank: 'Ваше место',
+        leaderboard_your_place: '📍 Ваше место',
+        leaderboard_empty: 'Рейтинг пуст',
+        leaderboard_empty_hint: 'Выполняйте больше привычек!',
+        leaderboard_only_3: 'Только 3 пользователя',
+        leaderboard_you: 'ВЫ',
+
         // Backup
-        backup_title: 'Резервная копия',
+        backup_title: '💾 Резервная копия',
         backup_desc: 'Сохраните данные в JSON файл.',
-        export: 'Экспорт',
-        export_desc: 'Скачать JSON файл',
-        import: 'Импорт',
-        import_desc: 'Восстановить из JSON',
-        upload: 'Загрузить'
+        backup_current: '📊 Текущие данные',
+        backup_export: 'Экспорт',
+        backup_export_desc: 'Скачать JSON файл',
+        backup_import: 'Импорт',
+        backup_import_desc: 'Восстановить из JSON',
+        backup_warning: '⚠️ Внимание! При импорте текущие данные удаляются.',
+        backup_upload: '📤 Загрузить',
+        backup_loaded: 'скачан!',
+        backup_restored: 'привычек восстановлено!',
+        backup_habits: 'Привычек',
+        backup_done: 'Выполнено',
+        backup_size: 'Размер',
+
+        // Payment (payment.js)
+        payment_confirm: 'Подтвердить оплату?',
+        payment_loading: 'Обработка платежа...',
+        payment_success: 'Поздравляю!',
+        payment_activated: 'активирован!',
+        payment_until: 'Дата окончания',
+        payment_error: 'Ошибка платежа',
+        payment_invalid_plan: 'Неверный тариф!',
+        payment_plan_monthly: 'Премиум (1 месяц)',
+        payment_plan_yearly: 'Премиум (1 год)',
+        payment_plan_price: 'Цена',
+        payment_plan_days: 'Срок',
+        payment_days: 'дней',
+        payment_note: '💳 Оплата: Payme, Click или Uzcard',
+        payment_demo: '(В демо-версии платёж имитируется)',
+        payment_amount: 'сум',
+
+        // PWA (pwa.js)
+        pwa_install: 'Установите HabitGo',
+        pwa_install_desc: 'Добавьте на телефон',
+        pwa_install_btn: 'Установить',
+        pwa_installed: 'Приложение установлено!',
+        pwa_offline: 'Оффлайн режим — всё работает',
+        pwa_online: 'Интернет вернулся',
+        pwa_ios_hint: 'В Safari нажмите Share (⬆️), затем "Add to Home Screen".',
+        pwa_got_it: 'Понятно',
+
+        // Push
+        push_enabled: '🔔 Напоминания включены!',
+        push_disabled: '🔕 Напоминания отключены',
+        push_not_supported: 'Браузер не поддерживает push-уведомления',
+        push_permission_denied: 'Разрешение не получено',
+        push_error: 'Ошибка',
+
+        // Theme
+        theme_dark: 'Тёмная тема',
+        theme_light: 'Светлая тема',
+
+        // Color
+        color_title: '🎨 Цветовая тема',
+        color_subtitle: 'Выберите понравившийся цвет',
+        color_purple: 'Фиолетовый',
+        color_blue: 'Синий',
+        color_green: 'Зелёный',
+        color_orange: 'Оранжевый',
+        color_pink: 'Розовый',
+        color_red: 'Красный',
+        color_changed: 'тема включена!',
+
+        // Statistics
+        stats_title: '📊 Статистика',
+        stats_weekly: '📊 Недельная активность',
+        stats_monthly: '📈 Месячный тренд',
+        stats_yearly: '📅 Годовая активность',
+        stats_breakdown: '📋 По привычкам',
+        stats_total: 'Всего выполнено',
+        stats_week: 'Эта неделя',
+        stats_month: 'Этот месяц',
+        stats_percent: 'Процент выполнения',
+        stats_legend_less: 'Меньше',
+        stats_legend_more: 'Больше',
+        stats_active: 'Активные',
+        stats_finished: 'Завершённые',
+        stats_progress: 'Выполнено',
+        stats_period_weekly: 'Недельный',
+        stats_period_monthly: 'Месячный',
+        stats_period_yearly: 'Годовой'
     },
 
     en: {
@@ -308,14 +840,17 @@ const translations = {
         start: 'Start',
         get_premium: 'Get Premium',
         get_yearly: 'Get Yearly',
-        popular: 'Popular',
-        save_2months: '2 months free',
+        popular: '🔥 Popular',
+        save_2months: '💰 2 months free',
         unlimited_habits: 'Unlimited habits',
         basic_stats: 'Basic statistics',
         tasks_section: 'Tasks section',
         leaderboard: 'Leaderboard',
         ai_motivation: 'AI motivation',
         discount_17: '17% discount',
+        premium_all: 'All Premium features',
+        habits_3: 'Up to 3 habits',
+        your_plan: 'Your plan',
 
         // Auth Modal
         login_title: 'Login',
@@ -327,7 +862,7 @@ const translations = {
         have_account: 'Already have an account?',
         no_account: 'No account?',
 
-        // Profile
+        // Profile menu
         profile: 'Profile',
         tasks: 'Tasks',
         statistics: 'Statistics',
@@ -340,25 +875,61 @@ const translations = {
         active_habits: 'Active habits',
         today_done: 'Done today',
         best_streak: 'Best streak',
+        total_habits: 'Total habits',
+        completed_count: 'Completed',
 
         // Tasks
         tasks_manage: 'Manage tasks',
-        today_tasks: 'X tasks today',
+        tasks_today: '{n} tasks today',
+        task_new: 'New task',
+        task_name: 'Task name',
+        task_desc: 'Description (optional)',
+        task_date: 'Date',
+        task_time: 'Time',
+        task_category: 'Category',
+        task_priority: 'Priority',
+        task_add: '✅ Add task',
+        task_category_study: '📚 Study',
+        task_category_work: '💼 Work',
+        task_category_sport: '💪 Sport',
+        task_category_personal: '🏠 Personal',
+        task_category_other: '📌 Other',
+        task_priority_low: '🟢 Low',
+        task_priority_medium: '🟡 Medium',
+        task_priority_high: '🔴 High',
+        task_filter_active: 'Active',
+        task_filter_today: 'Today',
+        task_filter_week: 'Week',
+        task_filter_done: 'Done',
+        task_filter_all: 'All',
+        task_stats_active: 'Active',
+        task_stats_today: 'Today',
+        task_stats_overdue: 'Overdue',
+        task_stats_done: 'Done',
+        task_empty: 'No tasks yet',
+        task_empty_hint: 'Add a task above!',
+        task_overdue: '⚠️ Overdue',
+        task_today: '📅 Today',
+        task_tomorrow: '📅 Tomorrow',
+        task_in_days: 'days',
+        task_delete_confirm: 'Delete this task?',
+        task_added: 'added!',
 
         // Habit form
-        add_habit: 'Add new habit',
-        habit_name: 'Habit name',
+        add_habit: 'Add habit',
+        add_habit_title: '➕ Add new habit',
+        habit_name: '1️⃣ Habit name',
         habit_name_placeholder: 'e.g. Reading a book',
-        period: 'Period',
-        weekly: 'Weekly',
-        monthly: 'Monthly',
-        yearly: 'Yearly',
-        days: 'Days',
+        period: '2️⃣ Period',
+        weekly: '📅 Weekly',
+        monthly: '🗓 Monthly',
+        yearly: '📆 Yearly',
+        days: '3️⃣ Days',
         every_day: 'Every day',
-        time: 'Time',
-        place: 'Place',
+        time: '4️⃣ Time',
+        place: '5️⃣ Place',
         place_placeholder: 'e.g. At the park',
-        add_habit_btn: 'Add habit',
+        add_habit_btn: '✅ Add habit',
 
         // Day names
         day_sun: 'Sun',
@@ -368,15 +939,16 @@ const translations = {
         day_thu: 'Thu',
         day_fri: 'Fri',
         day_sat: 'Sat',
+        days_full: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 
         // Habit states
-        active_habits_title: 'Active habits',
-        completed_habits: 'Completed habits',
+        active_habits_title: '📋 Active habits',
+        completed_habits_title: '🏆 Completed habits',
         empty_message: 'No habits yet. Tap ➕ at the top! 🌱',
-        not_done: 'Not done',
+        not_done: '⚠️ Not done',
 
         // Premium banner
-        premium_limit: 'Free tier has only 3 habits.',
+        premium_limit: '⚠️ Free tier has only 3 habits.',
         get_premium_link: '💎 Get Premium',
 
         // Language
@@ -386,26 +958,252 @@ const translations = {
         loading: 'Loading...',
         welcome: 'Welcome',
         bye: 'Bye! See you again!',
-        saved: 'Saved!',
+        saved: 'Saved',
         deleted: 'Deleted',
         error: 'Error',
-        confirm_delete: 'Delete this habit?',
-        reminders_on: 'Reminders enabled!',
-        reminders_off: 'Reminders disabled',
+        close: 'Close',
+        ok: 'OK',
 
-        // Premium
+        // Alerts (app.js)
+        toast_habit_added: 'added!',
+        toast_habit_deleted: 'Deleted',
+        alert_enter_habit_name: 'Enter habit name!',
+        alert_select_day: 'Select at least one day!',
+        alert_select_time: 'Select time!',
+        alert_enter_place: 'Enter place!',
+        alert_not_today: 'Today is not this habit\'s day!',
+        alert_save_error: 'Save error!',
+        alert_delete_confirm: 'Delete this habit?',
+        alert_signin_required: 'Please sign in!',
+        alert_limit_reached: 'Free tier only has 3 habits!',
+        streak_7: '🔥 7 days in a row!',
+        streak_30: '🏆 30 days in a row!',
+        days_label: 'days',
+
+        // Daily report
+        daily_report_title: 'Daily report',
+        daily_report_perfect: '🎉 Excellent!',
+        daily_report_good: '👏 Good!',
+        daily_report_ok: '💪 Okay...',
+        daily_report_bad: '⚠️ Attention!',
+        report_all_done: 'You completed all habits!',
+        report_only: 'Only',
+
+        // Periods
+        period_weekly: 'Weekly',
+        period_monthly: 'Monthly',
+        period_yearly: 'Yearly',
+
+        // Feedback
+        feedback_90: '🏆 Excellent result!',
+        feedback_70: '🎉 Good result!',
+        feedback_50: '💪 Good, but can be better',
+        feedback_low: '🌱 Next time will be better!',
+
+        // Auth (auth.js)
+        auth_welcome: 'Welcome',
+        auth_register_success: 'You are registered!',
+        auth_fill_all: 'Fill in all fields!',
+        auth_password_short: 'Password min 6 chars!',
+        auth_email_invalid: 'Invalid email!',
+        auth_login_error: 'Wrong email or password!',
+        auth_logout_confirm: 'Log out?',
+        auth_bye: 'Bye! See you again!',
+
+        // Badges (badges.js)
+        badge_unlocked: '🎉 New achievement!',
+        badge_first_habit: 'First step',
+        badge_first_habit_desc: 'Added first habit',
+        badge_first_check: 'First check',
+        badge_first_check_desc: 'Completed first habit',
+        badge_streak_3: '3 days in a row',
+        badge_streak_3_desc: '3-day streak',
+        badge_streak_7: 'One week!',
+        badge_streak_7_desc: '7-day streak',
+        badge_streak_30: 'One month!',
+        badge_streak_30_desc: '30-day streak',
+        badge_streak_100: '100 days!',
+        badge_streak_100_desc: '100-day streak',
+        badge_habit_5: '5 habits',
+        badge_habit_5_desc: 'Added 5 habits',
+        badge_habit_10: '10 habits',
+        badge_habit_10_desc: 'Added 10 habits',
+        badge_done_10: '10 times',
+        badge_done_10_desc: 'Completed 10 times',
+        badge_done_50: '50 times',
+        badge_done_50_desc: 'Completed 50 times',
+        badge_done_100: '100 times',
+        badge_done_100_desc: 'Completed 100 times',
+        badge_perfect_day: 'Perfect day',
+        badge_perfect_day_desc: 'All habits in one day',
+        badge_finished_habit: 'Completed',
+        badge_finished_habit_desc: 'Finished first habit',
+        badge_finished_5: '5 completed',
+        badge_finished_5_desc: 'Finished 5 habits',
+        badge_premium: 'Premium',
+        badge_premium_desc: 'Upgraded to Premium',
+        badge_early_bird: 'Early bird',
+        badge_early_bird_desc: 'Completed habit in morning',
+        badge_night_owl: 'Night owl',
+        badge_night_owl_desc: 'Completed habit in evening',
+        badge_unlocked_label: '✅ Unlocked',
+        badge_no_badges: 'No achievements yet. Start completing habits! 🌱',
+        achievements_subtitle: 'Complete habits and earn badges!',
+
+        // Challenge (challenge.js)
+        challenge_title: '🎯 Daily Challenge',
+        challenge_complete: 'Challenge completed!',
+        challenge_reward: 'Claim reward',
+        challenge_continue: 'Continue...',
+        challenge_done: '🎉 Today\'s challenge done! New one tomorrow!',
+        challenge_done_btn: '✅ Done!',
+        challenge_xp: 'XP',
+        challenge_level: 'Level',
+        challenge_not_done: 'Challenge not completed yet!',
+        challenge_great: 'Great!',
+        challenge_perfect_day: 'Perfect day',
+        challenge_perfect_day_desc: 'Complete all habits today',
+        challenge_three_checks: '3 checks',
+        challenge_three_checks_desc: 'Check 3 habits today',
+        challenge_early_bird: 'Early bird',
+        challenge_early_bird_desc: 'Complete a habit before 8:00',
+        challenge_add_habit: 'New habit',
+        challenge_add_habit_desc: 'Add a new habit today',
+        challenge_keep_streak: 'Streak keeper',
+        challenge_keep_streak_desc: 'Continue your streak today',
+        challenge_half_done: 'Halfway',
+        challenge_half_done_desc: 'Complete half of today\'s habits',
+        challenge_level_up: 'Level up!',
+
+        // Notes (notes.js)
+        notes_title: '📝 Notes',
+        notes_for: 'for',
+        notes_placeholder: 'How was your day?',
+        notes_add: 'Add',
+        notes_hint: '💡 Ctrl+Enter — quick add',
+        notes_empty: 'No notes yet',
+        notes_empty_hint: 'Write your first note!',
+        notes_delete_confirm: 'Delete this note?',
+        notes_enter_text: 'Enter note text!',
+        notes_too_long: 'Max 500 characters!',
+        notes_now: 'Now',
+        notes_min_ago: 'min ago',
+        notes_hour_ago: 'h ago',
+        notes_day_ago: 'd ago',
+        notes_mood_great: '😄 Great',
+        notes_mood_good: '😊 Good',
+        notes_mood_neutral: '😐 Neutral',
+        notes_mood_bad: '😔 Bad',
+        notes_mood_terrible: '😢 Terrible',
+
+        // Profile (profile.js)
+        profile_title: '👤 Profile',
+        profile_name_label: 'Name',
+        profile_email_label: 'Email',
+        profile_plan_label: 'Plan',
+        profile_joined_label: 'Joined',
+        profile_stats: '📊 General statistics',
         plan_free: 'Free',
         plan_monthly: 'Premium',
         plan_yearly: 'Yearly Premium',
 
+        // Leaderboard (leaderboard.js)
+        leaderboard_title: '🏅 Leaderboard',
+        leaderboard_subtitle: 'Most active users ranking.',
+        leaderboard_filter_streak: '🔥 Streak',
+        leaderboard_filter_completed: '✅ Completed',
+        leaderboard_filter_level: '⭐ Level',
+        leaderboard_filter_xp: '⚡ XP',
+        leaderboard_your_rank: 'Your rank',
+        leaderboard_your_place: '📍 Your place',
+        leaderboard_empty: 'No ranking yet',
+        leaderboard_empty_hint: 'Complete more habits!',
+        leaderboard_only_3: 'Only 3 users',
+        leaderboard_you: 'YOU',
+
         // Backup
-        backup_title: 'Backup',
+        backup_title: '💾 Backup',
         backup_desc: 'Save your data to a JSON file.',
-        export: 'Export',
-        export_desc: 'Download JSON file',
-        import: 'Import',
-        import_desc: 'Restore from JSON',
-        upload: 'Upload'
+        backup_current: '📊 Current data',
+        backup_export: 'Export',
+        backup_export_desc: 'Download JSON file',
+        backup_import: 'Import',
+        backup_import_desc: 'Restore from JSON',
+        backup_warning: '⚠️ Warning! Import deletes current data.',
+        backup_upload: '📤 Upload',
+        backup_loaded: 'downloaded!',
+        backup_restored: 'habits restored!',
+        backup_habits: 'Habits',
+        backup_done: 'Completed',
+        backup_size: 'Size',
+
+        // Payment (payment.js)
+        payment_confirm: 'Confirm payment?',
+        payment_loading: 'Processing payment...',
+        payment_success: 'Congratulations!',
+        payment_activated: 'activated!',
+        payment_until: 'Expiry date',
+        payment_error: 'Payment error',
+        payment_invalid_plan: 'Invalid plan!',
+        payment_plan_monthly: 'Premium (1 month)',
+        payment_plan_yearly: 'Premium (1 year)',
+        payment_plan_price: 'Price',
+        payment_plan_days: 'Duration',
+        payment_days: 'days',
+        payment_note: '💳 Payment: Payme, Click or Uzcard',
+        payment_demo: '(In demo version, payment is simulated)',
+        payment_amount: 'sum',
+
+        // PWA (pwa.js)
+        pwa_install: 'Install HabitGo',
+        pwa_install_desc: 'Add to your phone',
+        pwa_install_btn: 'Install',
+        pwa_installed: 'App installed!',
+        pwa_offline: 'Offline mode — everything works',
+        pwa_online: 'Internet is back',
+        pwa_ios_hint: 'In Safari tap Share (⬆️), then "Add to Home Screen".',
+        pwa_got_it: 'Got it',
+
+        // Push
+        push_enabled: '🔔 Reminders enabled!',
+        push_disabled: '🔕 Reminders disabled',
+        push_not_supported: 'Browser does not support push notifications',
+        push_permission_denied: 'Permission denied',
+        push_error: 'Error',
+
+        // Theme
+        theme_dark: 'Dark mode',
+        theme_light: 'Light mode',
+
+        // Color
+        color_title: '🎨 Color theme',
+        color_subtitle: 'Choose your favorite color',
+        color_purple: 'Purple',
+        color_blue: 'Blue',
+        color_green: 'Green',
+        color_orange: 'Orange',
+        color_pink: 'Pink',
+        color_red: 'Red',
+        color_changed: 'theme enabled!',
+
+        // Statistics
+        stats_title: '📊 Statistics',
+        stats_weekly: '📊 Weekly activity',
+        stats_monthly: '📈 Monthly trend',
+        stats_yearly: '📅 Yearly activity',
+        stats_breakdown: '📋 By habits',
+        stats_total: 'Total completed',
+        stats_week: 'This week',
+        stats_month: 'This month',
+        stats_percent: 'Completion percent',
+        stats_legend_less: 'Less',
+        stats_legend_more: 'More',
+        stats_active: 'Active',
+        stats_finished: 'Completed',
+        stats_progress: 'Done',
+        stats_period_weekly: 'Weekly',
+        stats_period_monthly: 'Monthly',
+        stats_period_yearly: 'Yearly'
     }
 };
 
@@ -413,8 +1211,23 @@ const translations = {
 let currentLang = localStorage.getItem('habitgo_lang') || 'uz';
 
 // Tarjima olish
-function t(key) {
-    return translations[currentLang]?.[key] || translations.uz[key] || key;
+function t(key, params) {
+    let text = translations[currentLang]?.[key] || translations.uz[key] || key;
+
+    // {n} kabi parametrlarni almashtirish
+    if (params && typeof text === 'string') {
+        Object.keys(params).forEach(k => {
+            text = text.replace(new RegExp(`\\{${k}\\}`, 'g'), params[k]);
+        });
+    }
+
+    return text;
+}
+
+// Kun nomlarini olish
+function tDay(dayIndex) {
+    const days = translations[currentLang]?.days_full || translations.uz.days_full;
+    return days[dayIndex] || '';
 }
 
 // Tilni o'zgartirish
@@ -422,8 +1235,23 @@ function setLanguage(lang) {
     if (!translations[lang]) return;
     currentLang = lang;
     localStorage.setItem('habitgo_lang', lang);
+
+    // HTML lang atributi
+    document.documentElement.lang = lang === 'uz' ? 'uz' : lang;
+
     applyTranslations();
     updateLanguageButtons();
+
+    // Sahifani qayta chizish
+    if (typeof renderHabits === 'function') renderHabits();
+    if (typeof renderTasks === 'function') renderTasks();
+    if (typeof renderTasksHeader === 'function') renderTasksHeader();
+    if (typeof renderBadgesPreview === 'function') renderBadgesPreview();
+    if (typeof renderChallenge === 'function') renderChallenge();
+    if (typeof updateStats === 'function') updateStats();
+    if (typeof updateTasksQuickInfo === 'function') updateTasksQuickInfo();
+    if (typeof renderLeaderboard === 'function') renderLeaderboard();
+
     console.log('[i18n] Til:', lang);
 }
 
@@ -432,17 +1260,24 @@ function applyTranslations() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         const translation = t(key);
-        if (translation) {
+        if (translation && translation !== key) {
             el.textContent = translation;
         }
     });
 
-    // Placeholder'lar
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         const translation = t(key);
-        if (translation) {
+        if (translation && translation !== key) {
             el.placeholder = translation;
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        const translation = t(key);
+        if (translation && translation !== key) {
+            el.title = translation;
         }
     });
 }
@@ -459,3 +1294,5 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTranslations();
     updateLanguageButtons();
 });
+
+console.log('[i18n] Tayyor');

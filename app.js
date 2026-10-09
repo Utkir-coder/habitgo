@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Asosiy mantiq
+// HABITGO — Asosiy mantiq (i18n bilan)
 // ============================================
 
 let habits = [];
@@ -77,9 +77,6 @@ async function initApp() {
     }
 }
 
-// ============================================
-// LOADING
-// ============================================
 function showLoadingState(show) {
     const loading = document.getElementById('loadingOverlay');
     if (loading) loading.style.display = show ? 'flex' : 'none';
@@ -137,11 +134,17 @@ async function loadHabits() {
 // SANA
 // ============================================
 function showCurrentDate() {
-    const days = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba'];
-    const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
     const now = new Date();
+    const days = translations[currentLang]?.days_full || translations.uz.days_full;
+    const months = {
+        uz: ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'],
+        ru: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    };
+    const monthNames = months[currentLang] || months.uz;
+
     const el = document.getElementById('currentDate');
-    if (el) el.textContent = `${days[now.getDay()]}, ${now.getDate()}-${months[now.getMonth()]}, ${now.getFullYear()}`;
+    if (el) el.textContent = `${days[now.getDay()]}, ${now.getDate()}-${monthNames[now.getMonth()]}, ${now.getFullYear()}`;
 }
 
 // ============================================
@@ -189,9 +192,6 @@ function isHabitFinished(habit) {
     return getTodayStr() > habit.endDate;
 }
 
-// ============================================
-// PREMIUM
-// ============================================
 function checkPremiumLimit() {
     const banner = document.getElementById('premiumLimit');
     if (!banner) return;
@@ -203,7 +203,7 @@ function checkPremiumLimit() {
 }
 
 // ============================================
-// MODAL — YANGI ODAT
+// MODAL
 // ============================================
 function openHabitModal() {
     document.getElementById('habitModal').style.display = 'flex';
@@ -215,7 +215,6 @@ function closeHabitModal() {
     resetForm();
 }
 
-// Modal tashqarisiga bosilganda yopish
 document.addEventListener('click', (e) => {
     const modal = document.getElementById('habitModal');
     if (modal && modal.style.display === 'flex' && e.target === modal) {
@@ -223,7 +222,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// ESC tugmasi
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         const modal = document.getElementById('habitModal');
@@ -235,9 +233,9 @@ document.addEventListener('keydown', (e) => {
 // ADD HABIT
 // ============================================
 async function addHabit() {
-    if (!currentUser) { alert('❌ Tizimga kiring!'); return; }
+    if (!currentUser) { alert('❌ ' + t('alert_signin_required')); return; }
     if (typeof isPremium === 'function' && !isPremium() && habits.length >= 3) {
-        alert('⚠️ Bepul tarifda faqat 3 ta odat!');
+        alert('⚠️ ' + t('alert_limit_reached'));
         if (typeof showSubscription === 'function') showSubscription();
         return;
     }
@@ -251,10 +249,10 @@ async function addHabit() {
     if (allDays) selectedDays = [0,1,2,3,4,5,6];
     else document.querySelectorAll('.day:checked').forEach(cb => selectedDays.push(parseInt(cb.value)));
 
-    if (!name) { alert('❌ Odat nomini kiriting!'); return; }
-    if (selectedDays.length === 0) { alert('❌ Kun tanlang!'); return; }
-    if (!time) { alert('❌ Vaqtni tanlang!'); return; }
-    if (!place) { alert('❌ Joyni kiriting!'); return; }
+    if (!name) { alert('❌ ' + t('alert_enter_habit_name')); return; }
+    if (selectedDays.length === 0) { alert('❌ ' + t('alert_select_day')); return; }
+    if (!time) { alert('❌ ' + t('alert_select_time')); return; }
+    if (!place) { alert('❌ ' + t('alert_enter_place')); return; }
 
     const today = getTodayStr();
     const range = getPeriodRange(period, today);
@@ -283,7 +281,7 @@ async function addHabit() {
 
         if (typeof renderChallenge === 'function') renderChallenge();
         if (typeof checkForNewBadges === 'function') setTimeout(checkForNewBadges, 500);
-        showToast(`✅ "${name}" qo'shildi!`);
+        showToast(`✅ "${name}" ${t('toast_habit_added')}`);
     } catch (err) {
         alert('❌ ' + err.message);
     } finally {
@@ -309,14 +307,14 @@ function resetForm() {
 // DELETE
 // ============================================
 async function deleteHabit(id) {
-    if (!confirm('Bu odatni o\'chirmoqchimisiz?')) return;
+    if (!confirm(t('alert_delete_confirm'))) return;
     try {
         const success = await deleteHabitFromDB(id);
         if (success) {
             habits = habits.filter(h => h.id !== id);
             renderHabits(); updateStats(); checkPremiumLimit();
             if (typeof renderChallenge === 'function') renderChallenge();
-            showToast('🗑 O\'chirildi');
+            showToast('🗑 ' + t('toast_habit_deleted'));
         }
     } catch (err) { alert('❌ ' + err.message); }
 }
@@ -331,7 +329,7 @@ async function checkHabit(id) {
     const todayDay = new Date().getDay();
 
     if (!habit.days.includes(todayDay)) {
-        alert('⚠️ Bugun bu odat kuni emas!');
+        alert('⚠️ ' + t('alert_not_today'));
         return;
     }
 
@@ -365,15 +363,15 @@ async function checkHabit(id) {
             last_check: newLastCheck
         });
         if (!wasDone) {
-            if (newStreak === 7) setTimeout(() => alert(`🔥 7 kun ketma-ket!`), 100);
-            else if (newStreak === 30) setTimeout(() => alert(`🏆 30 kun ketma-ket!`), 100);
+            if (newStreak === 7) setTimeout(() => alert(t('streak_7')), 100);
+            else if (newStreak === 30) setTimeout(() => alert(t('streak_30')), 100);
             if (typeof checkForNewBadges === 'function') setTimeout(checkForNewBadges, 500);
             if (typeof renderChallenge === 'function') renderChallenge();
         }
     } catch (err) {
         habit.completedDays = wasDone ? [...newCompletedDays, today] : newCompletedDays.filter(d => d !== today);
         renderHabits();
-        alert('❌ Saqlashda xato!');
+        alert('❌ ' + t('alert_save_error'));
     }
 }
 
@@ -406,16 +404,18 @@ function renderHabits() {
             const totalDaysNeeded = Math.round(habit.days.length * weeksCount);
             const doneCount = habit.completedDays.length;
             const percent = Math.min(100, Math.round((doneCount / Math.max(1, totalDaysNeeded)) * 100));
-            const dayNames = ['Yak', 'Dush', 'Sesh', 'Chor', 'Pay', 'Jum', 'Shan'];
-            const daysStr = habit.days.length === 7 ? 'Har kuni' : habit.days.map(d => dayNames[d]).join(', ');
-            const warning = (isToday && !isDone) ? '<span class="habit-warning">⚠️ Bajarilmadi</span>' : '';
+            const dayNames = ['day_sun', 'day_mon', 'day_tue', 'day_wed', 'day_thu', 'day_fri', 'day_sat'];
+            const daysStr = habit.days.length === 7
+                ? t('every_day')
+                : habit.days.map(d => t(dayNames[d])).join(', ');
+            const warning = (isToday && !isDone) ? `<span class="habit-warning">${t('not_done')}</span>` : '';
 
             return `
                 <div class="habit-item ${isDone ? 'completed' : ''}">
                     <div class="habit-info">
                         <div class="habit-name">${escapeHtml(habit.name)}</div>
                         <div class="habit-meta">
-                            <span class="habit-badge">${getPeriodName(habit.period)}</span>
+                            <span class="habit-badge">${t('period_' + habit.period)}</span>
                             <span>⏰ ${habit.time}</span>
                             <span>📍 ${escapeHtml(habit.place)}</span>
                             <span>📅 ${daysStr}</span>
@@ -423,10 +423,10 @@ function renderHabits() {
                             ${warning}
                         </div>
                         <div class="habit-progress"><div class="habit-progress-fill" style="width: ${percent}%"></div></div>
-                        <div style="font-size: 11px; color: #888; margin-top: 4px;">${doneCount} / ${totalDaysNeeded} kun (${percent}%)</div>
+                        <div style="font-size: 11px; color: #888; margin-top: 4px;">${doneCount} / ${totalDaysNeeded} ${t('days_label')} (${percent}%)</div>
                     </div>
                     <div class="habit-actions">
-                        <button class="btn-notes" onclick="openNotesModal(${habit.id})" title="Eslatmalar">📝</button>
+                        <button class="btn-notes" onclick="openNotesModal(${habit.id})" title="${t('notes_title')}">📝</button>
                         <button class="btn-check ${isDone ? 'done' : ''}" onclick="checkHabit(${habit.id})"
                                 ${!isToday ? 'disabled style="opacity:0.3;cursor:not-allowed"' : ''}>
                             ${isDone ? '✓' : '○'}
@@ -449,20 +449,16 @@ function renderHabits() {
             const totalDaysNeeded = Math.round(habit.days.length * weeksCount);
             const doneCount = habit.completedDays.length;
             const percent = Math.min(100, Math.round((doneCount / Math.max(1, totalDaysNeeded)) * 100));
-            let feedback = percent >= 90 ? '🏆 Ajoyib!' : percent >= 70 ? '🎉 Yaxshi!' : percent >= 50 ? '💪 Yaxshi' : '🌱 Keyingi safar!';
+            let feedback = percent >= 90 ? t('feedback_90') : percent >= 70 ? t('feedback_70') : percent >= 50 ? t('feedback_50') : t('feedback_low');
             return `
                 <div class="completed-item">
                     <div class="habit-name">${escapeHtml(habit.name)}</div>
                     <div class="completed-percent">${percent}%</div>
-                    <div class="completed-stats">📅 ${habit.startDate} – ${habit.endDate}<br>✅ ${doneCount} kun<br>${feedback}</div>
+                    <div class="completed-stats">📅 ${habit.startDate} – ${habit.endDate}<br>✅ ${doneCount} ${t('days_label')}<br>${feedback}</div>
                 </div>
             `;
         }).join('');
     }
-}
-
-function getPeriodName(period) {
-    return { weekly: 'Haftalik', monthly: 'Oylik', yearly: 'Yillik' }[period] || period;
 }
 
 function updateStats() {
@@ -496,10 +492,22 @@ function checkDailyReport() {
 
     const percent = Math.round((actuallyDone.length / shouldDone.length) * 100);
     let title, text;
-    if (percent === 100) { title = '🎉 Ajoyib!'; text = `Barcha odatlarni bajarding!\n\n${actuallyDone.length}/${shouldDone.length} ✅\n\n${randomFrom(praiseMessages)}`; }
-    else if (percent >= 70) { title = '👏 Yaxshi!'; text = `${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n${randomFrom(praiseMessages)}`; }
-    else if (percent >= 50) { title = '💪 Yaxshi...'; text = `${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n${randomFrom(encourageMessages)}`; }
-    else { title = '⚠️ Diqqat!'; text = `Faqat ${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n${randomFrom(encourageMessages)}`; }
+    if (percent === 100) {
+        title = t('daily_report_perfect');
+        text = t('report_all_done') + `\n\n${actuallyDone.length}/${shouldDone.length} ✅\n\n` + randomFrom(praiseMessages);
+    }
+    else if (percent >= 70) {
+        title = t('daily_report_good');
+        text = `${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n` + randomFrom(praiseMessages);
+    }
+    else if (percent >= 50) {
+        title = t('daily_report_ok');
+        text = `${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n` + randomFrom(encourageMessages);
+    }
+    else {
+        title = t('daily_report_bad');
+        text = t('report_only') + ` ${actuallyDone.length}/${shouldDone.length} (${percent}%)\n\n` + randomFrom(encourageMessages);
+    }
 
     const titleEl = document.getElementById('reportTitle');
     const textEl = document.getElementById('reportText');
@@ -541,11 +549,11 @@ function updateTasksQuickInfo() {
     if (typeof getTodayTasksCount !== 'function') return;
     const count = getTodayTasksCount();
     if (count > 0) {
-        info.textContent = `Bugun ${count} ta vazifa`;
+        info.textContent = t('tasks_today', { n: count });
         info.style.color = '#ff6b35';
         info.style.fontWeight = '600';
     } else {
-        info.textContent = 'Vazifalarni boshqarish';
+        info.textContent = t('tasks_manage');
         info.style.color = '';
         info.style.fontWeight = '';
     }
