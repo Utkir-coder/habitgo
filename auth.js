@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Auth (Safari + mobil dropdown fix)
+// HABITGO — Auth (Safari + iOS fix)
 // ============================================
 
 var currentUser = null;
@@ -195,7 +195,7 @@ async function logout() {
 }
 
 // ============================================
-// PROFIL MENYUSI — SAFARI + MOBIL FIX
+// PROFIL MENYUSI — SAFARI + iOS FIX
 // ============================================
 function toggleProfileMenu() {
     var dropdown = document.getElementById('profileDropdown');
@@ -219,10 +219,9 @@ function toggleProfileMenu() {
     // Barcha inline stillarni tozalash
     dropdown.removeAttribute('style');
 
-    if (isMobile) {
+    if (isMobile || safari || ios) {
         if (safari || ios) {
             // ========== SAFARI / iOS ==========
-            // Safari position:absolute ni to'g'ri ishlatadi (relative parent bilan)
             dropdown.style.cssText =
                 'position: absolute !important;' +
                 'top: 100% !important;' +
@@ -239,7 +238,11 @@ function toggleProfileMenu() {
                 'max-height: 70vh !important;' +
                 'overflow-y: auto !important;' +
                 '-webkit-overflow-scrolling: touch !important;' +
-                'border: 1px solid #e0e0e0 !important;';
+                'border: 1px solid #e0e0e0 !important;' +
+                '-webkit-transform: translateZ(0) !important;' +
+                'transform: translateZ(0) !important;';
+
+            menu.style.position = 'relative';
         } else {
             // ========== CHROME / ANDROID ==========
             var headerRect = header ? header.getBoundingClientRect() : { bottom: 60 };
@@ -260,9 +263,6 @@ function toggleProfileMenu() {
                 '-webkit-overflow-scrolling: touch !important;' +
                 'border: 1px solid #e0e0e0 !important;';
         }
-    } else {
-        // Desktop — standart holat
-        dropdown.removeAttribute('style');
     }
 
     // Dark mode uchun rang
@@ -371,10 +371,8 @@ supabaseClient.auth.onAuthStateChange(function(event, session) {
 });
 
 // ============================================
-// PREMIUM
+// PREMIUM (Bepul versiya — hamma narsa bepul)
 // ============================================
 function isPremium() {
-    if (!currentUserStats) return false;
-    if (currentUserStats.plan === 'free') return false;
     return true;
 }

@@ -6040,3 +6040,131 @@ body.dark .welcome-step {
         font-size: 12px;
     }
 }
+/* ============================================ */
+/* SAFARI + iOS UCHUN MAXSUS */
+/* ============================================ */
+
+/* Safari aniqlash */
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari */
+    .header {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+        -webkit-transform: translateZ(0) !important;
+        transform: translateZ(0) !important;
+    }
+
+    .profile-menu {
+        position: relative !important;
+    }
+
+    .dropdown {
+        -webkit-overflow-scrolling: touch !important;
+        -webkit-transform: translateZ(0) !important;
+        transform: translateZ(0) !important;
+    }
+
+    .modal,
+    .page-modal {
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    .modal-content,
+    .page-content {
+        -webkit-overflow-scrolling: touch !important;
+        max-height: 85vh !important;
+        overflow-y: auto !important;
+    }
+
+    /* iOS input zoom oldini olish */
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* Safari brauzer (Mac) */
+@supports (-webkit-hyphens: none) {
+    .dropdown {
+        -webkit-transform: translateZ(0) !important;
+        transform: translateZ(0) !important;
+    }
+}
+
+/* iOS uchun safe area */
+@supports (padding: max(0px)) {
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .header {
+        padding-top: calc(12px + env(safe-area-inset-top));
+    }
+}
+
+/* ============================================ */
+/* MOBIL DROPDOWN — YAKUNIY */
+/* ============================================ */
+@media (max-width: 768px) {
+    .profile-menu {
+        position: relative !important;
+    }
+
+    .dropdown {
+        display: none;
+    }
+
+    .dropdown.show {
+        display: block !important;
+        animation: dropdownFadeIn 0.2s ease !important;
+    }
+
+    @keyframes dropdownFadeIn {
+        from { opacity: 0; transform: translateY(-8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dropdown a {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 12px 14px !important;
+        font-size: 14px !important;
+        color: #333 !important;
+        text-decoration: none !important;
+        border-radius: 10px !important;
+        transition: background 0.15s !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    .dropdown a:hover,
+    .dropdown a:active {
+        background: #f0f0f5 !important;
+    }
+
+    .dropdown-icon {
+        font-size: 16px !important;
+        width: 20px !important;
+        text-align: center !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Dark mode */
+    body.dark .dropdown {
+        background: #1e1e2e !important;
+        border-color: #3a3a4e !important;
+    }
+
+    body.dark .dropdown a {
+        color: #e0e0e0 !important;
+    }
+
+    body.dark .dropdown a:hover,
+    body.dark .dropdown a:active {
+        background: #2a2a3e !important;
+    }
+}

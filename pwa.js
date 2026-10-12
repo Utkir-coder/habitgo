@@ -1,155 +1,197 @@
 // ============================================
-// HABITGO — PWA Install tugmasi
+// HABITGO — PWA (Safari + iOS fix)
 // ============================================
 
-let deferredPrompt = null;
-let installButtonShown = false;
+var deferredPrompt = null;
+var installButtonShown = false;
 
-// Service Worker'ni ro'yxatdan o'tkazish
+// ============================================
+// SAFARI ANIQLASH
+// ============================================
+function isSafariBrowser() {
+    var ua = navigator.userAgent;
+    return /Safari/i.test(ua) && !/Chrome/i.test(ua) && !/CriOS/i.test(ua) && !/FxiOS/i.test(ua);
+}
+
+function isIOSDevice() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+
+function isAndroidDevice() {
+    return /Android/i.test(navigator.userAgent);
+}
+
+function isPWA() {
+    return window.matchMedia('(display-mode: standalone)').matches ||
+           window.navigator.standalone === true ||
+           document.referrer.indexOf('android-app://') !== -1;
+}
+
+// ============================================
+// SERVICE WORKER RO'YXATDAN O'TKAZISH
+// ============================================
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
+    window.addEventListener('load', function() {
         navigator.serviceWorker.register('./service-worker.js')
-            .then((registration) => {
+            .then(function(registration) {
                 console.log('[PWA] Service Worker ro\'yxatdan o\'tdi:', registration.scope);
+
+                // Safari uchun yangilanishni kuzatish
+                registration.addEventListener('updatefound', function() {
+                    console.log('[PWA] Yangi SW topildi');
+                });
             })
-            .catch((err) => {
+            .catch(function(err) {
                 console.log('[PWA] SW xatosi:', err);
             });
     });
 }
 
-// Install taklifini ushlash
-window.addEventListener('beforeinstallprompt', (event) => {
+// ============================================
+// INSTALL TAKLIFINI USHLASH (Chrome / Android)
+// ============================================
+window.addEventListener('beforeinstallprompt', function(event) {
     console.log('[PWA] Install taklif keldi');
 
-    // Standart taklifni to'xtatish
     event.preventDefault();
-
-    // Keyinroq ishlatish uchun saqlash
     deferredPrompt = event;
 
-    // Install tugmasini ko'rsatish
-    showInstallButton();
+    // Android va Chrome uchun install tugmasi
+    if (!isPWA()) {
+        showInstallButton();
+    }
 });
 
-// Install tugmasini ko'rsatish
+// ============================================
+// INSTALL TUGMASI
+// ============================================
 function showInstallButton() {
     if (installButtonShown) return;
 
-    const container = document.getElementById('installBanner');
+    var container = document.getElementById('installBanner');
     if (!container) return;
 
     container.style.display = 'flex';
     installButtonShown = true;
 }
 
-// Install tugmasini yashirish
 function hideInstallButton() {
-    const container = document.getElementById('installBanner');
+    var container = document.getElementById('installBanner');
     if (container) {
         container.style.display = 'none';
     }
 }
 
-// Install tugmasi bosilganda
+// ============================================
+// INSTALL QILISH
+// ============================================
 async function installPWA() {
+    if (isIOSDevice()) {
+        // iOS uchun qo'llanma
+        showIOSInstallHint();
+        return;
+    }
+
     if (!deferredPrompt) {
         alert('❗ Ilovani o\'rnatib bo\'lmaydi.\n\nBrauzer menyusidan "Add to Home Screen" ni tanlang.');
         return;
     }
 
-    // Install taklifini ko'rsatish
     deferredPrompt.prompt();
 
-    // Foydalanuvchi javobini kutish
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log('[PWA] Foydalanuvchi tanlovi:', outcome);
+    var choiceResult = await deferredPrompt.userChoice;
+    console.log('[PWA] Foydalanuvchi tanlovi:', choiceResult.outcome);
 
-    if (outcome === 'accepted') {
+    if (choiceResult.outcome === 'accepted') {
         console.log('[PWA] O\'rnatildi!');
         showPWAToast('🎉 Ilova o\'rnatildi!');
     } else {
         console.log('[PWA] Bekor qilindi');
     }
 
-    // Tugmani yashirish
     deferredPrompt = null;
     hideInstallButton();
 }
 
-// O'rnatilgandan keyin
-window.addEventListener('appinstalled', () => {
+// ============================================
+// O'RNATILGANDAN KEYIN
+// ============================================
+window.addEventListener('appinstalled', function() {
     console.log('[PWA] O\'rnatildi!');
     hideInstallButton();
     showPWAToast('🎉 HabitGo telefoningizga o\'rnatildi!');
     deferredPrompt = null;
 });
 
-// PWA rejimida ishlayaptimi?
-function isPWA() {
-    return window.matchMedia('(display-mode: standalone)').matches ||
-           window.navigator.standalone === true ||
-           document.referrer.includes('android-app://');
+// ============================================
+// iOS UCHUN QO'LLANMA
+// ============================================
+function showIOSInstallHint() {
+    if (localStorage.getItem('habitgo_ios_hint_shown') === 'true') {
+        alert('📱 Safari\'da pastdagi Share (⬆️) tugmasini bosing, keyin "Add to Home Screen" ni tanlang.');
+        return;
+    }
+
+    var hint = document.createElement('div');
+    hint.className = 'ios-install-hint';
+    hint.innerHTML =
+        '<div class="ios-hint-content">' +
+            '<div class="ios-hint-icon">📱</div>' +
+            '<h3>' + t('pwa_install') + '</h3>' +
+            '<p>' + t('pwa_ios_hint') + '</p>' +
+            '<button onclick="this.parentElement.parentElement.remove(); localStorage.setItem(\'habitgo_ios_hint_shown\', \'true\');">' + t('pwa_got_it') + '</button>' +
+        '</div>';
+    document.body.appendChild(hint);
+
+    setTimeout(function() { hint.classList.add('show'); }, 10);
 }
 
-// Online/Offline holatini kuzatish
-window.addEventListener('online', () => {
+// ============================================
+// ONLINE / OFFLINE
+// ============================================
+window.addEventListener('online', function() {
     console.log('[PWA] Online');
-    showPWAToast('🌐 Internet qaytdi');
+    showPWAToast('🌐 ' + t('pwa_online'));
 });
 
-window.addEventListener('offline', () => {
+window.addEventListener('offline', function() {
     console.log('[PWA] Offline');
-    showPWAToast('📴 Offline rejim — hammasi ishlaydi');
+    showPWAToast('📴 ' + t('pwa_offline'));
 });
 
-// Toast xabar
+// ============================================
+// TOAST XABAR
+// ============================================
 function showPWAToast(text) {
-    const toast = document.createElement('div');
+    var toast = document.createElement('div');
     toast.className = 'pwa-toast';
     toast.textContent = text;
     document.body.appendChild(toast);
 
-    setTimeout(() => toast.classList.add('show'), 10);
-    setTimeout(() => {
+    setTimeout(function() { toast.classList.add('show'); }, 10);
+    setTimeout(function() {
         toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
+        setTimeout(function() { toast.remove(); }, 300);
     }, 3000);
 }
 
-// Sahifa yuklanganda
-document.addEventListener('DOMContentLoaded', () => {
+// ============================================
+// SAHIFA YUKLANGANDA
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
     // PWA rejimida bo'lsa — install banner ko'rsatmaslik
     if (isPWA()) {
         console.log('[PWA] Allaqachon PWA rejimida');
         return;
     }
 
-    // iOS uchun maxsus ko'rsatma
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if (isIOS && !isPWA()) {
-        setTimeout(() => {
-            showIOSInstallHint();
+    // iOS uchun maxsus ko'rsatma (5 sekunddan keyin)
+    if (isIOSDevice() && !isPWA()) {
+        setTimeout(function() {
+            // Faqat bir marta ko'rsatish
+            if (localStorage.getItem('habitgo_ios_hint_shown') !== 'true') {
+                showInstallButton();
+            }
         }, 5000);
     }
 });
-
-// iOS uchun install ko'rsatmasi
-function showIOSInstallHint() {
-    // Faqat bir marta ko'rsatish
-    if (localStorage.getItem('habitgo_ios_hint_shown')) return;
-
-    const hint = document.createElement('div');
-    hint.className = 'ios-install-hint';
-    hint.innerHTML = `
-        <div class="ios-hint-content">
-            <div class="ios-hint-icon">📱</div>
-            <h3>HabitGo'ni o'rnatish</h3>
-            <p>Safari'da pastdagi <strong>Share</strong> (⬆️) tugmasini bosing, keyin <strong>"Add to Home Screen"</strong> ni tanlang.</p>
-            <button onclick="this.parentElement.parentElement.remove(); localStorage.setItem('habitgo_ios_hint_shown', 'true');">Tushundim</button>
-        </div>
-    `;
-    document.body.appendChild(hint);
-
-    setTimeout(() => hint.classList.add('show'), 10);
-}
