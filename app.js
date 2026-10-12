@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Asosiy mantiq (Safari-compatible)
+// HABITGO — Asosiy mantiq (Bepul versiya)
 // ============================================
 
 var habits = [];
@@ -20,11 +20,12 @@ async function initApp() {
         checkDailyReport();
         renderHabits();
         updateStats();
-        checkPremiumLimit();
 
         if (typeof renderChallenge === 'function') renderChallenge();
         if (typeof loadTasks === 'function') await loadTasks();
         if (typeof updateTasksQuickInfo === 'function') updateTasksQuickInfo();
+
+        setTimeout(showWelcomeModal, 1500);
     } catch (err) {
         console.error('[App] Xato:', err);
     } finally {
@@ -164,14 +165,9 @@ function isHabitFinished(habit) {
     return getTodayStr() > habit.endDate;
 }
 
+// Bepul versiya — limit yo'q
 function checkPremiumLimit() {
-    var banner = document.getElementById('premiumLimit');
-    if (!banner) return;
-    if (typeof isPremium === 'function' && !isPremium() && habits.length >= 3) {
-        banner.style.display = 'block';
-    } else {
-        banner.style.display = 'none';
-    }
+    // Cheksiz odatlar
 }
 
 function openHabitModal() {
@@ -200,11 +196,6 @@ document.addEventListener('keydown', function(e) {
 
 async function addHabit() {
     if (!currentUser) { alert('❌ ' + t('alert_signin_required')); return; }
-    if (typeof isPremium === 'function' && !isPremium() && habits.length >= 3) {
-        alert('⚠️ ' + t('alert_limit_reached'));
-        if (typeof showSubscription === 'function') showSubscription();
-        return;
-    }
 
     var name = document.getElementById('habitName').value.trim();
     var period = document.querySelector('input[name="period"]:checked').value;
@@ -247,7 +238,7 @@ async function addHabit() {
             lastCheck: result.last_check, createdAt: result.created_at
         });
 
-        renderHabits(); updateStats(); checkPremiumLimit();
+        renderHabits(); updateStats();
         closeHabitModal();
 
         if (typeof renderChallenge === 'function') renderChallenge();
@@ -281,7 +272,7 @@ async function deleteHabit(id) {
         var success = await deleteHabitFromDB(id);
         if (success) {
             habits = habits.filter(function(h) { return h.id !== id; });
-            renderHabits(); updateStats(); checkPremiumLimit();
+            renderHabits(); updateStats();
             if (typeof renderChallenge === 'function') renderChallenge();
             showToast('🗑 ' + t('toast_habit_deleted'));
         }
@@ -521,5 +512,24 @@ function updateTasksQuickInfo() {
         info.textContent = t('tasks_manage');
         info.style.color = '';
         info.style.fontWeight = '';
+    }
+}
+
+// ============================================
+// WELCOME MODAL
+// ============================================
+function showWelcomeModal() {
+    if (!currentUser) return;
+    var key = 'habitgo_welcome_shown_' + currentUser.id;
+    if (localStorage.getItem(key) === 'true') return;
+    var modal = document.getElementById('welcomeModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeWelcomeModal() {
+    var modal = document.getElementById('welcomeModal');
+    if (modal) modal.style.display = 'none';
+    if (currentUser) {
+        localStorage.setItem('habitgo_welcome_shown_' + currentUser.id, 'true');
     }
 }

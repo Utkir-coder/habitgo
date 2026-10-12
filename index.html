@@ -40,6 +40,7 @@
         </nav>
 
         <section class="hero">
+            <div class="beta-badge" data-i18n="beta_badge">🎉 Beta versiya — hammasi bepul!</div>
             <h1>
                 <span data-i18n="hero_title_1">Odatlaringizni</span>
                 <span data-i18n="hero_title_2">o'zgartiring</span>,<br>
@@ -47,6 +48,7 @@
             </h1>
             <p class="hero-sub" data-i18n="hero_sub">Har qanday maqsad sari yo'l. Rejalashtir, kuzat, muvaffaqiyatga erish!</p>
             <button onclick="showRegister()" class="btn-hero" data-i18n="hero_btn">🚀 Bepul boshlash</button>
+            <p class="hero-note" data-i18n="hero_note">Karta kerak emas · 30 sekundda boshlash</p>
         </section>
 
         <section class="features">
@@ -68,48 +70,17 @@
                     <p data-i18n="feature_badges_desc">Streak yig'ing, badge oling</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3 data-i18n="feature_mobile">Telefonda ham</h3>
-                    <p data-i18n="feature_mobile_desc">PWA — o'rnatib oling</p>
+                    <div class="feature-icon">🤖</div>
+                    <h3 data-i18n="feature_ai">AI motivatsiya</h3>
+                    <p data-i18n="feature_ai_desc">Shaxsiy motivatsiya har kuni</p>
                 </div>
             </div>
         </section>
 
-        <section class="pricing">
-            <h2 data-i18n="pricing">Narxlar</h2>
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <h3 data-i18n="free">Bepul</h3>
-                    <div class="price"><span>0</span> <span data-i18n="per_month">so'm/oy</span></div>
-                    <ul>
-                        <li>✅ <span data-i18n="habits_3">3 tagacha odat</span></li>
-                        <li>✅ <span data-i18n="basic_stats">Asosiy statistika</span></li>
-                    </ul>
-                    <button onclick="showRegister()" class="btn-outline" data-i18n="start">Boshlash</button>
-                </div>
-                <div class="price-card featured">
-                    <div class="badge-popular" data-i18n="popular">🔥 Mashhur</div>
-                    <h3 data-i18n="premium">Premium</h3>
-                    <div class="price"><span>9,900</span> <span data-i18n="per_month">so'm/oy</span></div>
-                    <ul>
-                        <li>✅ <span data-i18n="unlimited_habits">Cheksiz odatlar</span></li>
-                        <li>✅ <span data-i18n="tasks_section">Rejalar bo'limi</span></li>
-                        <li>✅ <span data-i18n="leaderboard">Leaderboard</span></li>
-                        <li>✅ <span data-i18n="ai_motivation">AI motivatsiya</span></li>
-                    </ul>
-                    <button onclick="showRegister()" class="btn-primary" data-i18n="get_premium">Premium olish</button>
-                </div>
-                <div class="price-card">
-                    <div class="badge-save" data-i18n="save_2months">💰 2 oy bepul</div>
-                    <h3 data-i18n="yearly">Yillik</h3>
-                    <div class="price"><span>99,000</span> <span data-i18n="per_year">so'm/yil</span></div>
-                    <ul>
-                        <li>✅ <span data-i18n="premium_all">Premium'ning hammasi</span></li>
-                        <li>✅ <span data-i18n="discount_17">17% chegirma</span></li>
-                    </ul>
-                    <button onclick="showRegister()" class="btn-outline" data-i18n="get_yearly">Yillik olish</button>
-                </div>
-            </div>
+        <section class="cta-section">
+            <h2 data-i18n="cta_title">Hoziroq boshlang!</h2>
+            <p data-i18n="cta_text">Hammasi bepul. Hech qanday to'lov yo'q.</p>
+            <button onclick="showRegister()" class="btn-hero" data-i18n="hero_btn">🚀 Bepul boshlash</button>
         </section>
 
         <footer class="landing-footer">
@@ -174,7 +145,6 @@
                         <a href="#" onclick="showStatistics()"><span class="dropdown-icon">📊</span><span data-i18n="statistics">Statistika</span></a>
                         <a href="#" onclick="showAchievements()"><span class="dropdown-icon">🏆</span><span data-i18n="achievements">Yutuqlar</span></a>
                         <a href="#" onclick="showBackup()"><span class="dropdown-icon">💾</span><span data-i18n="backup">Backup</span></a>
-                        <a href="#" onclick="showSubscription()"><span class="dropdown-icon">💎</span><span data-i18n="subscription">Obuna</span></a>
                         <a href="#" onclick="logout()"><span class="dropdown-icon">🚪</span><span data-i18n="logout">Chiqish</span></a>
                     </div>
                 </div>
@@ -233,11 +203,6 @@
             </section>
 
             <section class="challenge-card" id="challengeCard"></section>
-
-            <div id="premiumLimit" class="premium-banner" style="display:none;">
-                <span data-i18n="premium_limit">⚠️ Bepul tarifda faqat 3 ta odat.</span>
-                <a href="#" onclick="showSubscription()" data-i18n="get_premium_link">💎 Premium olish</a>
-            </div>
 
             <section class="habits-section">
                 <h2 data-i18n="active_habits_title">📋 Faol odatlar</h2>
@@ -323,7 +288,6 @@
                 <div class="profile-details">
                     <p><strong data-i18n="profile_name_label">Ism:</strong> <span id="profileName">-</span></p>
                     <p><strong data-i18n="profile_email_label">Email:</strong> <span id="profileEmail">-</span></p>
-                    <p><strong data-i18n="profile_plan_label">Tarif:</strong> <span id="profilePlan" class="plan-badge">Bepul</span></p>
                     <p><strong data-i18n="profile_joined_label">Ro'yxatdan o'tgan:</strong> <span id="profileJoined">-</span></p>
                 </div>
             </div>
@@ -447,51 +411,35 @@
         </div>
     </div>
 
-    <div id="subscriptionPage" class="page-modal" style="display:none;">
-        <div class="page-content">
-            <span class="close-btn" onclick="closePage()">×</span>
-            <h2 data-i18n="subscription">💎 Obuna</h2>
-            <p class="subscription-info"><span data-i18n="your_plan">Hozirgi tarif:</span> <strong id="currentPlan" data-i18n="plan_free">Bepul</strong></p>
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <h3 data-i18n="free">Bepul</h3>
-                    <div class="price"><span>0</span> <span data-i18n="per_month">so'm</span></div>
-                    <ul><li>✅ <span data-i18n="habits_3">3 tagacha odat</span></li><li>✅ <span data-i18n="basic_stats">Asosiy statistika</span></li></ul>
-                    <button class="btn-outline" disabled data-i18n="your_plan">Sizning tarifingiz</button>
-                </div>
-                <div class="price-card featured">
-                    <div class="badge-popular" data-i18n="popular">🔥 Mashhur</div>
-                    <h3 data-i18n="premium">Premium</h3>
-                    <div class="price"><span>9,900</span> <span data-i18n="per_month">so'm/oy</span></div>
-                    <ul>
-                        <li>✅ <span data-i18n="unlimited_habits">Cheksiz odatlar</span></li>
-                        <li>✅ <span data-i18n="tasks_section">Rejalar</span></li>
-                        <li>✅ <span data-i18n="leaderboard">Leaderboard</span></li>
-                        <li>✅ <span data-i18n="ai_motivation">AI motivatsiya</span></li>
-                    </ul>
-                    <button class="btn-primary" onclick="buyPremium('monthly')" data-i18n="get_premium">Premium olish</button>
-                </div>
-                <div class="price-card">
-                    <div class="badge-save" data-i18n="save_2months">💰 2 oy bepul</div>
-                    <h3 data-i18n="yearly">Yillik</h3>
-                    <div class="price"><span>99,000</span> <span data-i18n="per_year">so'm/yil</span></div>
-                    <ul><li>✅ <span data-i18n="premium_all">Premium'ning hammasi</span></li><li>✅ <span data-i18n="discount_17">17% chegirma</span></li></ul>
-                    <button class="btn-primary" onclick="buyPremium('yearly')" data-i18n="get_yearly">Yillik olish</button>
-                </div>
-            </div>
-            <p class="payment-note">
-                <span data-i18n="payment_note">💳 To'lov: Payme, Click yoki Uzcard orqali</span><br>
-                <span data-i18n="payment_demo">(Demo versiyada to'lov simulyatsiya qilinadi)</span>
-            </p>
-        </div>
-    </div>
-
     <div id="achievementsPage" class="page-modal" style="display:none;">
         <div class="page-content">
             <span class="close-btn" onclick="closePage()">×</span>
             <h2 data-i18n="achievements">🏆 Yutuqlar</h2>
             <p style="color:#666; margin-bottom:20px;" data-i18n="achievements_subtitle">Odatlaringizni bajarib badge'lar yig'ing!</p>
             <div class="achievements-grid" id="achievementsGrid"></div>
+        </div>
+    </div>
+
+    <div id="welcomeModal" class="modal" style="display:none;">
+        <div class="modal-content welcome-modal-content">
+            <div class="welcome-icon">🎉</div>
+            <h2 data-i18n="welcome_title">HabitGo'ga xush kelibsiz!</h2>
+            <p data-i18n="welcome_text">Hamma funksiyalar bepul. Hoziroq boshlang!</p>
+            <div class="welcome-steps">
+                <div class="welcome-step">
+                    <span class="step-icon">1️⃣</span>
+                    <span data-i18n="welcome_step1">Odat qo'shing</span>
+                </div>
+                <div class="welcome-step">
+                    <span class="step-icon">2️⃣</span>
+                    <span data-i18n="welcome_step2">Har kuni belgilang</span>
+                </div>
+                <div class="welcome-step">
+                    <span class="step-icon">3️⃣</span>
+                    <span data-i18n="welcome_step3">Natijangizni ko'ring</span>
+                </div>
+            </div>
+            <button onclick="closeWelcomeModal()" class="btn-primary full" data-i18n="welcome_btn">Boshlash 🚀</button>
         </div>
     </div>
 

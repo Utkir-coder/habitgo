@@ -5679,3 +5679,152 @@ body.dark .auth-lang-switcher .lang-btn {
         }
     }
 }
+/* ============================================ */
+/* BETA BADGE */
+/* ============================================ */
+.beta-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #333;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+    animation: betaPulse 2s infinite;
+}
+
+@keyframes betaPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.hero-note {
+    margin-top: 15px;
+    font-size: 13px;
+    opacity: 0.8;
+    color: white;
+}
+
+/* ============================================ */
+/* CTA SECTION */
+/* ============================================ */
+.cta-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 60px 40px;
+    text-align: center;
+    color: white;
+}
+
+.cta-section h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+/* ============================================ */
+/* WELCOME MODAL */
+/* ============================================ */
+.welcome-modal-content {
+    text-align: center;
+    max-width: 420px;
+}
+
+.welcome-icon {
+    font-size: 70px;
+    margin-bottom: 15px;
+    animation: welcomeBounce 0.6s ease;
+}
+
+@keyframes welcomeBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.welcome-modal-content h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+body.dark .welcome-modal-content h2 {
+    color: #e0e0e0;
+}
+
+.welcome-modal-content > p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+body.dark .welcome-modal-content > p {
+    color: #a0a0b0;
+}
+
+.welcome-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.welcome-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #f8f9ff;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #333;
+}
+
+body.dark .welcome-step {
+    background: #2a2a3e;
+    color: #e0e0e0;
+}
+
+.step-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* Mobil */
+@media (max-width: 768px) {
+    .beta-badge {
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+
+    .hero-note {
+        font-size: 12px;
+    }
+
+    .cta-section {
+        padding: 40px 20px;
+    }
+
+    .cta-section h2 {
+        font-size: 24px;
+    }
+
+    .cta-section p {
+        font-size: 14px;
+    }
+
+    .welcome-icon {
+        font-size: 55px;
+    }
+
+    .welcome-modal-content h2 {
+        font-size: 18px;
+    }
+}
