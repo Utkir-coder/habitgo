@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Ko'p tilli (i18n) — Bepul versiya
+// HABITGO — Ko'p tilli (i18n) — Analytics bilan
 // ============================================
 
 const translations = {
@@ -1220,6 +1220,7 @@ function setLanguage(lang) {
     if (typeof showCurrentDate === 'function') showCurrentDate();
     if (typeof renderNotesList === 'function' && typeof currentNoteHabitId !== 'undefined' && currentNoteHabitId) renderNotesList();
     if (typeof renderColorOptions === 'function') renderColorOptions();
+    if (typeof trackLanguageChange === 'function') trackLanguageChange(lang);
 
     console.log('[i18n] Til:', lang);
 }

@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Asosiy mantiq (Bepul versiya)
+// HABITGO — Asosiy mantiq (Analytics bilan)
 // ============================================
 
 var habits = [];
@@ -165,9 +165,8 @@ function isHabitFinished(habit) {
     return getTodayStr() > habit.endDate;
 }
 
-// Bepul versiya — limit yo'q
 function checkPremiumLimit() {
-    // Cheksiz odatlar
+    // Bepul versiya — limit yo'q
 }
 
 function openHabitModal() {
@@ -243,6 +242,7 @@ async function addHabit() {
 
         if (typeof renderChallenge === 'function') renderChallenge();
         if (typeof checkForNewBadges === 'function') setTimeout(checkForNewBadges, 500);
+        if (typeof trackHabitAdded === 'function') trackHabitAdded(name, period);
         showToast('✅ "' + name + '" ' + t('toast_habit_added'));
     } catch (err) {
         alert('❌ ' + err.message);
@@ -269,11 +269,17 @@ function resetForm() {
 async function deleteHabit(id) {
     if (!confirm(t('alert_delete_confirm'))) return;
     try {
+        var habit = null;
+        for (var i = 0; i < habits.length; i++) {
+            if (habits[i].id === id) { habit = habits[i]; break; }
+        }
+
         var success = await deleteHabitFromDB(id);
         if (success) {
             habits = habits.filter(function(h) { return h.id !== id; });
             renderHabits(); updateStats();
             if (typeof renderChallenge === 'function') renderChallenge();
+            if (habit && typeof trackHabitDeleted === 'function') trackHabitDeleted(habit.name);
             showToast('🗑 ' + t('toast_habit_deleted'));
         }
     } catch (err) { alert('❌ ' + err.message); }
@@ -328,6 +334,7 @@ async function checkHabit(id) {
             else if (newStreak === 30) setTimeout(function() { alert(t('streak_30')); }, 100);
             if (typeof checkForNewBadges === 'function') setTimeout(checkForNewBadges, 500);
             if (typeof renderChallenge === 'function') renderChallenge();
+            if (typeof trackHabitCompleted === 'function') trackHabitCompleted(habit.name, newStreak);
         }
     } catch (err) {
         habit.completedDays = wasDone ? newCompletedDays.concat([today]) : newCompletedDays.filter(function(d) { return d !== today; });
@@ -515,9 +522,6 @@ function updateTasksQuickInfo() {
     }
 }
 
-// ============================================
-// WELCOME MODAL
-// ============================================
 function showWelcomeModal() {
     if (!currentUser) return;
     var key = 'habitgo_welcome_shown_' + currentUser.id;

@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Auth (Safari + iOS fix)
+// HABITGO — Auth (Analytics bilan)
 // ============================================
 
 var currentUser = null;
@@ -7,22 +7,15 @@ var currentUserProfile = null;
 var currentUserStats = null;
 var authReady = false;
 
-// ============================================
-// SAFARI ANIQLASH
-// ============================================
 function isSafariBrowser() {
     var ua = navigator.userAgent;
-    var isSafari = /Safari/i.test(ua) && !/Chrome/i.test(ua) && !/CriOS/i.test(ua) && !/FxiOS/i.test(ua);
-    return isSafari;
+    return /Safari/i.test(ua) && !/Chrome/i.test(ua) && !/CriOS/i.test(ua) && !/FxiOS/i.test(ua);
 }
 
 function isIOSDevice() {
     return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 }
 
-// ============================================
-// SAHIFA BOSHQARUVI
-// ============================================
 function showLanding() {
     document.getElementById('landingPage').style.display = 'block';
     document.getElementById('appPage').style.display = 'none';
@@ -44,9 +37,6 @@ function showApp() {
     }
 }
 
-// ============================================
-// MODAL BOSHQARUVI
-// ============================================
 function showLogin() {
     document.getElementById('authModal').style.display = 'flex';
     document.getElementById('loginForm').style.display = 'block';
@@ -63,9 +53,6 @@ function closeModal() {
     document.getElementById('authModal').style.display = 'none';
 }
 
-// ============================================
-// RO'YXATDAN O'TISH
-// ============================================
 async function register() {
     var name = document.getElementById('regName').value.trim();
     var email = document.getElementById('regEmail').value.trim().toLowerCase();
@@ -116,6 +103,7 @@ async function register() {
 
         closeModal();
         showApp();
+        if (typeof trackRegister === 'function') trackRegister('email');
         alert('🎉 ' + t('auth_welcome') + ', ' + name + '!');
 
     } catch (err) {
@@ -127,9 +115,6 @@ async function register() {
     }
 }
 
-// ============================================
-// KIRISH
-// ============================================
 async function login() {
     var email = document.getElementById('loginEmail').value.trim().toLowerCase();
     var password = document.getElementById('loginPassword').value;
@@ -164,6 +149,7 @@ async function login() {
 
         closeModal();
         showApp();
+        if (typeof trackLogin === 'function') trackLogin('email');
         alert('👋 ' + t('auth_welcome') + '!');
 
     } catch (err) {
@@ -175,13 +161,11 @@ async function login() {
     }
 }
 
-// ============================================
-// CHIQISH
-// ============================================
 async function logout() {
     if (!confirm(t('auth_logout_confirm'))) return;
 
     try {
+        if (typeof trackLogout === 'function') trackLogout();
         await supabaseClient.auth.signOut();
         currentUser = null;
         currentUserProfile = null;
@@ -194,9 +178,6 @@ async function logout() {
     }
 }
 
-// ============================================
-// PROFIL MENYUSI — SAFARI + iOS FIX
-// ============================================
 function toggleProfileMenu() {
     var dropdown = document.getElementById('profileDropdown');
     var menu = document.querySelector('.profile-menu');
@@ -216,12 +197,10 @@ function toggleProfileMenu() {
     var ios = isIOSDevice();
     var isMobile = window.innerWidth <= 768;
 
-    // Barcha inline stillarni tozalash
     dropdown.removeAttribute('style');
 
     if (isMobile || safari || ios) {
         if (safari || ios) {
-            // ========== SAFARI / iOS ==========
             dropdown.style.cssText =
                 'position: absolute !important;' +
                 'top: 100% !important;' +
@@ -241,10 +220,8 @@ function toggleProfileMenu() {
                 'border: 1px solid #e0e0e0 !important;' +
                 '-webkit-transform: translateZ(0) !important;' +
                 'transform: translateZ(0) !important;';
-
             menu.style.position = 'relative';
         } else {
-            // ========== CHROME / ANDROID ==========
             var headerRect = header ? header.getBoundingClientRect() : { bottom: 60 };
             dropdown.style.cssText =
                 'position: fixed !important;' +
@@ -265,7 +242,6 @@ function toggleProfileMenu() {
         }
     }
 
-    // Dark mode uchun rang
     if (document.body.classList.contains('dark')) {
         dropdown.style.background = '#1e1e2e';
         dropdown.style.borderColor = '#3a3a4e';
@@ -274,9 +250,6 @@ function toggleProfileMenu() {
     dropdown.classList.add('show');
 }
 
-// ============================================
-// TASHQARIGA BOSILGANDA YOPISH
-// ============================================
 document.addEventListener('click', function(e) {
     var menu = document.querySelector('.profile-menu');
     var dropdown = document.getElementById('profileDropdown');
@@ -286,9 +259,6 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// ============================================
-// SKROLL BO'LGanda YOPISH (mobil)
-// ============================================
 var lastScrollY = window.scrollY;
 window.addEventListener('scroll', function() {
     if (window.innerWidth <= 768 && Math.abs(window.scrollY - lastScrollY) > 50) {
@@ -301,9 +271,6 @@ window.addEventListener('scroll', function() {
     }
 }, { passive: true });
 
-// ============================================
-// SAHIFA O'LCHAMI O'ZGARGANDA
-// ============================================
 window.addEventListener('resize', function() {
     var dropdown = document.getElementById('profileDropdown');
     if (dropdown && dropdown.classList.contains('show')) {
@@ -312,16 +279,11 @@ window.addEventListener('resize', function() {
     }
 });
 
-// ============================================
-// AVTOMATIK KIRISH
-// ============================================
 async function initializeAuth() {
     if (authReady) return;
     authReady = true;
 
     console.log('[Auth] ===== Boshlash =====');
-    console.log('[Auth] Safari:', isSafariBrowser() ? 'Ha' : 'Yo\'q');
-    console.log('[Auth] iOS:', isIOSDevice() ? 'Ha' : 'Yo\'q');
 
     try {
         var session = await getSession();
@@ -354,9 +316,6 @@ if (document.readyState === 'loading') {
     initializeAuth();
 }
 
-// ============================================
-// AUTH HOLATI
-// ============================================
 supabaseClient.auth.onAuthStateChange(function(event, session) {
     console.log('[Auth] State:', event);
 
@@ -370,9 +329,6 @@ supabaseClient.auth.onAuthStateChange(function(event, session) {
     }
 });
 
-// ============================================
-// PREMIUM (Bepul versiya — hamma narsa bepul)
-// ============================================
 function isPremium() {
     return true;
 }
