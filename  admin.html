@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HabitGo — Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <!-- YUKLASH -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Yuklanmoqda...</p>
+    </div>
+
+    <!-- KIRISH -->
+    <div id="loginPage" class="login-page" style="display:none;">
+        <div class="login-box">
+            <div class="login-logo">🚀 HabitGo</div>
+            <h2>Admin Panel</h2>
+            <p class="login-note">Faqat adminlar uchun</p>
+            <input type="email" id="adminEmail" placeholder="Email">
+            <input type="password" id="adminPassword" placeholder="Parol">
+            <button onclick="adminLogin()" class="btn-login">Kirish</button>
+            <p id="loginError" class="login-error"></p>
+        </div>
+    </div>
+
+    <!-- ACCESS DENIED -->
+    <div id="accessDenied" class="login-page" style="display:none;">
+        <div class="login-box">
+            <div class="access-icon">🚫</div>
+            <h2>Ruxsat yo'q</h2>
+            <p>Siz admin emassiz.</p>
+            <a href="/" class="btn-back">Bosh sahifaga qaytish</a>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPage" style="display:none;">
+
+        <header class="admin-header">
+            <div class="admin-logo">🚀 HabitGo Admin</div>
+            <div class="admin-header-right">
+                <span id="adminEmailDisplay" class="admin-email"></span>
+                <button onclick="adminLogout()" class="btn-logout">Chiqish</button>
+            </div>
+        </header>
+
+        <main class="admin-container">
+
+            <!-- STATISTIKA -->
+            <section class="admin-section">
+                <h2>📊 Umumiy statistika</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-value" id="statTotalUsers">0</div>
+                        <div class="stat-label">Jami foydalanuvchilar</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🆕</div>
+                        <div class="stat-value" id="statTodayUsers">0</div>
+                        <div class="stat-label">Bugun ro'yxatdan o'tgan</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-value" id="statActiveUsers">0</div>
+                        <div class="stat-label">Faol foydalanuvchilar</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-value" id="statTotalHabits">0</div>
+                        <div class="stat-label">Jami odatlar</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value" id="statTotalCompleted">0</div>
+                        <div class="stat-label">Jami bajarilgan</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-value" id="statTotalTasks">0</div>
+                        <div class="stat-label">Jami vazifalar</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOYDALANUVCHILAR -->
+            <section class="admin-section">
+                <h2>👥 Foydalanuvchilar</h2>
+
+                <div class="search-box">
+                    <input type="text" id="userSearch" placeholder="🔍 Email yoki ism bo'yicha qidirish..." oninput="filterUsers()">
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ism</th>
+                                <th>Email</th>
+                                <th>Ro'yxatdan o'tgan</th>
+                                <th>Odatlar</th>
+                                <th>Bajarilgan</th>
+                                <th>Streak</th>
+                                <th>Level</th>
+                                <th>Tarif</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <tr><td colspan="10" class="loading-row">Yuklanmoqda...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-info">
+                    <span id="usersCount">0 ta foydalanuvchi</span>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="admin-footer">
+            <p>© 2026 HabitGo Admin Panel</p>
+        </footer>
+    </div>
+
+    <!-- FOYDALANUVCHI MODAL -->
+    <div id="userModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeUserModal()">×</span>
+            <h2 id="modalUserName">Foydalanuvchi</h2>
+            <div id="modalUserInfo" class="modal-info"></div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
