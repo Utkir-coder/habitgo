@@ -1,5 +1,5 @@
 // ============================================
-// HABITGO — Admin Panel
+// HABITGO — Admin Panel (tuzatilgan)
 // ============================================
 
 const SUPABASE_URL = 'https://zispqithqfobiveofltm.supabase.co';
@@ -21,16 +21,22 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function checkAdminSession() {
-    try {
-        var session = await supabaseClient.auth.getSession();
+    console.log('[Admin] Sessiya tekshirilmoqda...');
 
-        if (!session.data.session) {
+    try {
+        var sessionResult = await supabaseClient.auth.getSession();
+
+        if (!sessionResult.data.session) {
+            console.log('[Admin] Sessiya yo\'q');
             showLogin();
             return;
         }
 
-        var user = session.data.session.user;
+        var user = sessionResult.data.session.user;
+        console.log('[Admin] User:', user.email, user.id);
+
         var isAdmin = await checkIsAdmin(user.id);
+        console.log('[Admin] isAdmin:', isAdmin);
 
         if (isAdmin) {
             showAdminPanel(user);
@@ -48,10 +54,16 @@ async function checkIsAdmin(userId) {
         var result = await supabaseClient
             .from('admins')
             .select('*')
-            .eq('user_id', userId)
-            .maybeSingle();
+            .eq('user_id', userId);
 
-        return result.data !== null;
+        console.log('[Admin] checkIsAdmin result:', result);
+
+        if (result.error) {
+            console.error('[Admin] Xato:', result.error);
+            return false;
+        }
+
+        return result.data && result.data.length > 0;
     } catch (err) {
         console.error('[Admin] Admin tekshirish xatosi:', err);
         return false;
@@ -116,7 +128,6 @@ async function adminLogin() {
         } else {
             await supabaseClient.auth.signOut();
             errorEl.textContent = '🚫 Siz admin emassiz!';
-            showAccessDenied();
         }
     } catch (err) {
         console.error('[Admin] Login xatosi:', err);
@@ -134,8 +145,9 @@ async function adminLogout() {
 // MA'LUMOTLARNI YUKLASH
 // ============================================
 async function loadAllData() {
+    console.log('[Admin] Ma\'lumotlar yuklanmoqda...');
+
     try {
-        // 1. Foydalanuvchilar
         var profilesResult = await supabaseClient.from('user_profiles').select('*');
         var statsResult = await supabaseClient.from('user_stats').select('*');
         var habitsResult = await supabaseClient.from('habits').select('*');
@@ -145,6 +157,10 @@ async function loadAllData() {
         allStats = statsResult.data || [];
         allHabits = habitsResult.data || [];
         allTasks = tasksResult.data || [];
+
+        console.log('[Admin] Foydalanuvchilar:', allUsers.length);
+        console.log('[Admin] Odatlar:', allHabits.length);
+        console.log('[Admin] Vazifalar:', allTasks.length);
 
         renderStats();
         renderUsers();
@@ -165,24 +181,15 @@ function renderStats() {
         return u.joined_at && u.joined_at.split('T')[0] === today;
     }).length;
 
-    var activeUsers = 0;
     var totalHabits = allHabits.length;
     var totalCompleted = 0;
     var totalTasks = allTasks.length;
-
-    // Har bir foydalanuvchi uchun
-    var userCompletedMap = {};
+    var activeUsers = 0;
 
     allHabits.forEach(function(h) {
-        var userId = h.user_id;
-        var completedCount = (h.completed_days || []).length;
-        totalCompleted += completedCount;
-
-        if (!userCompletedMap[userId]) userCompletedMap[userId] = 0;
-        userCompletedMap[userId] += completedCount;
+        totalCompleted += (h.completed_days || []).length;
     });
 
-    // Faol foydalanuvchilar (bugun bajarganlar)
     allUsers.forEach(function(u) {
         var userHabits = allHabits.filter(function(h) { return h.user_id === u.user_id; });
         var hasTodayActivity = userHabits.some(function(h) {
@@ -314,7 +321,6 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// Modal tashqarisi
 document.addEventListener('click', function(e) {
     var modal = document.getElementById('userModal');
     if (modal && e.target === modal) {
