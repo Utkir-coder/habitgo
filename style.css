@@ -1,22 +1,18 @@
 /* ============================================
-   HABITGO — ELITA VA KLASSIK DIZAYN
-   (Old Money / Vintage Luxury Style)
+   HABITGO — ELITA VA KLASSIK DIZAYN (To'g'rilangan)
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 
 :root {
-    /* Elita Ranglar Palitrasi */
-    --bg-dark: #0a0e0c;        /* Qora-yashil (Tungi fon) */
-    --bg-paper: #f4f1ea;       /* Qadimiy qog'oz (Kunduzgi fon) */
-    --text-main: #2c2a26;      /* To'q jigarrang matn */
-    --text-light: #e8e3d9;     /* Och sarg'ish matn */
-    --gold: #c5a059;           /* Tilla */
-    --gold-hover: #d4b36a;     /* Yorqin tilla */
-    --gold-dark: #9a7b3c;      /* To'q tilla */
-    --border-color: #d1c8b4;   /* Qog'oz chegara rangi */
-    --border-dark: #2a3a2e;    /* Tungi chegara */
-    --accent-red: #8b2e2e;     /* Klassik qizil (xato uchun) */
+    --bg-dark: #0a0e0c;
+    --bg-paper: #f4f1ea;
+    --text-main: #2c2a26;
+    --text-light: #e8e3d9;
+    --gold: #c5a059;
+    --gold-hover: #d4b36a;
+    --border-color: #d1c8b4;
+    --border-dark: #2a3a2e;
 }
 
 * {
@@ -27,67 +23,47 @@
 
 body {
     background-color: var(--bg-paper);
-    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>'); /* Nozik qog'oz teksturasi */
     color: var(--text-main);
     font-family: 'Lora', serif;
     line-height: 1.6;
-    transition: background 0.5s, color 0.5s;
+    transition: background 0.3s, color 0.3s;
 }
 
-/* Tungi rejim (Dark Mode) — Elita uslubida */
 body.dark {
     background-color: var(--bg-dark);
-    background-image: none;
     color: var(--text-light);
 }
 
-/* ============================================
-   TIPOGRAFIYA (Shriftlar)
-   ============================================ */
-h1, h2, h3, h4, h5, h6, .logo, .stat-number {
+h1, h2, h3, .logo, .stat-number {
     font-family: 'Playfair Display', serif;
     font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-h1 {
-    font-family: 'Cinzel', serif; /* Eng klassik shrift */
-    text-transform: uppercase;
-    letter-spacing: 2px;
 }
 
 /* ============================================
-   HEADER
+   HEADER (Tepa qismi)
    ============================================ */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background: transparent;
+    padding: 15px 40px;
     border-bottom: 1px solid var(--border-color);
+    background: var(--bg-paper);
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(10px);
 }
 
 body.dark .header {
+    background: var(--bg-dark);
     border-bottom-color: var(--border-dark);
 }
 
 .logo {
-    font-size: 28px;
     font-family: 'Cinzel', serif;
-    font-weight: 700;
-    color: var(--text-main);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-body.dark .logo {
-    color: var(--text-light);
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .header-right {
@@ -96,385 +72,274 @@ body.dark .logo {
     gap: 20px;
 }
 
-.date {
+/* Til va tema tugmalari */
+.lang-switcher, .btn-theme, .btn-add-habit {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 5px 10px;
     font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #777;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text-main);
+}
+body.dark .lang-switcher, body.dark .btn-theme, body.dark .btn-add-habit {
+    border-color: var(--border-dark);
+    color: var(--gold);
 }
 
-body.dark .date {
-    color: #aaa;
+/* Profil menyusi */
+.profile-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    position: relative;
 }
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    background: transparent;
+    color: var(--text-main);
+}
+body.dark .avatar { color: var(--gold); }
+
+.dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: var(--bg-paper);
+    border: 1px solid var(--border-color);
+    display: none;
+    flex-direction: column;
+    width: 200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+body.dark .dropdown { background: var(--bg-dark); border-color: var(--gold); }
+.dropdown.show { display: flex; }
+
+.dropdown a {
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-color);
+}
+body.dark .dropdown a { color: var(--text-light); border-bottom-color: var(--border-dark); }
+.dropdown a:hover { background: rgba(197, 160, 89, 0.1); color: var(--gold); }
 
 /* ============================================
-   TUGMALAR (Klassik uslub)
+   MOTIVATSIYA BANNERI
    ============================================ */
-button {
-    cursor: pointer;
-    font-family: 'Lora', serif;
-    transition: all 0.3s ease;
-}
-
-.btn-primary, .btn-hero, .btn-add {
-    background-color: var(--text-main);
-    color: var(--gold);
-    border: 1px solid var(--text-main);
-    padding: 12px 28px;
-    border-radius: 0; /* Burchaklar o'tkir */
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-body.dark .btn-primary,
-body.dark .btn-hero,
-body.dark .btn-add {
-    background-color: var(--gold);
-    color: var(--bg-dark);
-    border-color: var(--gold);
-}
-
-.btn-primary:hover, .btn-hero:hover, .btn-add:hover {
-    background-color: transparent;
-    color: var(--text-main);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-body.dark .btn-primary:hover,
-body.dark .btn-hero:hover,
-body.dark .btn-add:hover {
-    background-color: transparent;
-    color: var(--gold);
-}
-
-.btn-outline {
-    background-color: transparent;
-    color: var(--text-main);
-    border: 1px solid var(--text-main);
-    padding: 12px 28px;
-    border-radius: 0;
-    font-size: 16px;
-    text-transform: uppercase;
-}
-
-body.dark .btn-outline {
-    color: var(--gold);
-    border-color: var(--gold);
-}
-
-.btn-outline:hover {
-    background-color: var(--text-main);
-    color: var(--bg-paper);
-}
-
-body.dark .btn-outline:hover {
-    background-color: var(--gold);
-    color: var(--bg-dark);
-}
-
-.btn-theme {
-    background: transparent;
-    border: none;
+.motivation-banner {
+    text-align: center;
+    padding: 30px 20px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
     font-size: 20px;
-    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
+    letter-spacing: 0.5px;
 }
-
-body.dark .btn-theme {
-    color: var(--gold);
-}
+body.dark .motivation-banner { border-bottom-color: var(--border-dark); color: var(--gold); }
 
 /* ============================================
    KONTEYNER VA KARTOCHKALAR
    ============================================ */
 .container {
     max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
-.stats, .add-habit, .habits-section, .badges-preview, .challenge-card, .tasks-quick-access {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    border-radius: 0;
-    padding: 30px;
-    margin-bottom: 40px;
-    box-shadow: none;
-}
-
-body.dark .stats,
-body.dark .add-habit,
-body.dark .habits-section,
-body.dark .badges-preview,
-body.dark .challenge-card,
-body.dark .tasks-quick-access {
-    border-color: var(--border-dark);
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
 /* Statistika */
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    text-align: center;
+    border: 1px solid var(--border-color);
+    margin-bottom: 30px;
 }
+body.dark .stats { border-color: var(--border-dark); }
 
 .stat-card {
+    text-align: center;
+    padding: 30px 20px;
     border-right: 1px solid var(--border-color);
 }
-
-body.dark .stat-card {
-    border-right-color: var(--border-dark);
-}
-
-.stat-card:last-child {
-    border-right: none;
-}
+body.dark .stat-card { border-right-color: var(--border-dark); }
+.stat-card:last-child { border-right: none; }
 
 .stat-number {
-    font-size: 48px;
+    font-size: 42px;
     font-family: 'Cinzel', serif;
     color: var(--text-main);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
-
-body.dark .stat-number {
-    color: var(--gold);
-}
+body.dark .stat-number { color: var(--gold); }
 
 .stat-label {
-    font-size: 13px;
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    color: #777;
+}
+body.dark .stat-label { color: #999; }
+
+/* Rejalar tugmasi (Tasks Quick) */
+.tasks-quick-access {
+    margin-bottom: 30px;
+}
+
+.tasks-quick-btn {
+    width: 100%;
+    padding: 20px 30px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s;
+}
+body.dark .tasks-quick-btn { border-color: var(--border-dark); }
+
+.tasks-quick-btn:hover {
+    background: rgba(197, 160, 89, 0.05);
+    border-color: var(--gold);
+}
+
+.tasks-quick-text strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    display: block;
+}
+
+.tasks-quick-text span {
+    font-size: 14px;
+    font-style: italic;
     color: #777;
 }
 
-/* Odat qo'shish formasi */
+/* Challenge Card */
+.challenge-card {
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    margin-bottom: 30px;
+}
+body.dark .challenge-card { border-color: var(--border-dark); }
+
+.challenge-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.challenge-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+}
+.challenge-xp {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+}
+
+/* Odat qo'shish va Ro'yxat */
+.add-habit, .habits-section, .badges-preview {
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    margin-bottom: 30px;
+}
+body.dark .add-habit, body.dark .habits-section, body.dark .badges-preview { border-color: var(--border-dark); }
+
+.add-habit h2, .habits-section h2, .badges-preview h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+body.dark .add-habit h2, body.dark .habits-section h2 { border-bottom-color: var(--border-dark); }
+
+/* Inputlar */
 .add-form {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     flex-wrap: wrap;
-    align-items: center;
 }
 
-.add-form input,
-.add-form select {
+.add-form input, .add-form select {
     flex: 1;
-    min-width: 200px;
-    padding: 15px;
-    background: transparent;
+    padding: 12px;
     border: 1px solid var(--border-color);
-    border-radius: 0;
+    background: transparent;
     font-family: 'Lora', serif;
-    font-size: 15px;
     color: var(--text-main);
 }
-
-body.dark .add-form input,
-body.dark .add-form select {
+body.dark .add-form input, body.dark .add-form select {
     border-color: var(--border-dark);
     color: var(--text-light);
 }
 
-.add-form input:focus,
-.add-form select:focus {
-    outline: none;
+/* Tugmalar */
+.btn-add, .btn-primary {
+    padding: 12px 25px;
+    background: var(--text-main);
+    color: var(--bg-paper);
+    border: 1px solid var(--text-main);
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+body.dark .btn-add, body.dark .btn-primary {
+    background: var(--gold);
+    color: var(--bg-dark);
     border-color: var(--gold);
 }
 
-/* Odatlar ro'yxati */
+/* Odat kartochkasi */
 .habit-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 15px;
-    background: transparent;
+    padding: 15px 0;
+    border-bottom: 1px dotted var(--border-color);
 }
-
-body.dark .habit-item {
-    border-color: var(--border-dark);
-}
-
-.habit-item.completed {
-    border-color: var(--gold);
-    opacity: 0.8;
-}
+body.dark .habit-item { border-bottom-color: var(--border-dark); }
+.habit-item:last-child { border-bottom: none; }
 
 .habit-name {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 5px;
+    font-size: 18px;
 }
 
-.habit-meta {
+.habit-meta span {
     font-size: 13px;
+    margin-right: 10px;
     color: #777;
-    font-style: italic;
-    display: flex;
-    gap: 15px;
 }
 
-body.dark .habit-meta {
-    color: #aaa;
-}
-
+/* Check tugmasi */
 .btn-check {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--text-main);
     background: transparent;
     color: var(--text-main);
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    cursor: pointer;
+    margin-left: 10px;
 }
-
-body.dark .btn-check {
-    border-color: var(--border-dark);
-    color: var(--gold);
-}
-
-.btn-check:hover, .btn-check.done {
-    background-color: var(--gold);
+body.dark .btn-check { border-color: var(--gold); color: var(--gold); }
+.btn-check.done {
+    background: var(--gold);
+    color: white;
     border-color: var(--gold);
-    color: var(--bg-dark);
-}
-
-/* ============================================
-   LANDING PAGE
-   ============================================ */
-.landing-page {
-    background-color: var(--bg-paper);
-    min-height: 100vh;
-}
-
-body.dark .landing-page {
-    background-color: var(--bg-dark);
-}
-
-.hero h1 {
-    font-size: 52px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: var(--text-main);
-}
-
-body.dark .hero h1 {
-    color: var(--text-light);
-}
-
-.hero h1 span {
-    color: var(--gold);
-}
-
-.hero-sub {
-    text-align: center;
-    font-size: 20px;
-    font-style: italic;
-    color: #666;
-    margin-bottom: 40px;
-}
-
-body.dark .hero-sub {
-    color: #aaa;
-}
-
-/* Narxlar (Pricing) */
-.price-card {
-    border: 1px solid var(--border-color);
-    padding: 40px 30px;
-    background: transparent;
-}
-
-body.dark .price-card {
-    border-color: var(--border-dark);
-}
-
-.price-card.featured {
-    border: 2px solid var(--gold);
-    transform: scale(1.05);
-}
-
-.price {
-    font-family: 'Cinzel', serif;
-    font-size: 42px;
-    color: var(--text-main);
-    margin: 20px 0;
-}
-
-body.dark .price {
-    color: var(--gold);
-}
-
-/* ============================================
-   MODAL
-   ============================================ */
-.modal-content {
-    background: var(--bg-paper);
-    border: 1px solid var(--border-color);
-    border-radius: 0;
-    padding: 40px;
-}
-
-body.dark .modal-content {
-    background: var(--bg-dark);
-    border-color: var(--gold);
-}
-
-/* ============================================
-   FOOTER
-   ============================================ */
-.footer {
-    text-align: center;
-    padding: 40px;
-    border-top: 1px solid var(--border-color);
-    font-family: 'Cinzel', serif;
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: #777;
-}
-
-body.dark .footer {
-    border-top-color: var(--border-dark);
-    color: #aaa;
-}
-
-/* Mobil moslashuv */
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px 20px;
-    }
-
-    .stats {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .stat-card {
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 20px;
-    }
-
-    body.dark .stat-card {
-        border-bottom-color: var(--border-dark);
-    }
-
-    .add-form {
-        flex-direction: column;
-    }
-
-    .add-form input,
-    .add-form select,
-    .add-form button {
-        width: 100%;
-    }
 }
