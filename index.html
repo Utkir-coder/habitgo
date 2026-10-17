@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>HabitGo — Elita</title>
-    <meta name="theme-color" content="#0a0e0c">
+    <meta name="theme-color" content="#120e0a">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -48,43 +48,43 @@
             </div>
         </nav>
 
-        <section class="hero" style="padding: 80px 20px; text-align: center;">
+        <section class="hero" style="padding: 100px 20px; text-align: center;">
             <div class="beta-badge" data-i18n="beta_badge">Beta versiya — hammasi bepul</div>
-            <h1 style="margin-top: 20px;">
+            <h1 style="margin-top: 25px; font-size: 48px; line-height: 1.2;">
                 <span data-i18n="hero_title_1">Odatlaringizni</span>
                 <span data-i18n="hero_title_2">o'zgartiring</span>,<br>
                 <span data-i18n="hero_title_3">hayotingizni o'zgartiring</span>
             </h1>
-            <p class="hero-sub" data-i18n="hero_sub">Har qanday maqsad sari yo'l. Rejalashtir, kuzat, muvaffaqiyatga erish!</p>
+            <p class="hero-sub" data-i18n="hero_sub" style="margin: 25px 0; font-size: 18px;">Har qanday maqsad sari yo'l. Rejalashtir, kuzat, muvaffaqiyatga erish!</p>
             <button onclick="showRegister()" class="btn-hero" data-i18n="hero_btn">Bepul boshlash</button>
-            <p class="hero-note" data-i18n="hero_note">Karta kerak emas · 30 sekundda boshlash</p>
+            <p class="hero-note" data-i18n="hero_note" style="margin-top:15px; font-size:13px; opacity:0.7;">Karta kerak emas · 30 sekundda boshlash</p>
         </section>
 
-        <section class="features" style="padding: 60px 20px; border-top: 1px solid var(--border-color); text-align: center;">
-            <h2 data-i18n="why_habitgo" style="margin-bottom: 40px;">Nega HabitGo?</h2>
-            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto;">
+        <section class="features" style="padding: 80px 20px; border-top: 1px solid var(--border-light); text-align: center;">
+            <h2 data-i18n="why_habitgo" style="margin-bottom: 50px; font-size: 32px;">Nega HabitGo?</h2>
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
                 <div class="feature-card">
-                    <h3 data-i18n="feature_stats" style="font-size: 20px; margin-bottom: 10px;">Statistika</h3>
+                    <h3 data-i18n="feature_stats" style="font-size: 22px; margin-bottom: 10px;">Statistika</h3>
                     <p data-i18n="feature_stats_desc" style="font-size: 14px; color: #777;">Natijalaringizni kuzatib boring</p>
                 </div>
                 <div class="feature-card">
-                    <h3 data-i18n="feature_reminders" style="font-size: 20px; margin-bottom: 10px;">Eslatmalar</h3>
+                    <h3 data-i18n="feature_reminders" style="font-size: 22px; margin-bottom: 10px;">Eslatmalar</h3>
                     <p data-i18n="feature_reminders_desc" style="font-size: 14px; color: #777;">Odat vaqtida bildirishnoma</p>
                 </div>
                 <div class="feature-card">
-                    <h3 data-i18n="feature_badges" style="font-size: 20px; margin-bottom: 10px;">Yutuqlar</h3>
+                    <h3 data-i18n="feature_badges" style="font-size: 22px; margin-bottom: 10px;">Yutuqlar</h3>
                     <p data-i18n="feature_badges_desc" style="font-size: 14px; color: #777;">Streak yig'ing, badge oling</p>
                 </div>
                 <div class="feature-card">
-                    <h3 data-i18n="feature_ai" style="font-size: 20px; margin-bottom: 10px;">AI motivatsiya</h3>
+                    <h3 data-i18n="feature_ai" style="font-size: 22px; margin-bottom: 10px;">AI motivatsiya</h3>
                     <p data-i18n="feature_ai_desc" style="font-size: 14px; color: #777;">Shaxsiy motivatsiya har kuni</p>
                 </div>
             </div>
         </section>
 
-        <section class="cta-section" style="padding: 60px 20px; text-align: center; border-top: 1px solid var(--border-color);">
-            <h2 data-i18n="cta_title" style="margin-bottom: 15px;">Hoziroq boshlang</h2>
-            <p data-i18n="cta_text" style="margin-bottom: 30px; font-style: italic;">Hammasi bepul. Hech qanday to'lov yo'q.</p>
+        <section class="cta-section" style="padding: 80px 20px; text-align: center; border-top: 1px solid var(--border-light);">
+            <h2 data-i18n="cta_title" style="margin-bottom: 15px; font-size: 32px;">Hoziroq boshlang</h2>
+            <p data-i18n="cta_text" style="margin-bottom: 30px; font-style: italic; color: #666;">Hammasi bepul. Hech qanday to'lov yo'q.</p>
             <button onclick="showRegister()" class="btn-hero" data-i18n="hero_btn">Bepul boshlash</button>
         </section>
 
@@ -100,23 +100,23 @@
             <span class="close-btn" onclick="closeModal()">×</span>
             <div id="loginForm">
                 <h2 data-i18n="login_title" style="margin-bottom: 20px;">Kirish</h2>
-                <input type="email" id="loginEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
-                <input type="password" id="loginPassword" data-i18n-placeholder="password" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
+                <input type="email" id="loginEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
+                <input type="password" id="loginPassword" data-i18n-placeholder="password" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
                 <button onclick="login()" class="btn-primary full" data-i18n="login" style="width:100%;">Kirish</button>
                 <p class="switch-text" style="margin-top:20px; font-size:14px; text-align:center;">
                     <span data-i18n="no_account">Akkauntingiz yo'qmi?</span>
-                    <a href="#" onclick="showRegister()" data-i18n="register" style="color:var(--gold); text-decoration:none;">Ro'yxatdan o'tish</a>
+                    <a href="#" onclick="showRegister()" data-i18n="register" style="color:var(--gold-dark); text-decoration:none; font-weight:bold;">Ro'yxatdan o'tish</a>
                 </p>
             </div>
             <div id="registerForm" style="display:none;">
                 <h2 data-i18n="register_title" style="margin-bottom: 20px;">Ro'yxatdan o'tish</h2>
-                <input type="text" id="regName" data-i18n-placeholder="name" placeholder="Ismingiz" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
-                <input type="email" id="regEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
-                <input type="password" id="regPassword" data-i18n-placeholder="password_hint" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
+                <input type="text" id="regName" data-i18n-placeholder="name" placeholder="Ismingiz" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
+                <input type="email" id="regEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
+                <input type="password" id="regPassword" data-i18n-placeholder="password_hint" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
                 <button onclick="register()" class="btn-primary full" data-i18n="register" style="width:100%;">Ro'yxatdan o'tish</button>
                 <p class="switch-text" style="margin-top:20px; font-size:14px; text-align:center;">
                     <span data-i18n="have_account">Akkauntingiz bormi?</span>
-                    <a href="#" onclick="showLogin()" data-i18n="login" style="color:var(--gold); text-decoration:none;">Kirish</a>
+                    <a href="#" onclick="showLogin()" data-i18n="login" style="color:var(--gold-dark); text-decoration:none; font-weight:bold;">Kirish</a>
                 </p>
             </div>
         </div>
@@ -151,10 +151,6 @@
             </div>
         </header>
 
-        <section class="motivation-banner">
-            <p id="motivationText">Bugun ajoyib kun bo'ladi</p>
-        </section>
-
         <section class="daily-report" id="dailyReport" style="display: none;">
             <div class="report-content modal-content">
                 <h3 id="reportTitle">Kunlik hisobot</h3>
@@ -187,7 +183,7 @@
                         <strong data-i18n="tasks">Rejalar</strong>
                         <span id="tasksQuickInfo" data-i18n="tasks_manage">Vazifalarni boshqarish</span>
                     </div>
-                    <span class="tasks-quick-arrow" style="font-size: 20px;">&rarr;</span>
+                    <span class="tasks-quick-arrow" style="font-size: 20px; color: var(--gold-dark);">&rarr;</span>
                 </button>
             </section>
 
@@ -197,7 +193,7 @@
             <!-- FAOL ODATLAR -->
             <section class="habits-section">
                 <h2 data-i18n="active_habits_title">Faol odatlar</h2>
-                <div id="habitsList" class="habits-list"></div>
+                <div id="habitsList" class="habits-list" style="margin-top: 20px;"></div>
                 <p id="emptyMessage" class="empty-message" data-i18n="empty_message" style="text-align:center; padding:20px; font-style:italic; color:#777;">
                     Hali odat qo'shmadingiz. Tepadagi "+ Odat" tugmasini bosing
                 </p>
@@ -205,7 +201,7 @@
 
             <section class="completed-section" id="completedSection" style="display: none;">
                 <h2 data-i18n="completed_habits_title">Tugallangan odatlar</h2>
-                <div id="completedList" class="habits-list"></div>
+                <div id="completedList" class="habits-list" style="margin-top: 20px;"></div>
             </section>
         </main>
 
@@ -222,7 +218,7 @@
 
             <div class="form-group" style="margin-bottom: 15px;">
                 <label data-i18n="habit_name" style="display:block; margin-bottom:5px; font-size:14px;">1. Odat nomi</label>
-                <input type="text" id="habitName" data-i18n-placeholder="habit_name_placeholder" placeholder="Masalan: Kitob o'qish" style="width:100%; padding:10px; border:1px solid var(--border-color); background:transparent; color:inherit;">
+                <input type="text" id="habitName" data-i18n-placeholder="habit_name_placeholder" placeholder="Masalan: Kitob o'qish" style="width:100%; padding:10px; border:1px solid var(--border-light); background:transparent; color:inherit;">
             </div>
 
             <div class="form-group" style="margin-bottom: 15px;">
@@ -250,12 +246,12 @@
 
             <div class="form-group" style="margin-bottom: 15px;">
                 <label data-i18n="time" style="display:block; margin-bottom:5px; font-size:14px;">4. Vaqt</label>
-                <input type="time" id="habitTime" value="06:00" style="width:100%; padding:10px; border:1px solid var(--border-color); background:transparent; color:inherit;">
+                <input type="time" id="habitTime" value="06:00" style="width:100%; padding:10px; border:1px solid var(--border-light); background:transparent; color:inherit;">
             </div>
 
             <div class="form-group" style="margin-bottom: 25px;">
                 <label data-i18n="place" style="display:block; margin-bottom:5px; font-size:14px;">5. Joy</label>
-                <input type="text" id="habitPlace" data-i18n-placeholder="place_placeholder" placeholder="Masalan: Bog'da" style="width:100%; padding:10px; border:1px solid var(--border-color); background:transparent; color:inherit;">
+                <input type="text" id="habitPlace" data-i18n-placeholder="place_placeholder" placeholder="Masalan: Bog'da" style="width:100%; padding:10px; border:1px solid var(--border-light); background:transparent; color:inherit;">
             </div>
 
             <button class="btn-add" onclick="addHabit()" data-i18n="add_habit_btn" style="width:100%;">Odatni qo'shish</button>
@@ -268,18 +264,18 @@
             <span class="close-btn" onclick="closePage()">×</span>
             <h2 data-i18n="profile_title">Profil</h2>
             <div class="profile-info" style="text-align:center; margin: 20px 0;">
-                <div class="profile-avatar-large" id="profileAvatar" style="width:80px; height:80px; border-radius:50%; border:1px solid var(--gold); font-size:32px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px;">U</div>
-                <p><strong data-i18n="profile_name_label">Ism:</strong> <span id="profileName">-</span></p>
-                <p><strong data-i18n="profile_email_label">Email:</strong> <span id="profileEmail">-</span></p>
+                <div class="profile-avatar-large" id="profileAvatar" style="width:80px; height:80px; border-radius:50%; border:1px solid var(--gold-dark); font-size:32px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; color:var(--gold-dark);">U</div>
+                <p style="margin-bottom:5px;"><strong data-i18n="profile_name_label">Ism:</strong> <span id="profileName">-</span></p>
+                <p style="margin-bottom:5px;"><strong data-i18n="profile_email_label">Email:</strong> <span id="profileEmail">-</span></p>
                 <p><strong data-i18n="profile_joined_label">Ro'yxatdan o'tgan:</strong> <span id="profileJoined">-</span></p>
             </div>
-            <h3 data-i18n="profile_stats" style="border-bottom: 1px solid var(--border-color); padding-bottom:10px; margin-bottom:15px;">Umumiy statistika</h3>
+            <h3 data-i18n="profile_stats" style="border-bottom: 1px solid var(--border-light); padding-bottom:10px; margin-bottom:15px;">Umumiy statistika</h3>
             <div class="profile-stats" style="display:flex; justify-content:space-around; text-align:center; margin-bottom:20px;">
-                <div><strong id="pTotalHabits" style="font-size:24px; font-family:'Cinzel';">0</strong><br><span style="font-size:12px;" data-i18n="total_habits">Jami odatlar</span></div>
-                <div><strong id="pTotalDone" style="font-size:24px; font-family:'Cinzel';">0</strong><br><span style="font-size:12px;" data-i18n="completed_count">Bajarilgan</span></div>
-                <div><strong id="pBestStreak" style="font-size:24px; font-family:'Cinzel';">0</strong><br><span style="font-size:12px;" data-i18n="best_streak">Streak</span></div>
+                <div><strong id="pTotalHabits" style="font-size:24px; font-family:'Cinzel'; color:var(--gold-dark);">0</strong><br><span style="font-size:12px;" data-i18n="total_habits">Jami odatlar</span></div>
+                <div><strong id="pTotalDone" style="font-size:24px; font-family:'Cinzel'; color:var(--gold-dark);">0</strong><br><span style="font-size:12px;" data-i18n="completed_count">Bajarilgan</span></div>
+                <div><strong id="pBestStreak" style="font-size:24px; font-family:'Cinzel'; color:var(--gold-dark);">0</strong><br><span style="font-size:12px;" data-i18n="best_streak">Streak</span></div>
             </div>
-            <button onclick="logout()" class="btn-primary full" style="width:100%; background:var(--accent-red); border-color:var(--accent-red); color:white;" data-i18n="logout">Chiqish</button>
+            <button onclick="logout()" class="btn-primary full" style="width:100%; background:#8b2e2e; border-color:#8b2e2e; color:white;" data-i18n="logout">Chiqish</button>
         </div>
     </div>
 
@@ -288,13 +284,13 @@
         <div class="page-content modal-content" style="max-width: 700px;">
             <span class="close-btn" onclick="closeTasks()">×</span>
             <h2 data-i18n="tasks">Rejalar</h2>
-            <div id="tasksHeader" class="tasks-header" style="display:flex; gap:20px; margin:20px 0; text-align:center;"></div>
+            <div id="tasksHeader" class="tasks-header" style="display:flex; gap:20px; margin:20px 0; text-align:center; justify-content:space-between;"></div>
 
-            <div class="task-add-form" style="border:1px solid var(--border-color); padding:15px; margin-bottom:20px;">
-                <input type="text" id="taskName" placeholder="Vazifa nomi" style="width:100%; margin-bottom:10px; padding:10px; background:transparent; border:1px solid var(--border-color); color:inherit;">
+            <div class="task-add-form" style="border:1px solid var(--border-light); padding:15px; margin-bottom:20px;">
+                <input type="text" id="taskName" placeholder="Vazifa nomi" style="width:100%; margin-bottom:10px; padding:10px; background:transparent; border:1px solid var(--border-light); color:inherit;">
                 <div style="display:flex; gap:10px; margin-bottom:10px;">
-                    <input type="date" id="taskDate" style="flex:1; padding:10px; background:transparent; border:1px solid var(--border-color); color:inherit;">
-                    <select id="taskPriority" style="flex:1; padding:10px; background:transparent; border:1px solid var(--border-color); color:inherit;">
+                    <input type="date" id="taskDate" style="flex:1; padding:10px; background:transparent; border:1px solid var(--border-light); color:inherit;">
+                    <select id="taskPriority" style="flex:1; padding:10px; background:transparent; border:1px solid var(--border-light); color:inherit;">
                         <option value="low">Past</option>
                         <option value="medium" selected>O'rta</option>
                         <option value="high">Yuqori</option>
@@ -361,7 +357,7 @@
             <h2 data-i18n="notes_title">Eslatmalar</h2>
             <p style="margin-bottom:15px;" data-i18n="notes_for">Ushbu odat uchun</p>
             <div class="note-input-group" style="margin-bottom:20px;">
-                <textarea id="noteInput" placeholder="Bugun qanday o'tdi?" style="width:100%; height:80px; padding:10px; background:transparent; border:1px solid var(--border-color); color:inherit; font-family:'Lora'; margin-bottom:10px;"></textarea>
+                <textarea id="noteInput" placeholder="Bugun qanday o'tdi?" style="width:100%; height:80px; padding:10px; background:transparent; border:1px solid var(--border-light); color:inherit; font-family:'Lora'; margin-bottom:10px;"></textarea>
                 <button onclick="addNote()" class="btn-primary" style="width:100%;">Qo'shish</button>
             </div>
             <div id="notesList" class="notes-list" style="max-height:200px; overflow-y:auto;"></div>
@@ -383,13 +379,13 @@
     <script src="supabase.js"></script>
     <script src="analytics.js"></script>
     <script src="i18n.js"></script>
+    <script src="auth.js"></script>
     <script src="push.js"></script>
     <script src="theme.js"></script>
     <script src="colors.js"></script>
     <script src="confetti.js"></script>
     <script src="notifications.js"></script>
     <script src="badges.js"></script>
-    <script src="auth.js"></script>
     <script src="profile.js"></script>
     <script src="payment.js"></script>
     <script src="app.js"></script>

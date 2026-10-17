@@ -1,143 +1,167 @@
 /* ============================================
-   HABITGO — "OLD MONEY" HASHRATLI DIZAYN
+   HABITGO — "OLD MONEY" MUKAMMAL DIZAYN
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 
 :root {
-    /* Chuqur va issiq ranglar */
-    --bg-dark: #120e0a;        /* Qadimiy yog'och / Tungi xona */
-    --bg-panel: #1c1611;       /* Mebel rangi */
-    --bg-paper: #f4ebd8;       /* Pergament (yorug' rejim uchun) */
-    --text-main: #e6d5b8;      /* Issiq krem rang */
-    --text-dark: #2c1f14;      /* Yorug' rejim uchun to'q matn */
-    --gold: #c59b46;           /* Asl tilla */
-    --gold-glow: #e6b95c;      /* Tilla yorug'ligi */
-    --gold-dark: #8c6a2b;      /* To'q tilla */
-    --border-color: #3a2d22;   /* Nozik chegara */
-    --shadow-heavy: 0 15px 40px rgba(0, 0, 0, 0.8);
+    --bg-dark: #120e0a;
+    --bg-panel: #1c1611;
+    --bg-paper: #f7f1e3;       /* Issiq pergament foni */
+    --text-main: #e6d5b8;
+    --text-dark: #2c1f14;
+    --gold: #c59b46;
+    --gold-glow: #e6b95c;
+    --gold-dark: #8c6a2b;
+    --border-color: #3a2d22;
+    --border-light: #d8cbb5;
+    --shadow-heavy: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Asosiy tana (Tungi rejim default) */
 body {
-    background-color: var(--bg-dark);
-    background-image:
-        radial-gradient(circle at 50% 0%, rgba(197, 155, 70, 0.08) 0%, transparent 60%), /* Tepadagi lyustra yorug'ligi */
-        linear-gradient(to bottom, #120e0a, #090705);
-    color: var(--text-main);
+    background-color: var(--bg-paper);
+    background-image: radial-gradient(circle at 50% 0%, rgba(197, 155, 70, 0.2) 0%, transparent 70%);
+    color: var(--text-dark);
     font-family: 'Lora', serif;
     line-height: 1.6;
-    transition: background 0.5s, color 0.5s;
     min-height: 100vh;
-}
-
-/* Yorug' rejim (Agar kerak bo'lsa) */
-body:not(.dark) {
-    background-color: var(--bg-paper);
-    background-image:
-        radial-gradient(circle at 50% 0%, rgba(197, 155, 70, 0.15) 0%, transparent 70%),
-        linear-gradient(to bottom, #f4ebd8, #e8dcce);
-    color: var(--text-dark);
 }
 
 h1, h2, h3, .logo, .stat-number {
     font-family: 'Playfair Display', serif;
     font-weight: 600;
-    color: var(--gold);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Matnga chuqurlik berish */
-}
-
-body:not(.dark) h1, body:not(.dark) h2, body:not(.dark) h3, body:not(.dark) .logo {
     color: var(--gold-dark);
-    text-shadow: none;
 }
 
 /* ============================================
-   HEADER (Tepa qismi)
+   HEADER (Tepa qismi) - Tugmalar to'g'rilandi
    ============================================ */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background: rgba(18, 14, 10, 0.85); /* Shishaga o'xshash */
+    padding: 15px 40px;
+    background: rgba(247, 241, 227, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-light);
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-}
-
-body:not(.dark) .header {
-    background: rgba(244, 235, 216, 0.85);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
 .logo {
     font-family: 'Cinzel', serif;
     font-size: 26px;
     letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold-glow);
-}
-
-/* ============================================
-   TUGMALAR
-   ============================================ */
-button {
-    cursor: pointer;
-    font-family: 'Lora', serif;
-    transition: all 0.3s ease;
-}
-
-.btn-primary, .btn-hero, .btn-add {
-    background: linear-gradient(135deg, #c59b46, #a67c2b);
-    color: #120e0a;
-    border: 1px solid #e6b95c;
-    padding: 12px 28px;
-    border-radius: 2px; /* Deyarli to'g'ri burchak */
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    box-shadow: 0 4px 15px rgba(197, 155, 70, 0.3);
-}
-
-.btn-primary:hover, .btn-hero:hover, .btn-add:hover {
-    background: linear-gradient(135deg, #e6b95c, #c59b46);
-    box-shadow: 0 6px 25px rgba(197, 155, 70, 0.5);
-    transform: translateY(-2px);
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    padding: 12px 28px;
-    border-radius: 2px;
-    font-size: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-body:not(.dark) .btn-outline {
     color: var(--gold-dark);
-    border-color: var(--gold-dark);
 }
 
-.btn-outline:hover {
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Tepadagi tugmalar */
+.lang-switcher {
+    display: flex;
+    gap: 5px;
+    border-right: 1px solid var(--border-light);
+    padding-right: 15px;
+    margin-right: 5px;
+}
+
+.lang-btn, .btn-theme, .btn-add-habit {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    padding: 8px 12px;
+    font-family: 'Lora', serif;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text-dark);
+    transition: all 0.2s;
+}
+
+.lang-btn:hover, .btn-theme:hover, .btn-add-habit:hover {
+    border-color: var(--gold-dark);
+    color: var(--gold-dark);
+}
+
+.btn-add-habit {
+    background: var(--gold-dark);
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+.btn-add-habit:hover {
+    background: var(--gold);
+    color: white;
+}
+
+/* Profil menyusi */
+.profile-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    background: transparent;
+    color: var(--gold-dark);
+    font-weight: bold;
+}
+
+.dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: var(--bg-paper);
+    border: 1px solid var(--border-light);
+    display: none;
+    flex-direction: column;
+    width: 200px;
+    box-shadow: var(--shadow-heavy);
+    z-index: 1000;
+}
+
+.dropdown.show { display: flex; }
+
+.dropdown a {
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-light);
+    transition: 0.2s;
+}
+
+.dropdown a:hover {
     background: rgba(197, 155, 70, 0.1);
+    color: var(--gold-dark);
 }
 
 /* ============================================
-   KONTEYNER VA KARTOCHKALAR (Hashamatli)
+   MOTIVATSIYA BANNERI (Olindi, UX kerakmas)
+   ============================================ */
+.motivation-banner {
+    display: none !important;
+}
+
+/* ============================================
+   KONTEYNER VA KARTOCHKALAR
    ============================================ */
 .container {
     max-width: 1000px;
@@ -145,26 +169,13 @@ body:not(.dark) .btn-outline {
     padding: 0 20px;
 }
 
-/* Umumiy karta stili */
-.stats, .add-habit, .habits-section, .badges-preview, .challenge-card, .tasks-quick-access, .modal-content, .page-content {
-    background: var(--bg-panel);
-    border: 1px solid var(--border-color);
+.stats, .add-habit, .habits-section, .challenge-card, .tasks-quick-access, .modal-content, .page-content {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
     border-radius: 4px;
     padding: 30px;
     margin-bottom: 30px;
     box-shadow: var(--shadow-heavy);
-    position: relative;
-}
-
-body:not(.dark) .stats,
-body:not(.dark) .add-habit,
-body:not(.dark) .habits-section,
-body:not(.dark) .challenge-card,
-body:not(.dark) .tasks-quick-access,
-body:not(.dark) .modal-content {
-    background: rgba(255, 255, 255, 0.5);
-    border-color: #d1c8b4;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 /* Statistika */
@@ -178,27 +189,17 @@ body:not(.dark) .modal-content {
 .stat-card {
     text-align: center;
     padding: 40px 20px;
-    border-right: 1px solid var(--border-color);
-    background: linear-gradient(to bottom, rgba(197, 155, 70, 0.05), transparent);
+    border-right: 1px solid var(--border-light);
+    background: linear-gradient(to bottom, rgba(197, 155, 70, 0.03), transparent);
 }
 
-body:not(.dark) .stat-card {
-    border-right-color: #d1c8b4;
-}
-
-.stat-card:last-child {
-    border-right: none;
-}
+.stat-card:last-child { border-right: none; }
 
 .stat-number {
     font-size: 56px;
     font-family: 'Cinzel', serif;
-    color: var(--gold-glow);
-    margin-bottom: 10px;
-}
-
-body:not(.dark) .stat-number {
     color: var(--gold-dark);
+    margin-bottom: 10px;
 }
 
 .stat-label {
@@ -229,34 +230,27 @@ body:not(.dark) .stat-number {
 .tasks-quick-text strong {
     font-family: 'Playfair Display', serif;
     font-size: 22px;
-    color: var(--gold);
+    color: var(--gold-dark);
     display: block;
 }
 
 /* ============================================
-   INPUTLAR VA FORMALAR
+   INPUTLAR
    ============================================ */
 input, select, textarea {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
+    background: #fdfbf7;
+    border: 1px solid var(--border-light);
+    color: var(--text-dark);
     padding: 12px 15px;
     font-family: 'Lora', serif;
     font-size: 15px;
     border-radius: 2px;
     width: 100%;
-    transition: border 0.3s;
-}
-
-body:not(.dark) input, body:not(.dark) select, body:not(.dark) textarea {
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--text-dark);
-    border-color: #d1c8b4;
 }
 
 input:focus, select:focus, textarea:focus {
     outline: none;
-    border-color: var(--gold);
+    border-color: var(--gold-dark);
     box-shadow: 0 0 10px rgba(197, 155, 70, 0.2);
 }
 
@@ -268,31 +262,20 @@ input:focus, select:focus, textarea:focus {
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    border: 1px solid var(--border-color);
-    border-left: 3px solid var(--gold); /* Tilla chiziq */
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--gold-dark);
     margin-bottom: 15px;
-    background: rgba(255, 255, 255, 0.02);
+    background: white;
     transition: all 0.2s;
 }
 
 .habit-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-body:not(.dark) .habit-item {
-    border-color: #d1c8b4;
-    border-left-color: var(--gold-dark);
-    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .habit-name {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
-    color: var(--gold);
-}
-
-body:not(.dark) .habit-name {
     color: var(--text-dark);
 }
 
@@ -301,9 +284,9 @@ body:not(.dark) .habit-name {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    border: 2px solid var(--gold);
+    border: 2px solid var(--border-light);
     background: transparent;
-    color: var(--gold);
+    color: var(--text-dark);
     font-size: 20px;
     display: flex;
     align-items: center;
@@ -313,72 +296,16 @@ body:not(.dark) .habit-name {
 }
 
 .btn-check:hover, .btn-check.done {
-    background: var(--gold);
-    color: #120e0a;
-    box-shadow: 0 0 15px rgba(197, 155, 70, 0.5);
-}
-
-/* ============================================
-   DROPDOWN (Profil menyusi)
-   ============================================ */
-.dropdown {
-    position: absolute;
-    top: 120%;
-    right: 0;
-    background: var(--bg-panel);
-    border: 1px solid var(--border-color);
-    display: none;
-    flex-direction: column;
-    width: 220px;
-    box-shadow: var(--shadow-heavy);
-    z-index: 1000;
-    border-radius: 4px;
-}
-
-body:not(.dark) .dropdown {
-    background: white;
-    border-color: #d1c8b4;
-}
-
-.dropdown.show { display: flex; }
-
-.dropdown a {
-    padding: 14px 20px;
-    text-decoration: none;
-    color: var(--text-main);
-    font-size: 14px;
-    border-bottom: 1px solid var(--border-color);
-    transition: background 0.2s, color 0.2s;
-}
-
-body:not(.dark) .dropdown a {
-    color: var(--text-dark);
-    border-bottom-color: #eee;
-}
-
-.dropdown a:hover {
-    background: rgba(197, 155, 70, 0.1);
-    color: var(--gold-glow);
+    background: var(--gold-dark);
+    border-color: var(--gold-dark);
+    color: white;
+    box-shadow: 0 0 15px rgba(197, 155, 70, 0.4);
 }
 
 /* Mobil moslashuv */
 @media (max-width: 768px) {
-    .header {
-        padding: 15px 20px;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .stats {
-        grid-template-columns: 1fr;
-    }
-
-    .stat-card {
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    body:not(.dark) .stat-card {
-        border-bottom-color: #d1c8b4;
-    }
+    .header { flex-direction: column; gap: 15px; padding: 15px; }
+    .header-right { flex-wrap: wrap; justify-content: center; }
+    .stats { grid-template-columns: 1fr; }
+    .stat-card { border-right: none; border-bottom: 1px solid var(--border-light); }
 }
