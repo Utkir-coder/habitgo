@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>HabitGo — Elita Odatlar Trackeri</title>
+    <title>HabitGo — Elita</title>
     <meta name="theme-color" content="#0a0e0c">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,7 +31,7 @@
         <p data-i18n="loading">Yuklanmoqda...</p>
     </div>
 
-    <!-- LANDING PAGE -->
+    <!-- ============ LANDING PAGE ============ -->
     <div id="landingPage" class="landing-page">
         <nav class="header">
             <div class="logo">HabitGo</div>
@@ -94,14 +94,14 @@
         </footer>
     </div>
 
-    <!-- KIRISH MODAL -->
+    <!-- ============ KIRISH MODAL ============ -->
     <div id="authModal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">×</span>
             <div id="loginForm">
                 <h2 data-i18n="login_title" style="margin-bottom: 20px;">Kirish</h2>
-                <input type="email" id="loginEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora';">
-                <input type="password" id="loginPassword" data-i18n-placeholder="password" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora';">
+                <input type="email" id="loginEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
+                <input type="password" id="loginPassword" data-i18n-placeholder="password" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
                 <button onclick="login()" class="btn-primary full" data-i18n="login" style="width:100%;">Kirish</button>
                 <p class="switch-text" style="margin-top:20px; font-size:14px; text-align:center;">
                     <span data-i18n="no_account">Akkauntingiz yo'qmi?</span>
@@ -110,9 +110,9 @@
             </div>
             <div id="registerForm" style="display:none;">
                 <h2 data-i18n="register_title" style="margin-bottom: 20px;">Ro'yxatdan o'tish</h2>
-                <input type="text" id="regName" data-i18n-placeholder="name" placeholder="Ismingiz" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora';">
-                <input type="email" id="regEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora';">
-                <input type="password" id="regPassword" data-i18n-placeholder="password_hint" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora';">
+                <input type="text" id="regName" data-i18n-placeholder="name" placeholder="Ismingiz" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
+                <input type="email" id="regEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
+                <input type="password" id="regPassword" data-i18n-placeholder="password_hint" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-color); background:transparent; font-family:'Lora'; color:inherit;">
                 <button onclick="register()" class="btn-primary full" data-i18n="register" style="width:100%;">Ro'yxatdan o'tish</button>
                 <p class="switch-text" style="margin-top:20px; font-size:14px; text-align:center;">
                     <span data-i18n="have_account">Akkauntingiz bormi?</span>
@@ -122,7 +122,7 @@
         </div>
     </div>
 
-    <!-- ASOSIY APP -->
+    <!-- ============ ASOSIY APP ============ -->
     <div id="appPage" style="display:none;">
         <header class="header">
             <div class="logo">HabitGo</div>
@@ -156,9 +156,9 @@
         </section>
 
         <section class="daily-report" id="dailyReport" style="display: none;">
-            <div class="report-content">
+            <div class="report-content modal-content">
                 <h3 id="reportTitle">Kunlik hisobot</h3>
-                <p id="reportText"></p>
+                <p id="reportText" style="margin:15px 0;"></p>
                 <button onclick="closeReport()" class="btn-outline">Yopish</button>
             </div>
         </section>
@@ -214,7 +214,7 @@
         </footer>
     </div>
 
-    <!-- YANGI ODAT MODALI -->
+    <!-- ============ YANGI ODAT MODALI ============ -->
     <div id="habitModal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close-btn" onclick="closeHabitModal()">×</span>
@@ -222,7 +222,7 @@
 
             <div class="form-group" style="margin-bottom: 15px;">
                 <label data-i18n="habit_name" style="display:block; margin-bottom:5px; font-size:14px;">1. Odat nomi</label>
-                <input type="text" id="habitName" data-i18n-placeholder="habit_name_placeholder" placeholder="Masalan: Kitob o'qish" style="width:100%; padding:10px; border:1px solid var(--border-color); background:transparent;">
+                <input type="text" id="habitName" data-i18n-placeholder="habit_name_placeholder" placeholder="Masalan: Kitob o'qish" style="width:100%; padding:10px; border:1px solid var(--border-color); background:transparent; color:inherit;">
             </div>
 
             <div class="form-group" style="margin-bottom: 15px;">
@@ -250,19 +250,19 @@
 
             <div class="form-group" style="margin-bottom: 15px;">
                 <label data-i18n="time" style="display:block; margin-bottom:5px; font-size:14px;">4. Vaqt</label>
-                <input type="time" id="habitTime" value="06:00" style="width:100%; padding:10px; border:1px solid var(--border-color); background:transparent;">
+                <input type="time" id="habitTime" value="06:00" style="width:100%; padding:10px; border:1px solid var(--border-color); background:transparent; color:inherit;">
             </div>
 
             <div class="form-group" style="margin-bottom: 25px;">
                 <label data-i18n="place" style="display:block; margin-bottom:5px; font-size:14px;">5. Joy</label>
-                <input type="text" id="habitPlace" data-i18n-placeholder="place_placeholder" placeholder="Masalan: Bog'da" style="width:100%; padding:10px; border:1px solid var(--border-color); background:transparent;">
+                <input type="text" id="habitPlace" data-i18n-placeholder="place_placeholder" placeholder="Masalan: Bog'da" style="width:100%; padding:10px; border:1px solid var(--border-color); background:transparent; color:inherit;">
             </div>
 
             <button class="btn-add" onclick="addHabit()" data-i18n="add_habit_btn" style="width:100%;">Odatni qo'shish</button>
         </div>
     </div>
 
-    <!-- QOLGAN MODALLAR (Profil, Leaderboard, Statistika va h.k.) o'zgarishsiz qoladi, faqat CSS ularni klassik qilib qo'yadi -->
+    <!-- ============ PROFIL SAHIFASI ============ -->
     <div id="profilePage" class="page-modal" style="display:none;">
         <div class="page-content modal-content">
             <span class="close-btn" onclick="closePage()">×</span>
@@ -283,6 +283,103 @@
         </div>
     </div>
 
+    <!-- ============ REJALAR SAHIFASI ============ -->
+    <div id="tasksPage" class="page-modal" style="display:none;">
+        <div class="page-content modal-content" style="max-width: 700px;">
+            <span class="close-btn" onclick="closeTasks()">×</span>
+            <h2 data-i18n="tasks">Rejalar</h2>
+            <div id="tasksHeader" class="tasks-header" style="display:flex; gap:20px; margin:20px 0; text-align:center;"></div>
+
+            <div class="task-add-form" style="border:1px solid var(--border-color); padding:15px; margin-bottom:20px;">
+                <input type="text" id="taskName" placeholder="Vazifa nomi" style="width:100%; margin-bottom:10px; padding:10px; background:transparent; border:1px solid var(--border-color); color:inherit;">
+                <div style="display:flex; gap:10px; margin-bottom:10px;">
+                    <input type="date" id="taskDate" style="flex:1; padding:10px; background:transparent; border:1px solid var(--border-color); color:inherit;">
+                    <select id="taskPriority" style="flex:1; padding:10px; background:transparent; border:1px solid var(--border-color); color:inherit;">
+                        <option value="low">Past</option>
+                        <option value="medium" selected>O'rta</option>
+                        <option value="high">Yuqori</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="addTask()" style="width:100%;">Qo'shish</button>
+            </div>
+
+            <div id="tasksList" class="tasks-list"></div>
+        </div>
+    </div>
+
+    <!-- ============ STATISTIKA SAHIFASI ============ -->
+    <div id="statisticsPage" class="page-modal" style="display:none;">
+        <div class="page-content modal-content" style="max-width: 800px;">
+            <span class="close-btn" onclick="closeStatistics()">×</span>
+            <h2 data-i18n="stats_title">Statistika</h2>
+            <div id="statsSummary" style="margin:20px 0;"></div>
+
+            <div class="chart-container" style="height:250px; margin-bottom:30px;"><canvas id="weeklyChart"></canvas></div>
+            <div class="chart-container" style="height:250px; margin-bottom:30px;"><canvas id="monthlyChart"></canvas></div>
+
+            <h3 style="margin-bottom:15px;">Yillik faollik (Heatmap)</h3>
+            <div id="heatmapContainer" style="overflow-x:auto;"></div>
+            <div id="heatmapLegend"></div>
+        </div>
+    </div>
+
+    <!-- ============ LEADERBOARD SAHIFASI ============ -->
+    <div id="leaderboardPage" class="page-modal" style="display:none;">
+        <div class="page-content modal-content">
+            <span class="close-btn" onclick="closeLeaderboard()">×</span>
+            <h2 data-i18n="leaderboard_title">Leaderboard</h2>
+            <div id="leaderboardHeader" style="margin:20px 0;"></div>
+            <div id="leaderboardPodium"></div>
+            <div id="leaderboardList" class="leaderboard-list"></div>
+        </div>
+    </div>
+
+    <!-- ============ YUTUQLAR SAHIFASI ============ -->
+    <div id="achievementsPage" class="page-modal" style="display:none;">
+        <div class="page-content modal-content" style="max-width: 700px;">
+            <span class="close-btn" onclick="closePage()">×</span>
+            <h2 data-i18n="achievements">Yutuqlar</h2>
+            <div class="achievements-grid" id="achievementsGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:15px; margin-top:20px;"></div>
+        </div>
+    </div>
+
+    <!-- ============ BACKUP SAHIFASI ============ -->
+    <div id="backupPage" class="page-modal" style="display:none;">
+        <div class="page-content modal-content">
+            <span class="close-btn" onclick="closePage()">×</span>
+            <h2 data-i18n="backup_title">Backup</h2>
+            <p style="margin:20px 0; font-size:14px;" data-i18n="backup_desc">Ma'lumotlaringizni JSON faylga saqlang.</p>
+            <button onclick="exportData()" class="btn-primary" style="width:100%; margin-bottom:10px;">Export qilish</button>
+            <button onclick="importData()" class="btn-outline" style="width:100%;">Import qilish</button>
+        </div>
+    </div>
+
+    <!-- ============ ESLATMA MODALI ============ -->
+    <div id="notesModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeNotesModal()">×</span>
+            <h2 data-i18n="notes_title">Eslatmalar</h2>
+            <p style="margin-bottom:15px;" data-i18n="notes_for">Ushbu odat uchun</p>
+            <div class="note-input-group" style="margin-bottom:20px;">
+                <textarea id="noteInput" placeholder="Bugun qanday o'tdi?" style="width:100%; height:80px; padding:10px; background:transparent; border:1px solid var(--border-color); color:inherit; font-family:'Lora'; margin-bottom:10px;"></textarea>
+                <button onclick="addNote()" class="btn-primary" style="width:100%;">Qo'shish</button>
+            </div>
+            <div id="notesList" class="notes-list" style="max-height:200px; overflow-y:auto;"></div>
+        </div>
+    </div>
+
+    <!-- ============ RANG TANLASH MODALI ============ -->
+    <div id="colorPickerModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeColorPicker()">×</span>
+            <h2 data-i18n="color_title">Rang mavzusi</h2>
+            <div id="colorOptions" class="color-options" style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;"></div>
+        </div>
+    </div>
+
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- ============ SCRIPT'LAR ============ -->
     <script src="supabase.js"></script>
     <script src="analytics.js"></script>
     <script src="i18n.js"></script>
