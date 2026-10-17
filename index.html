@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>HabitGo — Elita</title>
-    <meta name="theme-color" content="#120e0a">
+    <title>HabitGo</title>
+    <meta name="theme-color" content="#0d2818">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -31,136 +31,159 @@
         <p data-i18n="loading">Yuklanmoqda...</p>
     </div>
 
-    <!-- ============ LANDING PAGE ============ -->
     <div id="landingPage" class="landing-page">
-        <nav class="header">
-            <div class="logo">HabitGo</div>
-            <div class="header-right">
+        <nav class="landing-nav">
+            <div class="logo">🚀 <span data-i18n="app_name">HabitGo</span></div>
+            <div class="nav-right">
                 <div class="lang-switcher landing-lang">
-                    <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">UZ</button>
-                    <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">RU</button>
-                    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">🇺🇿</button>
+                    <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">🇷🇺</button>
+                    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧</button>
                 </div>
-                <div class="nav-buttons" style="display:flex; gap:10px;">
+                <div class="nav-buttons">
                     <button onclick="showLogin()" class="btn-outline" data-i18n="login">Kirish</button>
                     <button onclick="showRegister()" class="btn-primary" data-i18n="register">Ro'yxatdan o'tish</button>
                 </div>
             </div>
         </nav>
 
-        <section class="hero" style="padding: 100px 20px; text-align: center;">
-            <div class="beta-badge" data-i18n="beta_badge">Beta versiya — hammasi bepul</div>
-            <h1 style="margin-top: 25px; font-size: 48px; line-height: 1.2;">
+        <section class="hero">
+            <div class="beta-badge" data-i18n="beta_badge">🎉 Beta versiya — hammasi bepul!</div>
+            <h1>
                 <span data-i18n="hero_title_1">Odatlaringizni</span>
                 <span data-i18n="hero_title_2">o'zgartiring</span>,<br>
                 <span data-i18n="hero_title_3">hayotingizni o'zgartiring</span>
             </h1>
-            <p class="hero-sub" data-i18n="hero_sub" style="margin: 25px 0; font-size: 18px;">Har qanday maqsad sari yo'l. Rejalashtir, kuzat, muvaffaqiyatga erish!</p>
-            <button onclick="showRegister()" class="btn-hero" data-i18n="hero_btn">Bepul boshlash</button>
-            <p class="hero-note" data-i18n="hero_note" style="margin-top:15px; font-size:13px; opacity:0.7;">Karta kerak emas · 30 sekundda boshlash</p>
+            <p class="hero-sub" data-i18n="hero_sub">Har qanday maqsad sari yo'l. Rejalashtir, kuzat, muvaffaqiyatga erish!</p>
+            <button onclick="showRegister()" class="btn-hero" data-i18n="hero_btn">🚀 Bepul boshlash</button>
+            <p class="hero-note" data-i18n="hero_note">Karta kerak emas · 30 sekundda boshlash</p>
         </section>
 
-        <section class="features" style="padding: 80px 20px; border-top: 1px solid var(--border-light); text-align: center;">
-            <h2 data-i18n="why_habitgo" style="margin-bottom: 50px; font-size: 32px;">Nega HabitGo?</h2>
-            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
+        <section class="features">
+            <h2 data-i18n="why_habitgo">Nega HabitGo?</h2>
+            <div class="features-grid">
                 <div class="feature-card">
-                    <h3 data-i18n="feature_stats" style="font-size: 22px; margin-bottom: 10px;">Statistika</h3>
-                    <p data-i18n="feature_stats_desc" style="font-size: 14px; color: #777;">Natijalaringizni kuzatib boring</p>
+                    <div class="feature-icon">📊</div>
+                    <h3 data-i18n="feature_stats">Statistika</h3>
+                    <p data-i18n="feature_stats_desc">Natijalaringizni kuzatib boring</p>
                 </div>
                 <div class="feature-card">
-                    <h3 data-i18n="feature_reminders" style="font-size: 22px; margin-bottom: 10px;">Eslatmalar</h3>
-                    <p data-i18n="feature_reminders_desc" style="font-size: 14px; color: #777;">Odat vaqtida bildirishnoma</p>
+                    <div class="feature-icon">🔔</div>
+                    <h3 data-i18n="feature_reminders">Eslatmalar</h3>
+                    <p data-i18n="feature_reminders_desc">Odat vaqtida bildirishnoma</p>
                 </div>
                 <div class="feature-card">
-                    <h3 data-i18n="feature_badges" style="font-size: 22px; margin-bottom: 10px;">Yutuqlar</h3>
-                    <p data-i18n="feature_badges_desc" style="font-size: 14px; color: #777;">Streak yig'ing, badge oling</p>
+                    <div class="feature-icon">🏆</div>
+                    <h3 data-i18n="feature_badges">Yutuqlar</h3>
+                    <p data-i18n="feature_badges_desc">Streak yig'ing, badge oling</p>
                 </div>
                 <div class="feature-card">
-                    <h3 data-i18n="feature_ai" style="font-size: 22px; margin-bottom: 10px;">AI motivatsiya</h3>
-                    <p data-i18n="feature_ai_desc" style="font-size: 14px; color: #777;">Shaxsiy motivatsiya har kuni</p>
+                    <div class="feature-icon">🤖</div>
+                    <h3 data-i18n="feature_ai">AI motivatsiya</h3>
+                    <p data-i18n="feature_ai_desc">Shaxsiy motivatsiya har kuni</p>
                 </div>
             </div>
         </section>
 
-        <section class="cta-section" style="padding: 80px 20px; text-align: center; border-top: 1px solid var(--border-light);">
-            <h2 data-i18n="cta_title" style="margin-bottom: 15px; font-size: 32px;">Hoziroq boshlang</h2>
-            <p data-i18n="cta_text" style="margin-bottom: 30px; font-style: italic; color: #666;">Hammasi bepul. Hech qanday to'lov yo'q.</p>
-            <button onclick="showRegister()" class="btn-hero" data-i18n="hero_btn">Bepul boshlash</button>
+        <section class="cta-section">
+            <h2 data-i18n="cta_title">Hoziroq boshlang!</h2>
+            <p data-i18n="cta_text">Hammasi bepul. Hech qanday to'lov yo'q.</p>
+            <button onclick="showRegister()" class="btn-hero" data-i18n="hero_btn">🚀 Bepul boshlash</button>
         </section>
 
-        <footer class="footer">
-            <p>© 2026 HabitGo — Elita Odatlar Trackeri</p>
+        <footer class="landing-footer">
+            <p>© 2026 HabitGo</p>
             <p>support@habitgo.uz</p>
         </footer>
     </div>
 
-    <!-- ============ KIRISH MODAL ============ -->
     <div id="authModal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">×</span>
+
+            <div class="auth-lang-switcher">
+                <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">🇺🇿 UZ</button>
+                <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">🇷🇺 RU</button>
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
+            </div>
+
             <div id="loginForm">
-                <h2 data-i18n="login_title" style="margin-bottom: 20px;">Kirish</h2>
-                <input type="email" id="loginEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
-                <input type="password" id="loginPassword" data-i18n-placeholder="password" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
-                <button onclick="login()" class="btn-primary full" data-i18n="login" style="width:100%;">Kirish</button>
-                <p class="switch-text" style="margin-top:20px; font-size:14px; text-align:center;">
+                <h2 data-i18n="login_title">Kirish</h2>
+                <input type="email" id="loginEmail" data-i18n-placeholder="email" placeholder="Email">
+                <input type="password" id="loginPassword" data-i18n-placeholder="password" placeholder="Parol">
+                <button onclick="login()" class="btn-primary full" data-i18n="login">Kirish</button>
+                <p class="switch-text">
                     <span data-i18n="no_account">Akkauntingiz yo'qmi?</span>
-                    <a href="#" onclick="showRegister()" data-i18n="register" style="color:var(--gold-dark); text-decoration:none; font-weight:bold;">Ro'yxatdan o'tish</a>
+                    <a href="#" onclick="showRegister()" data-i18n="register">Ro'yxatdan o'tish</a>
                 </p>
             </div>
             <div id="registerForm" style="display:none;">
-                <h2 data-i18n="register_title" style="margin-bottom: 20px;">Ro'yxatdan o'tish</h2>
-                <input type="text" id="regName" data-i18n-placeholder="name" placeholder="Ismingiz" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
-                <input type="email" id="regEmail" data-i18n-placeholder="email" placeholder="Email" style="width:100%; margin-bottom:15px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
-                <input type="password" id="regPassword" data-i18n-placeholder="password_hint" placeholder="Parol" style="width:100%; margin-bottom:20px; padding:12px; border:1px solid var(--border-light); background:transparent; font-family:'Lora'; color:inherit;">
-                <button onclick="register()" class="btn-primary full" data-i18n="register" style="width:100%;">Ro'yxatdan o'tish</button>
-                <p class="switch-text" style="margin-top:20px; font-size:14px; text-align:center;">
+                <h2 data-i18n="register_title">Ro'yxatdan o'tish</h2>
+                <input type="text" id="regName" data-i18n-placeholder="name" placeholder="Ismingiz">
+                <input type="email" id="regEmail" data-i18n-placeholder="email" placeholder="Email">
+                <input type="password" id="regPassword" data-i18n-placeholder="password_hint" placeholder="Parol (kamida 6 belgi)">
+                <button onclick="register()" class="btn-primary full" data-i18n="register">Ro'yxatdan o'tish</button>
+                <p class="switch-text">
                     <span data-i18n="have_account">Akkauntingiz bormi?</span>
-                    <a href="#" onclick="showLogin()" data-i18n="login" style="color:var(--gold-dark); text-decoration:none; font-weight:bold;">Kirish</a>
+                    <a href="#" onclick="showLogin()" data-i18n="login">Kirish</a>
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- ============ ASOSIY APP ============ -->
     <div id="appPage" style="display:none;">
         <header class="header">
-            <div class="logo">HabitGo</div>
+            <div class="logo">🚀 <span data-i18n="app_name">HabitGo</span></div>
             <div class="header-right">
                 <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">UZ</button>
-                    <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">RU</button>
-                    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">🇺🇿</button>
+                    <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">🇷🇺</button>
+                    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧</button>
                 </div>
-                <button class="btn-add-habit" onclick="openHabitModal()">+ Odat</button>
-                <button class="btn-theme" onclick="showColorPicker()">Rang</button>
-                <button class="btn-theme" onclick="toggleTheme()" id="themeBtn" title="Tungi rejim">Tun</button>
-
+                <button class="btn-add-habit" onclick="openHabitModal()" title="Yangi odat">➕</button>
+                <button class="btn-theme" onclick="showColorPicker()" data-i18n-title="color_title" title="Rang">🎨</button>
+                <button class="btn-theme" onclick="toggleTheme()" id="themeBtn" data-i18n-title="theme_dark" title="Tungi rejim">🌙</button>
                 <div class="profile-menu" onclick="toggleProfileMenu()">
-                    <div class="avatar" id="userAvatar">U</div>
+                    <div class="avatar" id="userAvatar">👤</div>
+                    <span id="userName">Foydalanuvchi</span>
                     <div class="dropdown" id="profileDropdown">
-                        <a href="#" onclick="showProfile()">Profil</a>
-                        <a href="#" onclick="showTasks()">Rejalar</a>
-                        <a href="#" onclick="showLeaderboard()">Leaderboard</a>
-                        <a href="#" onclick="showStatistics()">Statistika</a>
-                        <a href="#" onclick="showAchievements()">Yutuqlar</a>
-                        <a href="#" onclick="showBackup()">Backup</a>
-                        <a href="#" onclick="logout()">Chiqish</a>
+                        <a href="#" onclick="showProfile()"><span class="dropdown-icon">👤</span><span data-i18n="profile">Profil</span></a>
+                        <a href="#" onclick="showTasks()"><span class="dropdown-icon">📝</span><span data-i18n="tasks">Rejalar</span></a>
+                        <a href="#" onclick="showLeaderboard()"><span class="dropdown-icon">🏅</span><span data-i18n="leaderboard">Leaderboard</span></a>
+                        <a href="#" onclick="showStatistics()"><span class="dropdown-icon">📊</span><span data-i18n="statistics">Statistika</span></a>
+                        <a href="#" onclick="showAchievements()"><span class="dropdown-icon">🏆</span><span data-i18n="achievements">Yutuqlar</span></a>
+                        <a href="#" onclick="showBackup()"><span class="dropdown-icon">💾</span><span data-i18n="backup">Backup</span></a>
+                        <a href="#" onclick="logout()"><span class="dropdown-icon">🚪</span><span data-i18n="logout">Chiqish</span></a>
                     </div>
                 </div>
             </div>
         </header>
 
+        <div id="installBanner" class="install-banner" style="display:none;">
+            <div class="install-content">
+                <div class="install-icon">📱</div>
+                <div class="install-text">
+                    <strong data-i18n="app_name">HabitGo</strong>
+                    <span data-i18n="feature_mobile_desc">Telefoningizga qo'shing</span>
+                </div>
+                <button class="install-btn" onclick="installPWA()">📥</button>
+                <button class="install-close" onclick="hideInstallButton()">×</button>
+            </div>
+        </div>
+
+        <section class="motivation-banner">
+            <p id="motivationText">Bugun ajoyib kun bo'ladi! ✨</p>
+        </section>
+
         <section class="daily-report" id="dailyReport" style="display: none;">
-            <div class="report-content modal-content">
+            <div class="report-content">
                 <h3 id="reportTitle">Kunlik hisobot</h3>
-                <p id="reportText" style="margin:15px 0;"></p>
-                <button onclick="closeReport()" class="btn-outline">Yopish</button>
+                <p id="reportText"></p>
+                <button onclick="closeReport()" data-i18n="close">Yopish</button>
             </div>
         </section>
 
         <main class="container">
-            <!-- STATISTIKA -->
             <section class="stats">
                 <div class="stat-card">
                     <div class="stat-number" id="totalHabits">0</div>
@@ -176,216 +199,302 @@
                 </div>
             </section>
 
-            <!-- REJALAR TUGMASI -->
             <section class="tasks-quick-access">
                 <button class="tasks-quick-btn" onclick="showTasks()">
+                    <span class="tasks-quick-icon">📝</span>
                     <div class="tasks-quick-text">
                         <strong data-i18n="tasks">Rejalar</strong>
                         <span id="tasksQuickInfo" data-i18n="tasks_manage">Vazifalarni boshqarish</span>
                     </div>
-                    <span class="tasks-quick-arrow" style="font-size: 20px; color: var(--gold-dark);">&rarr;</span>
+                    <span class="tasks-quick-arrow">→</span>
                 </button>
             </section>
 
-            <!-- CHALLENGE -->
             <section class="challenge-card" id="challengeCard"></section>
 
-            <!-- FAOL ODATLAR -->
             <section class="habits-section">
-                <h2 data-i18n="active_habits_title">Faol odatlar</h2>
-                <div id="habitsList" class="habits-list" style="margin-top: 20px;"></div>
-                <p id="emptyMessage" class="empty-message" data-i18n="empty_message" style="text-align:center; padding:20px; font-style:italic; color:#777;">
-                    Hali odat qo'shmadingiz. Tepadagi "+ Odat" tugmasini bosing
+                <h2 data-i18n="active_habits_title">📋 Faol odatlar</h2>
+                <div id="habitsList" class="habits-list"></div>
+                <p id="emptyMessage" class="empty-message" data-i18n="empty_message">
+                    Hali odat qo'shmadingiz. Tepadagi ➕ tugmasini bosing! 🌱
                 </p>
             </section>
 
             <section class="completed-section" id="completedSection" style="display: none;">
-                <h2 data-i18n="completed_habits_title">Tugallangan odatlar</h2>
-                <div id="completedList" class="habits-list" style="margin-top: 20px;"></div>
+                <h2 data-i18n="completed_habits_title">🏆 Tugallangan odatlar</h2>
+                <div id="completedList" class="habits-list"></div>
             </section>
         </main>
 
         <footer class="footer">
-            <p data-i18n="footer_text">HabitGo — Sen har kuni yaxshilanasan</p>
+            <p data-i18n="footer_text">HabitGo — Sen har kuni yaxshilanasan! 💪</p>
         </footer>
     </div>
 
-    <!-- ============ YANGI ODAT MODALI ============ -->
     <div id="habitModal" class="modal" style="display:none;">
-        <div class="modal-content">
+        <div class="modal-content habit-modal-content">
             <span class="close-btn" onclick="closeHabitModal()">×</span>
-            <h2 data-i18n="add_habit_title" style="margin-bottom: 20px;">Yangi odat qo'shish</h2>
+            <h2 data-i18n="add_habit_title">➕ Yangi odat qo'shish</h2>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label data-i18n="habit_name" style="display:block; margin-bottom:5px; font-size:14px;">1. Odat nomi</label>
-                <input type="text" id="habitName" data-i18n-placeholder="habit_name_placeholder" placeholder="Masalan: Kitob o'qish" style="width:100%; padding:10px; border:1px solid var(--border-light); background:transparent; color:inherit;">
+            <div class="form-group">
+                <label data-i18n="habit_name">1️⃣ Odat nomi</label>
+                <input type="text" id="habitName" data-i18n-placeholder="habit_name_placeholder" placeholder="Masalan: Kitob o'qish">
             </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label data-i18n="period" style="display:block; margin-bottom:5px; font-size:14px;">2. Davomiylik</label>
-                <div class="period-options" style="display:flex; gap:10px;">
-                    <label style="cursor:pointer;"><input type="radio" name="period" value="weekly" checked> Haftalik</label>
-                    <label style="cursor:pointer;"><input type="radio" name="period" value="monthly"> Oylik</label>
-                    <label style="cursor:pointer;"><input type="radio" name="period" value="yearly"> Yillik</label>
+            <div class="form-group">
+                <label data-i18n="period">2️⃣ Davomiylik</label>
+                <div class="period-options">
+                    <label class="radio-card">
+                        <input type="radio" name="period" value="weekly" checked>
+                        <span data-i18n="weekly">📅 Haftalik</span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="period" value="monthly">
+                        <span data-i18n="monthly">🗓 Oylik</span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="period" value="yearly">
+                        <span data-i18n="yearly">📆 Yillik</span>
+                    </label>
                 </div>
             </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label data-i18n="days" style="display:block; margin-bottom:5px; font-size:14px;">3. Kunlar</label>
-                <div class="days-options" style="display:flex; flex-wrap:wrap; gap:10px; font-size:14px;">
-                    <label><input type="checkbox" id="allDays" checked> Har kuni</label>
-                    <label><input type="checkbox" class="day" value="1"> Dush</label>
-                    <label><input type="checkbox" class="day" value="2"> Sesh</label>
-                    <label><input type="checkbox" class="day" value="3"> Chor</label>
-                    <label><input type="checkbox" class="day" value="4"> Pay</label>
-                    <label><input type="checkbox" class="day" value="5"> Jum</label>
-                    <label><input type="checkbox" class="day" value="6"> Shan</label>
-                    <label><input type="checkbox" class="day" value="0"> Yak</label>
+            <div class="form-group">
+                <label data-i18n="days">3️⃣ Kunlar</label>
+                <div class="days-options">
+                    <label class="day-chip"><input type="checkbox" id="allDays" checked><span data-i18n="every_day">Har kuni</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="1"><span data-i18n="day_mon">Dush</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="2"><span data-i18n="day_tue">Sesh</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="3"><span data-i18n="day_wed">Chor</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="4"><span data-i18n="day_thu">Pay</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="5"><span data-i18n="day_fri">Jum</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="6"><span data-i18n="day_sat">Shan</span></label>
+                    <label class="day-chip"><input type="checkbox" class="day" value="0"><span data-i18n="day_sun">Yak</span></label>
                 </div>
             </div>
 
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label data-i18n="time" style="display:block; margin-bottom:5px; font-size:14px;">4. Vaqt</label>
-                <input type="time" id="habitTime" value="06:00" style="width:100%; padding:10px; border:1px solid var(--border-light); background:transparent; color:inherit;">
+            <div class="form-group">
+                <label data-i18n="time">4️⃣ Vaqt</label>
+                <input type="time" id="habitTime" value="06:00">
             </div>
 
-            <div class="form-group" style="margin-bottom: 25px;">
-                <label data-i18n="place" style="display:block; margin-bottom:5px; font-size:14px;">5. Joy</label>
-                <input type="text" id="habitPlace" data-i18n-placeholder="place_placeholder" placeholder="Masalan: Bog'da" style="width:100%; padding:10px; border:1px solid var(--border-light); background:transparent; color:inherit;">
+            <div class="form-group">
+                <label data-i18n="place">5️⃣ Joy</label>
+                <input type="text" id="habitPlace" data-i18n-placeholder="place_placeholder" placeholder="Masalan: Bog'da">
             </div>
 
-            <button class="btn-add" onclick="addHabit()" data-i18n="add_habit_btn" style="width:100%;">Odatni qo'shish</button>
+            <button class="btn-add" onclick="addHabit()" data-i18n="add_habit_btn">✅ Odatni qo'shish</button>
         </div>
     </div>
 
-    <!-- ============ PROFIL SAHIFASI ============ -->
     <div id="profilePage" class="page-modal" style="display:none;">
-        <div class="page-content modal-content">
+        <div class="page-content">
             <span class="close-btn" onclick="closePage()">×</span>
-            <h2 data-i18n="profile_title">Profil</h2>
-            <div class="profile-info" style="text-align:center; margin: 20px 0;">
-                <div class="profile-avatar-large" id="profileAvatar" style="width:80px; height:80px; border-radius:50%; border:1px solid var(--gold-dark); font-size:32px; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; color:var(--gold-dark);">U</div>
-                <p style="margin-bottom:5px;"><strong data-i18n="profile_name_label">Ism:</strong> <span id="profileName">-</span></p>
-                <p style="margin-bottom:5px;"><strong data-i18n="profile_email_label">Email:</strong> <span id="profileEmail">-</span></p>
-                <p><strong data-i18n="profile_joined_label">Ro'yxatdan o'tgan:</strong> <span id="profileJoined">-</span></p>
+            <h2 data-i18n="profile_title">👤 Profil</h2>
+            <div class="profile-info">
+                <div class="profile-avatar-large" id="profileAvatar">👤</div>
+                <div class="profile-details">
+                    <p><strong data-i18n="profile_name_label">Ism:</strong> <span id="profileName">-</span></p>
+                    <p><strong data-i18n="profile_email_label">Email:</strong> <span id="profileEmail">-</span></p>
+                    <p><strong data-i18n="profile_joined_label">Ro'yxatdan o'tgan:</strong> <span id="profileJoined">-</span></p>
+                </div>
             </div>
-            <h3 data-i18n="profile_stats" style="border-bottom: 1px solid var(--border-light); padding-bottom:10px; margin-bottom:15px;">Umumiy statistika</h3>
-            <div class="profile-stats" style="display:flex; justify-content:space-around; text-align:center; margin-bottom:20px;">
-                <div><strong id="pTotalHabits" style="font-size:24px; font-family:'Cinzel'; color:var(--gold-dark);">0</strong><br><span style="font-size:12px;" data-i18n="total_habits">Jami odatlar</span></div>
-                <div><strong id="pTotalDone" style="font-size:24px; font-family:'Cinzel'; color:var(--gold-dark);">0</strong><br><span style="font-size:12px;" data-i18n="completed_count">Bajarilgan</span></div>
-                <div><strong id="pBestStreak" style="font-size:24px; font-family:'Cinzel'; color:var(--gold-dark);">0</strong><br><span style="font-size:12px;" data-i18n="best_streak">Streak</span></div>
+            <h3 data-i18n="profile_stats">📊 Umumiy statistika</h3>
+            <div class="profile-stats">
+                <div><strong id="pTotalHabits">0</strong><span data-i18n="total_habits">Jami odatlar</span></div>
+                <div><strong id="pTotalDone">0</strong><span data-i18n="completed_count">Bajarilgan</span></div>
+                <div><strong id="pBestStreak">0</strong><span data-i18n="best_streak">Eng yaxshi streak</span></div>
             </div>
-            <button onclick="logout()" class="btn-primary full" style="width:100%; background:#8b2e2e; border-color:#8b2e2e; color:white;" data-i18n="logout">Chiqish</button>
+            <button onclick="logout()" class="btn-danger full" data-i18n="logout">🚪 Chiqish</button>
         </div>
     </div>
 
-    <!-- ============ REJALAR SAHIFASI ============ -->
-    <div id="tasksPage" class="page-modal" style="display:none;">
-        <div class="page-content modal-content" style="max-width: 700px;">
-            <span class="close-btn" onclick="closeTasks()">×</span>
-            <h2 data-i18n="tasks">Rejalar</h2>
-            <div id="tasksHeader" class="tasks-header" style="display:flex; gap:20px; margin:20px 0; text-align:center; justify-content:space-between;"></div>
+    <div id="leaderboardPage" class="page-modal" style="display:none;">
+        <div class="page-content leaderboard-page-content">
+            <span class="close-btn" onclick="closeLeaderboard()">×</span>
+            <h2 data-i18n="leaderboard_title">🏅 Leaderboard</h2>
+            <p class="leaderboard-intro" data-i18n="leaderboard_subtitle">Eng faol foydalanuvchilar reytingi.</p>
+            <div id="leaderboardHeader"></div>
+            <div class="leaderboard-filters">
+                <button class="leaderboard-filter-btn active" data-filter="streak" onclick="setLeaderboardFilter('streak')" data-i18n="leaderboard_filter_streak">🔥 Streak</button>
+                <button class="leaderboard-filter-btn" data-filter="completed" onclick="setLeaderboardFilter('completed')" data-i18n="leaderboard_filter_completed">✅ Bajarilgan</button>
+                <button class="leaderboard-filter-btn" data-filter="level" onclick="setLeaderboardFilter('level')" data-i18n="leaderboard_filter_level">⭐ Level</button>
+                <button class="leaderboard-filter-btn" data-filter="xp" onclick="setLeaderboardFilter('xp')" data-i18n="leaderboard_filter_xp">⚡ XP</button>
+            </div>
+            <div id="leaderboardPodium"></div>
+            <div id="leaderboardList" class="leaderboard-list"></div>
+            <div id="leaderboardSelf" class="leaderboard-self"></div>
+        </div>
+    </div>
 
-            <div class="task-add-form" style="border:1px solid var(--border-light); padding:15px; margin-bottom:20px;">
-                <input type="text" id="taskName" placeholder="Vazifa nomi" style="width:100%; margin-bottom:10px; padding:10px; background:transparent; border:1px solid var(--border-light); color:inherit;">
-                <div style="display:flex; gap:10px; margin-bottom:10px;">
-                    <input type="date" id="taskDate" style="flex:1; padding:10px; background:transparent; border:1px solid var(--border-light); color:inherit;">
-                    <select id="taskPriority" style="flex:1; padding:10px; background:transparent; border:1px solid var(--border-light); color:inherit;">
-                        <option value="low">Past</option>
-                        <option value="medium" selected>O'rta</option>
-                        <option value="high">Yuqori</option>
+    <div id="tasksPage" class="page-modal" style="display:none;">
+        <div class="page-content tasks-page-content">
+            <span class="close-btn" onclick="closeTasks()">×</span>
+            <h2 data-i18n="tasks">📝 Rejalar</h2>
+            <div id="tasksHeader" class="tasks-header"></div>
+            <div class="task-add-form">
+                <h3 data-i18n="task_new">➕ Yangi vazifa</h3>
+                <div class="form-group"><input type="text" id="taskName" data-i18n-placeholder="task_name" placeholder="Vazifa nomi" maxlength="100"></div>
+                <div class="form-group"><textarea id="taskDesc" data-i18n-placeholder="task_desc" placeholder="Tavsif (ixtiyoriy)" maxlength="300" rows="2"></textarea></div>
+                <div class="task-form-row">
+                    <div class="form-group"><label data-i18n="task_date">📅 Sana</label><input type="date" id="taskDate"></div>
+                    <div class="form-group"><label data-i18n="task_time">⏰ Vaqt</label><input type="time" id="taskTime"></div>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="task_category">Kategoriya</label>
+                    <select id="taskCategory">
+                        <option value="study" data-i18n="task_category_study">📚 O'qish</option>
+                        <option value="work" data-i18n="task_category_work">💼 Ish</option>
+                        <option value="sport" data-i18n="task_category_sport">💪 Sport</option>
+                        <option value="personal" data-i18n="task_category_personal">🏠 Shaxsiy</option>
+                        <option value="other" data-i18n="task_category_other">📌 Boshqa</option>
                     </select>
                 </div>
-                <button class="btn-primary" onclick="addTask()" style="width:100%;">Qo'shish</button>
+                <div class="form-group">
+                    <label data-i18n="task_priority">Prioritet</label>
+                    <div class="priority-options">
+                        <label class="priority-chip"><input type="radio" name="taskPriority" value="low"><span data-i18n="task_priority_low">🟢 Past</span></label>
+                        <label class="priority-chip"><input type="radio" name="taskPriority" value="medium" checked><span data-i18n="task_priority_medium">🟡 O'rta</span></label>
+                        <label class="priority-chip"><input type="radio" name="taskPriority" value="high"><span data-i18n="task_priority_high">🔴 Yuqori</span></label>
+                    </div>
+                </div>
+                <button class="btn-add" onclick="addTask()" data-i18n="task_add">✅ Vazifani qo'shish</button>
             </div>
-
+            <div class="task-filters">
+                <button class="task-filter-btn active" data-filter="active" onclick="setTaskFilter('active')" data-i18n="task_filter_active">Faol</button>
+                <button class="task-filter-btn" data-filter="today" onclick="setTaskFilter('today')" data-i18n="task_filter_today">Bugun</button>
+                <button class="task-filter-btn" data-filter="week" onclick="setTaskFilter('week')" data-i18n="task_filter_week">Hafta</button>
+                <button class="task-filter-btn" data-filter="done" onclick="setTaskFilter('done')" data-i18n="task_filter_done">Bajarilgan</button>
+                <button class="task-filter-btn" data-filter="all" onclick="setTaskFilter('all')" data-i18n="task_filter_all">Hammasi</button>
+            </div>
             <div id="tasksList" class="tasks-list"></div>
         </div>
     </div>
 
-    <!-- ============ STATISTIKA SAHIFASI ============ -->
     <div id="statisticsPage" class="page-modal" style="display:none;">
-        <div class="page-content modal-content" style="max-width: 800px;">
+        <div class="page-content stats-page-content">
             <span class="close-btn" onclick="closeStatistics()">×</span>
-            <h2 data-i18n="stats_title">Statistika</h2>
-            <div id="statsSummary" style="margin:20px 0;"></div>
-
-            <div class="chart-container" style="height:250px; margin-bottom:30px;"><canvas id="weeklyChart"></canvas></div>
-            <div class="chart-container" style="height:250px; margin-bottom:30px;"><canvas id="monthlyChart"></canvas></div>
-
-            <h3 style="margin-bottom:15px;">Yillik faollik (Heatmap)</h3>
-            <div id="heatmapContainer" style="overflow-x:auto;"></div>
-            <div id="heatmapLegend"></div>
-        </div>
-    </div>
-
-    <!-- ============ LEADERBOARD SAHIFASI ============ -->
-    <div id="leaderboardPage" class="page-modal" style="display:none;">
-        <div class="page-content modal-content">
-            <span class="close-btn" onclick="closeLeaderboard()">×</span>
-            <h2 data-i18n="leaderboard_title">Leaderboard</h2>
-            <div id="leaderboardHeader" style="margin:20px 0;"></div>
-            <div id="leaderboardPodium"></div>
-            <div id="leaderboardList" class="leaderboard-list"></div>
-        </div>
-    </div>
-
-    <!-- ============ YUTUQLAR SAHIFASI ============ -->
-    <div id="achievementsPage" class="page-modal" style="display:none;">
-        <div class="page-content modal-content" style="max-width: 700px;">
-            <span class="close-btn" onclick="closePage()">×</span>
-            <h2 data-i18n="achievements">Yutuqlar</h2>
-            <div class="achievements-grid" id="achievementsGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:15px; margin-top:20px;"></div>
-        </div>
-    </div>
-
-    <!-- ============ BACKUP SAHIFASI ============ -->
-    <div id="backupPage" class="page-modal" style="display:none;">
-        <div class="page-content modal-content">
-            <span class="close-btn" onclick="closePage()">×</span>
-            <h2 data-i18n="backup_title">Backup</h2>
-            <p style="margin:20px 0; font-size:14px;" data-i18n="backup_desc">Ma'lumotlaringizni JSON faylga saqlang.</p>
-            <button onclick="exportData()" class="btn-primary" style="width:100%; margin-bottom:10px;">Export qilish</button>
-            <button onclick="importData()" class="btn-outline" style="width:100%;">Import qilish</button>
-        </div>
-    </div>
-
-    <!-- ============ ESLATMA MODALI ============ -->
-    <div id="notesModal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeNotesModal()">×</span>
-            <h2 data-i18n="notes_title">Eslatmalar</h2>
-            <p style="margin-bottom:15px;" data-i18n="notes_for">Ushbu odat uchun</p>
-            <div class="note-input-group" style="margin-bottom:20px;">
-                <textarea id="noteInput" placeholder="Bugun qanday o'tdi?" style="width:100%; height:80px; padding:10px; background:transparent; border:1px solid var(--border-light); color:inherit; font-family:'Lora'; margin-bottom:10px;"></textarea>
-                <button onclick="addNote()" class="btn-primary" style="width:100%;">Qo'shish</button>
+            <h2 data-i18n="stats_title">📊 Statistika</h2>
+            <div id="statsSummary"></div>
+            <h3 data-i18n="stats_weekly">📊 Haftalik faollik</h3>
+            <div class="chart-container"><canvas id="weeklyChart"></canvas></div>
+            <h3 data-i18n="stats_monthly">📈 Oylik tendentsiya</h3>
+            <div class="chart-container"><canvas id="monthlyChart"></canvas></div>
+            <h3 data-i18n="stats_yearly">📅 Yillik faollik</h3>
+            <div class="heatmap-section">
+                <div id="heatmapContainer"></div>
+                <div id="heatmapLegend" class="heatmap-legend"></div>
             </div>
-            <div id="notesList" class="notes-list" style="max-height:200px; overflow-y:auto;"></div>
+            <h3 data-i18n="stats_breakdown">📋 Odatlar bo'yicha</h3>
+            <div id="habitBreakdown"></div>
         </div>
     </div>
 
-    <!-- ============ RANG TANLASH MODALI ============ -->
+    <div id="backupPage" class="page-modal" style="display:none;">
+        <div class="page-content backup-page-content">
+            <span class="close-btn" onclick="closePage()">×</span>
+            <h2 data-i18n="backup_title">💾 Backup</h2>
+            <p class="backup-intro" data-i18n="backup_desc">Ma'lumotlaringizni JSON faylga saqlang.</p>
+            <div class="backup-info-card">
+                <h3 data-i18n="backup_current">📊 Hozirgi ma'lumotlar</h3>
+                <div id="backupInfo" class="backup-info-grid"></div>
+            </div>
+            <div class="backup-action">
+                <div class="backup-action-icon">📤</div>
+                <div class="backup-action-text">
+                    <strong data-i18n="backup_export">Export</strong>
+                    <span data-i18n="backup_export_desc">JSON faylga yuklab olish</span>
+                </div>
+                <button class="backup-btn export" onclick="exportData()" data-i18n="backup_upload">📤 Yuklash</button>
+            </div>
+            <div class="backup-action">
+                <div class="backup-action-icon">📥</div>
+                <div class="backup-action-text">
+                    <strong data-i18n="backup_import">Import</strong>
+                    <span data-i18n="backup_import_desc">JSON fayldan tiklash</span>
+                </div>
+                <button class="backup-btn import" onclick="importData()" data-i18n="backup_upload">📥 Yuklash</button>
+            </div>
+            <div class="backup-warning" data-i18n="backup_warning">⚠️ Diqqat! Import qilganda hozirgi ma'lumotlar o'chiriladi.</div>
+        </div>
+    </div>
+
+    <div id="achievementsPage" class="page-modal" style="display:none;">
+        <div class="page-content">
+            <span class="close-btn" onclick="closePage()">×</span>
+            <h2 data-i18n="achievements">🏆 Yutuqlar</h2>
+            <p style="color:#666; margin-bottom:20px;" data-i18n="achievements_subtitle">Odatlaringizni bajarib badge'lar yig'ing!</p>
+            <div class="achievements-grid" id="achievementsGrid"></div>
+        </div>
+    </div>
+
+    <div id="welcomeModal" class="modal" style="display:none;">
+        <div class="modal-content welcome-modal-content">
+            <div class="welcome-icon">🎉</div>
+            <h2 data-i18n="welcome_title">HabitGo'ga xush kelibsiz!</h2>
+            <p data-i18n="welcome_text">Hamma funksiyalar bepul. Hoziroq boshlang!</p>
+            <div class="welcome-steps">
+                <div class="welcome-step">
+                    <span class="step-icon">1️⃣</span>
+                    <span data-i18n="welcome_step1">Odat qo'shing</span>
+                </div>
+                <div class="welcome-step">
+                    <span class="step-icon">2️⃣</span>
+                    <span data-i18n="welcome_step2">Har kuni belgilang</span>
+                </div>
+                <div class="welcome-step">
+                    <span class="step-icon">3️⃣</span>
+                    <span data-i18n="welcome_step3">Natijangizni ko'ring</span>
+                </div>
+            </div>
+            <button onclick="closeWelcomeModal()" class="btn-primary full" data-i18n="welcome_btn">Boshlash 🚀</button>
+        </div>
+    </div>
+
+    <div id="notesModal" class="modal" style="display:none;">
+        <div class="modal-content notes-modal-content">
+            <span class="close-btn" onclick="closeNotesModal()">×</span>
+            <h2 data-i18n="notes_title">📝 Eslatmalar</h2>
+            <p class="notes-habit-title">"<span id="notesHabitName">-</span>" <span data-i18n="notes_for">uchun</span></p>
+            <div class="note-input-group">
+                <textarea id="noteInput" data-i18n-placeholder="notes_placeholder" placeholder="Bugun qanday o'tdi?" maxlength="500"></textarea>
+                <div class="note-input-footer">
+                    <select id="noteMood" class="note-mood-select">
+                        <option value="great" data-i18n="notes_mood_great">😄 Ajoyib</option>
+                        <option value="good" data-i18n="notes_mood_good">😊 Yaxshi</option>
+                        <option value="neutral" selected data-i18n="notes_mood_neutral">😐 O'rtacha</option>
+                        <option value="bad" data-i18n="notes_mood_bad">😔 Yomon</option>
+                        <option value="terrible" data-i18n="notes_mood_terrible">😢 Juda yomon</option>
+                    </select>
+                    <button onclick="addNote()" class="btn-primary" data-i18n="notes_add">Qo'shish</button>
+                </div>
+            </div>
+            <div id="notesList" class="notes-list"></div>
+            <p class="notes-hint" data-i18n="notes_hint">💡 Ctrl+Enter — tez qo'shish</p>
+        </div>
+    </div>
+
     <div id="colorPickerModal" class="modal" style="display:none;">
-        <div class="modal-content">
+        <div class="modal-content color-picker-content">
             <span class="close-btn" onclick="closeColorPicker()">×</span>
-            <h2 data-i18n="color_title">Rang mavzusi</h2>
-            <div id="colorOptions" class="color-options" style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;"></div>
+            <h2 data-i18n="color_title">🎨 Rang mavzusi</h2>
+            <p style="color:#666; margin-bottom:20px; font-size:14px;" data-i18n="color_subtitle">O'zingizga yoqqan rangni tanlang</p>
+            <div id="colorOptions" class="color-options"></div>
         </div>
     </div>
 
     <canvas id="confettiCanvas"></canvas>
 
-    <!-- ============ SCRIPT'LAR ============ -->
     <script src="supabase.js"></script>
     <script src="analytics.js"></script>
     <script src="i18n.js"></script>
-    <script src="auth.js"></script>
     <script src="push.js"></script>
     <script src="theme.js"></script>
     <script src="colors.js"></script>
     <script src="confetti.js"></script>
     <script src="notifications.js"></script>
     <script src="badges.js"></script>
+    <script src="auth.js"></script>
     <script src="profile.js"></script>
     <script src="payment.js"></script>
     <script src="app.js"></script>
